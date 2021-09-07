@@ -1,0 +1,152 @@
+<!--Home Page Starts-->
+<div class="wrapper">
+<div class="row bg-white p-2">
+  <div class="col-2 float-left" ngClass.sm="text-center" ngClass.xs="col-12 text-center" >
+    <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header">
+  </div>
+  <div class="col-10 text-center">
+    <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad">
+  </div>
+  <div class="col-md-12 p-0">
+    <hr class="separador mb-0 mt-4-s">
+  </div>
+</div>
+<div class="container">
+  <div class="row vCenter">
+    <div class="col-md-4 col-sm-6 mt-1">
+      <a  class="btn btn-blue btn-block btn-lg" [routerLink] = "['/pages/login']">Ingresar</a>
+    </div>
+    <div class="col-md-4 col-sm-6 mt-1">
+      <a  class="btn btn-pink btn-block btn-lg" [routerLink] = "['/pages/beneficios-base']">Aún no soy cliente</a>
+    </div>
+    <div class="col-md-4 col-sm-6 mt-1">
+      <a  class="btn btn-green btn-block btn-lg" >Completar contratación</a>
+    </div>
+  </div>
+  <div class="row mt-3 vCenter">
+    <div class="player-wrapper">
+      <vg-player>
+        <video #media [vgMedia]="media" id="singleVideo" preload="auto" controls>
+          <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+          <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
+          <source src="http://static.videogular.com/assets/videos/videogular.webm" type="video/webm">
+        </video>
+      </vg-player>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<!-- <section id="login" class="container mt-3">
+  <div class="row auth-height full-height-vh m-0">
+    <div class="col-12 align-items-center justify-content-center">
+      <h5 class="text-center"><b>Bienvenido a México Lindo Contigo.</b></h5>
+      <p class="text-center">Somos la central digital de soluciones para el ciudado de tu dinero y la salud de tu familia.</p>
+      <div class="card overflow-hidden">
+        <div class="card-content">
+          <div class="card-body auth-img">
+            <div class="row m-0 containerCenter">
+              <div class="col-lg-8 auth-img-bg p-3">
+                <ngb-carousel class="w-100" (swipeleft)="swipe($event.type)"
+                (swiperight)="swipe($event.type)">
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper" >
+                      <div class="row text-center">
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                          <p class="fontResponsive">Simple</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/segura.png">
+                          <p class="fontResponsive">Segura</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/centralizada.png">
+                          <p class="fontResponsive">Centralizada</p>
+                        </div>
+                      </div>
+                      <div class="row text-center">
+                        <div class="col-4 offset-2">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                          <p class="fontResponsive">A la medida</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/accesible.png">
+                          <p class="fontResponsive">Accesible</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                      <div class="row text-center">
+                        <div class="col-12">
+                            <p class="fontResponsiveSlider">Recomendamos que el titular de tu Plan sea la persona de tu familia</p>
+                            <p class="fontResponsiveSlider">que vive o trabaje temporalmente en Estados Unidos o Canadá.</p>
+                            <p class="fontResponsiveSlider">Si no eres tú. compártele esta app o pídele que ingrese a </p>
+                            <p><a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
+                            <i class="fas fa-share-alt fa-2x text-pink"></i>
+                            <p class="text-pink">Compartir</p>
+                            <p class="fontResponsiveSliderNotes">* El titular debe tener CURP.</p>
+                            <p class="fontResponsiveSliderNotes">* Los beneficios de nuestros planes están sujetos a elejibilidad.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                      <div class="row text-center">
+                        <div class="col-12">
+                            <p class="fontResponsiveSlider">El Plan incluye dos tipos de beneficios:</p>
+                        </div>
+                        <div class="col-6">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                          <p class="fontResponsive m-0"><b>Beneficios base</b></p>
+                          <p class="fontResponsive">(incluídos en el costo)</p>
+                        </div>
+                        <div class="col-6">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                          <p class="fontResponsive m-0"><b>Beneficios a la medida</b></p>
+                          <p class="fontResponsive">(con costo adicional)</p>
+                        </div>
+                        <a  class="btn btn-blue btn-block" [routerLink] = "['/pages/beneficios-base']" id="btnContinuar">Continuar</a>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-carousel>
+              </div>
+              <div class="col-lg-4 col-12 px-4 py-3" id="formLogin">
+                <form [formGroup]="loginForm">
+                  <div class="form-group">
+                    <input type="text" formControlName="username" class="form-control" placeholder="Email"
+                      [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.username.invalid, 'is-valid': loginFormSubmitted && !lf.username.invalid }"
+                      required>
+                    <div *ngIf="loginFormSubmitted && (lf.username.invalid || lf.username.errors?.required)"
+                      class="help-block mt-1 text-danger"> <i class="ft-alert-circle align-middle"></i> Campo requerido</div>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                      [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.password.invalid, 'is-valid': loginFormSubmitted && !lf.password.invalid }"
+                      required>
+                    <div *ngIf="loginFormSubmitted && (lf.password.invalid || lf.password.errors?.required)"
+                      class="help-block mt-1 text-danger"> <i class="ft-alert-circle align-middle"></i> Campo requerido
+                    </div>
+                  </div>
+                  <div class="">
+                    <a  class="btn btn-blue btn-block" >Ingresar</a>
+                    <a  class="btn btn-pink btn-block" [routerLink] = "['/pages/beneficios-base']">Aún no soy cliente</a>
+                    <a  class="btn btn-green btn-block" >Completar contratación</a>
+                  </div>
+                </form>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!--Home Page Ends-->

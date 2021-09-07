@@ -1,0 +1,293 @@
+<!--Login Page Starts-->
+<div class="container-fluid header">
+  <div class="row bg-white">
+    <div class="col-2 text-center pt-1">
+      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+    </div>
+    <div class="col-10 text-center pt-1">
+      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+    </div>
+    <div class="col-md-12 p-0">
+      <hr class="separador mt-1 mb-0" />
+    </div>
+  </div>
+</div>
+<div class="container-fluid" ngStyle.xs="display:block" ngStyle.sm="display:none" ngStyle.md="display:none" ngStyle.lg="display:none">
+  <div class="row bg-white align-items-center">
+    <div class="col-12 text-center p-0 mt-2">
+      <h2>Datos</h2>
+      <h3 class="m-0 fontResponsive">Para continuar debes llenar todos los campos.</h3>
+    </div>
+    <div class="col-12 p-0">
+      <hr class="separador mt-4 mb-0" />
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt-3 p-0">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div>
+        <div class="container-fluid" ngStyle.xs="display:none">
+          <div class="row">
+            <div class="col-12 text-center p-0">
+              <h2>Datos</h2>
+              <h3 class="m-0 fontResponsive">Para continuar debes llenar todos los campos.</h3>
+              <hr class="separador mt-4 mb-1" />
+            </div>
+          </div>
+        </div>
+          <div class="container">
+          <mat-stepper [linear]="true" class="stepper-datos-formulario" #stepper>
+            <mat-step label="">
+              <div class="row d-flex-center mt-2">
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Titular</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalTitular, 'Titular')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Pareja</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalTitular, 'Pareja')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Padre</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Padre')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Madre</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Madre')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Hijo 1</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Hijo 2</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                  <div class="card cardBeneficios p-1">
+                    <div class="card-body">
+                      <div class="row vCenter">
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <h3 class="m-0">Hijo 3</h3>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-outline-success">¡Listo!</button>
+                        </div>
+                        <div class="col-4 text-center">
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-12 text-center">
+                  <button class="btn btn-blue">Continuar</button>
+                </div>
+              </div>
+            </mat-step>
+          </mat-stepper>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalTitular let-c="close" let-d="dismiss">
+  <div class="modal-header bg-gray">
+    <h2 class="modal-title text-dark">{{miembroFamilia}}</h2>
+    <button type="button" class="close text-dark" aria-label="Close" (click)="d('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-gray">
+    <form>
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Nombre">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Apellido paterno">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Apellido materno">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Teléfono">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Fecha de nacimiento">
+        </div>
+        <div class="col">
+          <select class="form-control input-form-datos">
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos">
+            <option value="">País</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos">
+            <option value="">Estado</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-12 text-center">
+          <button class="btn btn-pink btn-block">Guardar</button>
+        </div>
+        <!-- <div class="col-6">
+          <button class="btn btn-blue btn-block">Continuar</button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #modalFamilia let-c="close" let-d="dismiss">
+  <div class="modal-header bg-gray">
+    <h2 class="modal-title text-dark">{{miembroFamilia}}</h2>
+    <button type="button" class="close text-dark" aria-label="Close" (click)="d('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-gray">
+    <form>
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Nombre">
+        </div>
+      </div>
+      <div class="form-row  mt-2">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Apellido paterno">
+        </div>
+      </div>
+      <div class="form-row  mt-2">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Apellido materno">
+        </div>
+      </div>
+      <div class="form-row  mt-2">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" placeholder="Fecha de nacimiento">
+        </div>
+        <div class="col">
+          <select class="form-control input-form-datos">
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 text-center">
+          <button class="btn btn-pink btn-block">Guardar</button>
+        </div>
+        <!-- <div class="col-6">
+          <button class="btn btn-blue btn-block">Continuar</button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!--Login Page Ends-->

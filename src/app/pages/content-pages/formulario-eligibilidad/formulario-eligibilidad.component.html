@@ -1,0 +1,318 @@
+<!--Login Page Starts-->
+<div class="container-fluid header">
+  <div class="row bg-white">
+    <div class="col-2 text-center pt-1">
+      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+    </div>
+    <div class="col-10 text-center pt-1">
+      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+    </div>
+    <div class="col-md-12 p-0">
+      <hr class="separador mt-1 mb-0" />
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+<div class="row mt-3">
+  <div class="col-12 text-center p-0" *ngIf="index == 0">
+    <h2 class="mb-0">
+      <b>Elegibilidad</b>
+    </h2>
+    <hr class="separador mt-4-s mb-2" />
+  </div>
+  <div class="col-12 text-center p-0" *ngIf="index == 1 || index == 2 || index == 3 || index == 4">
+    <h2 class="mb-0">Declaraciones de Salud</h2>
+    <h3 class="mb-0">¿Cómo está tu salud?</h3>
+    <hr class="separador mt-3 mb-2" />
+  </div>
+  <div class="col-12 text-center p-0" *ngIf="index == 5">
+    <h2 class="mb-0">
+      Profesión y actividades que practicas
+    </h2>
+    <hr class="separador mt-4-s mb-2" />
+  </div>
+  <div class="col-12 text-center p-0" *ngIf="index == 6">
+    <h2 class="mb-0">
+      Profesión y actividades que practicas
+    </h2>
+    <hr class="separador mt-4-s mb-2" />
+  </div>
+
+</div>
+</div>
+<div class="container-fluid mt-2">
+  <div class="row m-0">
+    <div class="col-12">
+      <mat-stepper [linear]="true" class="stepper-eligibilidad" #stepper>
+        <mat-step label="">
+          <div class="mt-4 text-center">
+            <p>
+              Gracias por avanzar en el diseño de tu Plan.
+            </p>
+            <br>
+            <p>
+              A continuación te haremos unas preguntas para saber si podemos ofrecerte el Seguro de Vida Base.
+            </p>
+            <br>
+            <p>
+              Tus respuestas serán recibidas por la Aseguradora.
+            </p>
+            <br>
+            <p>
+              Por favor lee con atención las preguntas y responde con honestidad.
+            </p>
+            <div class="row mt-4">
+              <div class="col-12 text-center">
+                <button class="btn btn-blue" (click)="changeStepInicial(stepper)">Continuar</button>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step label="" *ngFor="let pregunta of cuestionario; let i = index">
+          <form>
+            <div>
+              <div class="container">
+                <div class="row vCenter">
+                  <div class="col-md-6 col-sm-12">
+                    <span [innerHTML]="pregunta.descripcionPregunta"></span>
+                  </div>
+                  <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                    <mat-radio-group aria-label="Selecciona una opción" #rbtn1
+                    (change)="cuestionario[i].selected = true; this.respuesta = $event.value">
+                      <mat-radio-button value="Sí">Sí</mat-radio-button>
+                      <mat-radio-button value="No">No</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="col-sm-12 col-md-6 text-center mt-2" *ngIf="pregunta.selected">
+                    <button class="btn btn-blue" (click)="changeStep(stepper, i)">Continuar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <!--Step Salud/Embarazo-->
+        <!-- <mat-step label="">
+          <form>
+            <div>
+              <div class="container">
+                <div class="row vCenter">
+                  <div class="col-md-6 col-sm-12">
+                    <p class="">
+                      ¿Estás embarazada?
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                    <mat-radio-group aria-label="Selecciona una opción" #rbtn1>
+                      <mat-radio-button value="1">Sí</mat-radio-button>
+                      <mat-radio-button value="2">No</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="col-sm-12 col-md-6 text-center mt-2">
+                    <button class="btn btn-blue" (click)="changeStep(stepper)">Continuar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+        <!--Step Salud/Enfermedad-->
+        <!-- <mat-step label="">
+          <form>
+            <div class="container">
+              <div class="row vCenter">
+                <div class="col-md-6 col-sm-12">
+                  <p class="">
+                    ¿Estás enfermo(a), estás buscando o recibiendo algún
+                    tratamiento médico, terapia o medicación?
+                  </p>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                  <mat-radio-group aria-label="Selecciona una opción" #rbtn1>
+                    <mat-radio-button value="1">Sí</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2">
+                  <button class="btn btn-blue" (click)="changeStep(stepper)">Continuar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+        <!--Step Salud/Incapacitado-->
+        <!-- <mat-step label="">
+          <form>
+            <div class="container">
+              <div class="row vCenter">
+                <div class="col-md-6 col-sm-12">
+                  <p class="">
+                    ¿Has estado físicamente incapacitado(a) para realizar tu
+                    actividad cotidiana durante más de 5 días consecutivos
+                    debido a una enfermedad (diferente al resfriado común o la
+                    gripe)?
+                  </p>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                  <mat-radio-group aria-label="Selecciona una opción" #rbtn1>
+                    <mat-radio-button value="1">Sí</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2">
+                  <button class="btn btn-blue" (click)="changeStep(stepper)">Continuar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+        <!--Step Salud/Diagnóstico-->
+        <!-- <mat-step label="">
+          <form>
+            <div class="container">
+              <div class="row vCenter">
+                <div class="col-md-6 col-sm-12">
+                  <p class="">
+                    ¿Has recibido el diagnóstico de cáncer, diabetes, de alguna
+                    enfermedad del corazón, de problemas con la presión
+                    arterial, SIDA o prueba de VIH positiva o de alguna otra
+                    enfermedad crónica por parte de un médico certificado? ¿Has
+                    recibido o estás recibiendo tratamiento por esas causas?
+                  </p>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                  <mat-radio-group aria-label="Selecciona una opción" #rbtn1>
+                    <mat-radio-button value="1">Sí</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2">
+                  <button class="btn btn-blue" (click)="changeStep(stepper)">Continuar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+        <!--Step Profesión/Profesiones-->
+        <!-- <mat-step label=" ">
+          <p class="fontResponsiveSubtitle">
+            Declara por favor acerca de tu profesión actual. <br>Te
+            recomendamos revisar detenidamente las actividades.
+          </p>
+          <form class="mt-2">
+            <div class="container">
+              <div class="row vCenter">
+                <div class="col-md-6 col-sm-12">
+                  <p class="">
+                    <b>¿Desempeñas al menos una de las profesiones descritas a
+                    continuación?</b>
+                  </p>
+                  <ul class="text-left lista-profesion ">
+                    <li class="fontResponsiveSliderNotes">
+                      Personal de la salud.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Militares y fuerzas armadas, policías, investigadores, y/o
+                      profesiones con actividades similares.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Mineros y actividades en general relacionadas con la
+                      minería y canteras.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Personal de vuelo o navegación, así como tripulación
+                      (aéreo y/o marítimo).
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Actividades de extracción petrolera, gas o sus derivados.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">Bombero.</li>
+                    <li class="fontResponsiveSliderNotes">
+                      Industrias químicas, incluyendo: resinas sintéticas,
+                      hules, fertilizantes y plaguicidas, gases industriales,
+                      petroquímica, y de metales.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Reporteros, periodistas, camarógrafos: de nota roja,
+                      corresponsal de guerra, o similares.
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                  <mat-radio-group aria-label="Selecciona una opción" #rbtn1>
+                    <mat-radio-button value="1">Sí</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2">
+                  <button class="btn btn-blue" (click)="changeStep(stepper, i)">Continuar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+        <!--Step Profesión/Deportes-->
+        <!-- <mat-step label="">
+          <p class="fontResponsiveSubtitle mb-2">
+            Declara acerca de los deportes que practicas en forma
+            profesional o si participas en competencias relacionadas con
+            alguna de las actividades que se mencionan. Te recomendamos
+            revisar detenidamente las actividades.
+          </p>
+          <form class="mt-2">
+            <div class="container">
+              <div class="row vCenter">
+                <div class="col-md-6 col-sm-12">
+                  <p class="">
+                    <b>
+                      ¿Practicas de manera profesional al menos una de las
+                      actividades descritas a continuación?
+                    </b>
+                  </p>
+                  <ul class="text-left mt-2 lista-profesion">
+                    <li class="fontResponsiveSliderNotes">
+                      Montañismo, alpinismo, rapel, o escalar.
+                    </li>
+                    <li class="fontResponsiveSliderNotes">Charrería</li>
+                    <li class="fontResponsiveSliderNotes">
+                      Deporte de aviación o aéreos (de motor y sin motor)
+                      incluyendo paracaidismo o similares
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Tauromaquia, equitación, hockey
+                    </li>
+                    <li class="fontResponsiveSliderNotes">Buceo</li>
+                    <li class="fontResponsiveSliderNotes">Cacería</li>
+                    <li class="fontResponsiveSliderNotes">
+                      Deporte de motor (agua, tierra)
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Box, lucha libre, lucha grecorromana, artes marciales
+                    </li>
+                    <li class="fontResponsiveSliderNotes">
+                      Deportes de invierno (ski u otros)
+                    </li>
+                    <li class="fontResponsiveSliderNotes">Espeleología</li>
+                    <li class="fontResponsiveSliderNotes">
+                      Cualquier otro deporte de forma profesional .
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
+                  <mat-radio-group aria-label="Selecciona una opción" (change)="showBtnContinuar = true">
+                    <mat-radio-button value="1">Sí</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                  <a class="btn btn-blue btn-block btn-lg mt-2" *ngIf="showBtnContinuar"
+                    [routerLink]="['/pages/propuesta']">Continuar</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step> -->
+      </mat-stepper>
+    </div>
+  </div>
+</div>
+<!--Login Page Ends-->

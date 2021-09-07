@@ -1,0 +1,129 @@
+<!--Login Page Starts-->
+<div class="wrapper">
+  <div class="container-fluid ">
+    <div class="row bg-white">
+      <div class="col-2 text-center pt-1">
+        <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      </div>
+      <div class="col-10 text-center pt-1">
+        <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+      </div>
+      <div class="col-md-12 p-0">
+        <hr class="separador mt-1 mb-0" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card overflow-hidden">
+          <div class="card-header">
+            <h2>Iniciar sesión</h2>
+          </div>
+          <div class="card-content">
+            <div class="card-body auth-img">
+              <div class="row m-0 containerCenter">
+                <!-- <div class="col-lg-8 auth-img-bg p-3">
+                <ngb-carousel class="w-100" (swipeleft)="swipe($event.type)"
+                (swiperight)="swipe($event.type)">
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper" >
+                      <div class="row text-center">
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                          <p class="fontResponsive">Simple</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/segura.png">
+                          <p class="fontResponsive">Segura</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/centralizada.png">
+                          <p class="fontResponsive">Centralizada</p>
+                        </div>
+                      </div>
+                      <div class="row text-center">
+                        <div class="col-4 offset-2">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                          <p class="fontResponsive">A la medida</p>
+                        </div>
+                        <div class="col-4">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/accesible.png">
+                          <p class="fontResponsive">Accesible</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                      <div class="row text-center">
+                        <div class="col-12">
+                            <p class="fontResponsiveSlider">Recomendamos que el titular de tu Plan sea la persona de tu familia</p>
+                            <p class="fontResponsiveSlider">que vive o trabaje temporalmente en Estados Unidos o Canadá.</p>
+                            <p class="fontResponsiveSlider">Si no eres tú. compártele esta app o pídele que ingrese a </p>
+                            <p><a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
+                            <i class="fas fa-share-alt fa-2x text-pink"></i>
+                            <p class="text-pink">Compartir</p>
+                            <p class="fontResponsiveSliderNotes">* El titular debe tener CURP.</p>
+                            <p class="fontResponsiveSliderNotes">* Los beneficios de nuestros planes están sujetos a elejibilidad.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                      <div class="row text-center">
+                        <div class="col-12">
+                            <p class="fontResponsiveSlider">El Plan incluye dos tipos de beneficios:</p>
+                        </div>
+                        <div class="col-6">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                          <p class="fontResponsive m-0"><b>Beneficios base</b></p>
+                          <p class="fontResponsive">(incluídos en el costo)</p>
+                        </div>
+                        <div class="col-6">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                          <p class="fontResponsive m-0"><b>Beneficios a la medida</b></p>
+                          <p class="fontResponsive">(con costo adicional)</p>
+                        </div>
+                        <a  class="btn btn-blue btn-block" [routerLink] = "['/pages/beneficios-base']" id="btnContinuar">Continuar</a>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-carousel>
+              </div> -->
+                <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-sm-12 px-4 py-3">
+                  <form [formGroup]="loginForm">
+                    <div class="form-group">
+                      <input type="text" formControlName="username" class="form-control" placeholder="Email"
+                        [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.username.invalid, 'is-valid': loginFormSubmitted && !lf.username.invalid }"
+                        required>
+                      <div *ngIf="loginFormSubmitted && (lf.username.invalid || lf.username.errors?.required)"
+                        class="help-block mt-1 text-danger"> <i class="ft-alert-circle align-middle"></i> Campo
+                        requerido</div>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                        [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.password.invalid, 'is-valid': loginFormSubmitted && !lf.password.invalid }"
+                        required>
+                      <div *ngIf="loginFormSubmitted && (lf.password.invalid || lf.password.errors?.required)"
+                        class="help-block mt-1 text-danger"> <i class="ft-alert-circle align-middle"></i> Campo
+                        requerido
+                      </div>
+                    </div>
+                    <div class="">
+                      <a class="btn btn-blue btn-block" (click)="onSubmit()">Ingresar</a>
+                    </div>
+                  </form>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Login Page Ends-->
