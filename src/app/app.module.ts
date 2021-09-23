@@ -36,6 +36,7 @@ import {VgCoreModule} from '@videogular/ngx-videogular/core';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
@@ -62,6 +63,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
 };
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -95,7 +100,12 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: "YOUR_GOOGLE_MAP_API_KEY"
     }),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      }
+    })
   ],
   providers: [
     AuthService,

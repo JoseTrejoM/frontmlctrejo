@@ -1,3 +1,4 @@
+import { AutorizacionComponent } from './autorizacion/autorizacion.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -60,6 +61,13 @@ const routes: Routes = [
         component: HomeComponent,
         data: {
           title: 'Home'
+        }
+      },
+      {
+        path: 'autorizacion',
+        component: AutorizacionComponent,
+        data: {
+          title: 'Autorización'
         }
       },
     ]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ApiService} from '../../../shared/services/api.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-formulario-eligibilidad',
@@ -10,26 +12,52 @@ import {ApiService} from '../../../shared/services/api.service';
 })
 export class FormularioEligibilidadComponent implements OnInit {
 
+
   showBtnContinuar = false;
   index = 0;
   cuestionario: any [] = [];
   respuestas: any [] = [];
   respuesta: string;
+  cuestionarioLocal = [];
+  decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
+  public selection: string;
+
   constructor(
     private api: ApiService,
-    public router: Router
+    public router: Router,
+    public jwtHelper: JwtHelperService
   ) {
+    if (parseInt(localStorage.getItem('propuestaId')) == 0) {
+      this.cuestionarioLocal = [];
+    } else {
+      this.cuestionarioLocal = JSON.parse(localStorage.getItem("cuestionario"));
+    }
+    console.log(this.api.currentTokenValue);
+    console.log(this.cuestionarioLocal);
 
-    this.getPreguntas();
+
+      this.api.loginapp().pipe(first()).subscribe((data: any) => {
+        this.getPreguntas();
+      });
+
+
+
+
 
   }
 
   ngOnInit(): void {
   }
 
+  checkToken() {
+    if (helper.isTokenExpired(this.api.currentTokenValue)) {
+      this.api.loginapp().pipe(first()).subscribe((data: any) => {});
+    }
+  }
+
   getPreguntas() {
     this.api.getCuestionario(1, this.api.currentTokenValue).pipe(first()).subscribe((dataCuestionario:any) => {
-        console.log(dataCuestionario);
+      console.log(dataCuestionario);
         dataCuestionario['preguntas'].forEach(item => {
           this.cuestionario.push(
             {
@@ -39,11 +67,24 @@ export class FormularioEligibilidadComponent implements OnInit {
               orden: item.orden,
               preguntaId: item.preguntaId,
               selected: false,
-              respuesta: ''
+              respuesta: '',
+              respuestaId: 0,
             }
           )
         });
-        console.log(this.cuestionario);
+
+        this.cuestionario = this.cuestionario.map(a => {
+          const exists = this.cuestionarioLocal.find(b => b.preguntaid == a.preguntaId);
+
+          if (exists) {
+            a.selected = true;
+            a.respuesta = exists.respuesta;
+            a.respuestaId = exists.respuestaid;
+          }
+
+          return a;
+        });
+
         this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0))
       },
       (error) => { }
@@ -51,11 +92,79 @@ export class FormularioEligibilidadComponent implements OnInit {
   }
 
   changeStep(stepper, index){
-    this.cuestionario[index].respuesta = this.respuesta;
-    console.log(this.cuestionario);
+    let arrSend = [];
+    if (this.cuestionario[index].respuesta == 'si') {
+    } else if (this.respuesta) {
+      this.cuestionario[index].respuesta = this.respuesta;
+    } else {
+      this.cuestionario[index].respuesta = 'no';
+    }
 
     if (index == this.cuestionario.length - 1) {
-      this.router.navigate(["/pages/propuesta"]);
+
+      this.cuestionario.forEach(element => {
+
+        if (parseInt(localStorage.getItem('propuestaId')) == 0) {
+          this.respuestas.push(
+            {
+              "preguntaId": element.preguntaId,
+              "respuesta": element.respuesta,
+            }
+          );
+        } else {
+          this.respuestas.push(
+            {
+              "preguntaId": element.preguntaId,
+              "respuesta": element.respuesta,
+              'respuestaId': element.respuestaId
+            }
+          );
+        }
+
+      });
+
+
+      if (parseInt(localStorage.getItem('propuestaId')) == 0) {
+      arrSend.push({
+        "curp": localStorage.getItem('curp'),
+        "beneficiarios": JSON.parse(localStorage.getItem('beneficiarios')),
+        "beneficios": JSON.parse(localStorage.getItem('beneficios')),
+        "respuestas": this.respuestas
+      })
+    } else {
+      arrSend.push({
+        "propuestaId": localStorage.getItem('propuestaId'),
+        "servicioBeneficiarioId": localStorage.getItem('servicioBeneficiarioId'),
+        "curp": localStorage.getItem('curp'),
+        "beneficiarios": JSON.parse(localStorage.getItem('beneficiarios')),
+        "beneficios": JSON.parse(localStorage.getItem('beneficios')),
+        "respuestas": this.respuestas
+      })
+    }
+
+        console.log(JSON.stringify(arrSend[0]));
+        this.api.loginapp().pipe(first()).subscribe((data: any) => {
+          this.api.postCuestionario(JSON.stringify(arrSend[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+            console.log(data);
+
+            if (data.plan && data.propuesta) {
+
+              localStorage.setItem('tipoplanId', data.plan['tipoplanId']);
+              localStorage.setItem('precioAnual', data.plan['precioAnual']);
+              localStorage.setItem('precioMensual', data.plan['precioMensual']);
+              localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
+              localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
+
+
+              this.router.navigate(["./pages/propuesta"]);
+
+            }
+            },
+            (error) => { }
+          );
+        });
+
+      // this.router.navigate(["/pages/propuesta"]);
     } else {
       stepper.next();
       this.index++;

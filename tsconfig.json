@@ -9,7 +9,8 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es6",
+    "downlevelIteration": true,
     "typeRoots": [
       "node_modules/@types"
     ],

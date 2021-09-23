@@ -1,10 +1,10 @@
-<!--Login Page Starts-->
-<div class="container-fluid header">
+<!--Page Starts-->
+<div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
   <div class="row bg-white">
-    <div class="col-2 text-center pt-1">
+    <div class="col-md-2 text-center pt-1">
       <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
     </div>
-    <div class="col-10 text-center pt-1">
+    <div class="col-md-10 text-center pt-1">
       <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
     </div>
     <div class="col-md-12 p-0">
@@ -12,11 +12,33 @@
     </div>
   </div>
 </div>
-<div class="container-fluid" ngStyle.xs="display:block" ngStyle.sm="display:none" ngStyle.md="display:none" ngStyle.lg="display:none">
-  <div class="row bg-white align-items-center">
+<div class="container-fluid">
+  <div class="row bg-white align-items-center" *ngIf="index == 1">
     <div class="col-12 text-center p-0 mt-2">
       <h2>Datos</h2>
       <h3 class="m-0 fontResponsive">Para continuar debes llenar todos los campos.</h3>
+    </div>
+    <div class="col-12 p-0">
+      <hr class="separador mt-4 mb-0" />
+    </div>
+  </div>
+  <div class="row bg-white align-items-center" *ngIf="index == 2">
+    <div class="col-12 text-center p-0 mt-2">
+      <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
+      <h2>Confirma los datos</h2>
+
+      <h3 class="m-0 fontResponsive">Por favor confirma que los datos son correctos.</h3>
+    </div>
+    <div class="col-12 p-0">
+      <hr class="separador mt-4 mb-0" />
+    </div>
+  </div>
+  <div class="row bg-white align-items-center" *ngIf="index == 3">
+    <div class="col-12 text-center p-0 mt-2">
+      <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
+      <h2>Confirma tu Plan</h2>
+      <br>
+      <h3 class="m-0 fontResponsive">Por favor confirma el diseño de tu Plan y selecciona la forma de pago.</h3>
     </div>
     <div class="col-12 p-0">
       <hr class="separador mt-4 mb-0" />
@@ -26,154 +48,127 @@
 <div class="container-fluid mt-3 p-0">
   <div class="row m-0">
     <div class="col-12 p-0">
-      <div>
-        <div class="container-fluid" ngStyle.xs="display:none">
-          <div class="row">
-            <div class="col-12 text-center p-0">
-              <h2>Datos</h2>
-              <h3 class="m-0 fontResponsive">Para continuar debes llenar todos los campos.</h3>
-              <hr class="separador mt-4 mb-1" />
-            </div>
-          </div>
-        </div>
           <div class="container">
           <mat-stepper [linear]="true" class="stepper-datos-formulario" #stepper>
             <mat-step label="">
               <div class="row d-flex-center mt-2">
-                <div class="col-md-6 col-lg-4 col-sm-12">
+                <div class="col-md-6 col-lg-4 col-sm-12" *ngFor="let item of arrBeneficiarios">
                   <div class="card cardBeneficios p-1">
                     <div class="card-body">
                       <div class="row vCenter">
                         <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Titular</h3>
+                          <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-4 text-center" *ngIf="item.completo">
                           <button class="btn btn-outline-success">¡Listo!</button>
                         </div>
+                        <div class="col-4 text-center" *ngIf="!item.completo">
+                          <button class="btn btn-outline-danger">Incompleto</button>
+                        </div>
                         <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalTitular, 'Titular')">Editar</button>
+                          <button class="btn btn-pink" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
+                          <button class="btn btn-pink" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
+                          <button class="btn btn-pink" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Pareja</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalTitular, 'Pareja')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              </div>
+              <div class="row mt-2" *ngIf="this.formlarioCompleto">
+                <div class="col-12 text-center">
+                  <button class="btn btn-blue mb-1" (click)="changeStep(stepper)">Continuar</button>
                 </div>
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Padre</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Padre')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
+              </div>
+            </mat-step>
+             <!-- Step Conormación datos -->
+            <mat-step label="">
+              <div class="row d-flex-center mt-2">
+                <div class="col-md-6 col-lg-4 col-sm-12 mb-2" *ngFor="let item of arrBeneficiarios">
+                  <div *ngIf="item.tipoBeneficiarioId == 15">
+                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                    <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
+                    <p><b>Teléfono:</b> {{item.telefono}}</p>
+                    <p><b>Email:</b> {{item.correo}}</p>
+                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Genero:</b> {{item.sexo}}</p>
+                    <p><b>País origen:</b> {{item.paisOrigen}}</p>
+                    <p><b>Estado origen:</b> {{item.estadoOrigen}}</p>
+                    <p><b>País residencia:</b> {{item.paisTrabajo}}</p>
+                    <p><b>País residencia:</b> {{item.estadoTrabajo}}</p>
                   </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Madre</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Madre')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
+                  <div *ngIf="item.tipoBeneficiarioId == 16">
+                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                    <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
+                    <p><b>Teléfono:</b> {{item.telefono}}</p>
+                    <p><b>Email:</b> {{item.correo}}</p>
+                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Genero:</b> {{item.sexo}}</p>
+                    <p><b>País origen:</b> {{item.paisOrigen}}</p>
+                    <p><b>Estado origen:</b> {{item.estadoOrigen}}</p>
                   </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Hijo 1</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Hijo 2</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-sm-12">
-                  <div class="card cardBeneficios p-1">
-                    <div class="card-body">
-                      <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">Hijo 3</h3>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-outline-success">¡Listo!</button>
-                        </div>
-                        <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, 'Hijo')">Editar</button>
-                        </div>
-                      </div>
-                    </div>
+                  <div *ngIf="item.tipoBeneficiarioId > 16">
+                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                    <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
+                    <p><b>Teléfono:</b> {{item.telefono}}</p>
+                    <p><b>Email:</b> {{item.correo}}</p>
+                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Genero:</b> {{item.sexo}}</p>
                   </div>
                 </div>
               </div>
               <div class="row mt-2">
                 <div class="col-12 text-center">
-                  <button class="btn btn-blue">Continuar</button>
+                  <button class="btn btn-blue mb-1" (click)="changeStep(stepper)">Continuar</button>
                 </div>
               </div>
             </mat-step>
+            <!-- Fin Step Conormación datos -->
+            <!-- Step Conormación plan -->
+            <mat-step label="">
+              <div class="row d-flex-center mt-2">
+                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
+                  <h4 class="mb-1"><b>Beneficios del plan</b></h4>
+                  <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p>
+
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
+                  <h4 class="mb-1"><b>Plan de previsión</b></h4>
+
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                  <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-selected  mt-1 pointerEvents"
+                  [checked]="true">
+                    <p class="fontResponsiveSliderNotes lh-13">
+                      Pago tarjeta
+                    </p>
+                  </mat-slide-toggle>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-left mb-2">
+                  <mat-slide-toggle #chkMayor  name="menor56" class="btn btn-inactive  mt-1 pointerEvents"
+                  [checked]="false">
+                    <p class=" fontResponsiveSliderNotes lh-13">
+                      Pago efectivo
+                    </p>
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-12 text-center">
+                  <button class="btn btn-blue mb-1" [routerLink]="['/pages/autorizacion']">Continuar</button>
+                </div>
+              </div>
+            </mat-step>
+            <!-- Fin Step Conormación plan -->
           </mat-stepper>
         </div>
-      </div>
     </div>
   </div>
 </div>
 
+<!-- Modal Datos Titular -->
 <ng-template #modalTitular let-c="close" let-d="dismiss">
   <div class="modal-header bg-gray">
     <h2 class="modal-title text-dark">{{miembroFamilia}}</h2>
@@ -182,68 +177,170 @@
     </button>
   </div>
   <div class="modal-body bg-gray">
-    <form>
+    <form [formGroup]="frm">
       <div class="form-row">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Nombre">
+          <input type="text" class="form-control input-form-datos" formControlName="nombre" placeholder="Nombre"
+          [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Apellido paterno">
+          <input type="text" class="form-control input-form-datos" formControlName="apaterno" placeholder="Apellido paterno"
+          [ngClass]="{ 'is-invalid': submitted && f.apaterno.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Apellido materno">
+          <input type="text" class="form-control input-form-datos" formControlName="amaterno" placeholder="Apellido materno"
+          [ngClass]="{ 'is-invalid': submitted && f.amaterno.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Teléfono">
+          <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefono" placeholder="Teléfono"
+          [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Email">
+          <input type="text" class="form-control input-form-datos" formControlName="correo" placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted && f.correo.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Fecha de nacimiento">
+          <input class="form-control input-form-datos" #drp="bsDatepicker" bsDatepicker [maxDate]="maxDate"
+          [bsConfig]="{ isAnimated: true, adaptivePosition: false }" placement="top"
+          formControlName="fnacimiento" placeholder="Fecha de nacimiento"
+          [ngClass]="{ 'is-invalid': submitted && f.fnacimiento.errors }">
+
         </div>
+      </div>
+      <div class="form-row  mt-1">
         <div class="col">
-          <select class="form-control input-form-datos">
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
+          <select class="form-control input-form-datos" formControlName="sexo" placeholder="Sexo"
+          [ngClass]="{ 'is-invalid': submitted && f.sexo.value == '0' }">
+            <option value="0" disabled>Sexo</option>
+            <option value="{{item.sexoid}}" *ngFor="let item of sexos">{{item.sexo}}</option>
           </select>
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <select class="form-control input-form-datos">
-            <option value="">País</option>
+          <select class="form-control input-form-datos" formControlName="estado" placeholder="País"
+          [ngClass]="{ 'is-invalid': submitted && f.estado.value == '0' }">
+            <option value="0" disabled>Estado origen de México</option>
+            <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <select class="form-control input-form-datos">
-            <option value="">Estado</option>
+          <select class="form-control input-form-datos" formControlName="pais" placeholder="País"
+          [ngClass]="{ 'is-invalid': submitted && f.pais.value == '0' }" (change)="getEstadosEU($event.target.value)">
+            <option value="0" disabled>País de residencia</option>
+            <option value="{{item.paisid}}" *ngFor="let item of paises">{{item.descripcionpais}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos" formControlName="estadoEU" placeholder="Estado"
+          [ngClass]="{ 'is-invalid': submitted && f.estadoEU.value == '0' }">
+            <option value="0" disabled>¿En dónde trabajas?</option>
+            <option value="{{item.estadoid}}" *ngFor="let item of estadosEU">{{item.nombreestado}}</option>
           </select>
         </div>
       </div>
       <div class="row mt-1">
         <div class="col-12 text-center">
-          <button class="btn btn-pink btn-block">Guardar</button>
+          <button class="btn btn-pink btn-block" (click)="addUserTitular()">Guardar</button>
         </div>
-        <!-- <div class="col-6">
-          <button class="btn btn-blue btn-block">Continuar</button>
-        </div> -->
       </div>
     </form>
   </div>
 </ng-template>
+<!-- Fin Modal Datos Titular -->
+
+<!-- Modal Datos Pareja -->
+<ng-template #modalPareja let-c="close" let-d="dismiss">
+  <div class="modal-header bg-gray">
+    <h2 class="modal-title text-dark">{{miembroFamilia}}</h2>
+    <button type="button" class="close text-dark" aria-label="Close" (click)="d('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-gray">
+    <form [formGroup]="frmP">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" formControlName="nombreP" placeholder="Nombre"
+          [ngClass]="{ 'is-invalid': submitted && fP.nombreP.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" formControlName="apaternoP" placeholder="Apellido paterno"
+          [ngClass]="{ 'is-invalid': submitted && fP.apaternoP.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" formControlName="amaternoP" placeholder="Apellido materno"
+          [ngClass]="{ 'is-invalid': submitted && fP.amaternoP.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefonoP" placeholder="Teléfono"
+          [ngClass]="{ 'is-invalid': submitted && fP.telefonoP.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input type="text" class="form-control input-form-datos" formControlName="correoP" placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted && fP.correoP.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input class="form-control input-form-datos" #drp="bsDatepicker" bsDatepicker [maxDate]="maxDate"
+          [bsConfig]="{ isAnimated: true, adaptivePosition: false }" placement="top"
+          formControlName="fnacimientoP" placeholder="Fecha de nacimiento"
+          [ngClass]="{ 'is-invalid': submitted && fP.fnacimientoP.errors }">
+
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos" formControlName="sexoP" placeholder="Sexo"
+          [ngClass]="{ 'is-invalid': submitted && fP.sexoP.value == '0' }">
+            <option value="0" disabled>Sexo</option>
+            <option value="{{item.sexoid}}" *ngFor="let item of sexos">{{item.sexo}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
+          [ngClass]="{ 'is-invalid': submitted && fP.estadoP.value == '0' }">
+            <option value="0" disabled>Estado origen de México</option>
+            <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-12 text-center">
+          <button class="btn btn-pink btn-block" (click)="addUserPareja()">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- Fin Modal Datos Pareja -->
+
+<!-- Modal Datos Familia -->
 <ng-template #modalFamilia let-c="close" let-d="dismiss">
   <div class="modal-header bg-gray">
     <h2 class="modal-title text-dark">{{miembroFamilia}}</h2>
@@ -252,42 +349,63 @@
     </button>
   </div>
   <div class="modal-body bg-gray">
-    <form>
+    <form [formGroup]="frm2">
       <div class="form-row">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Nombre">
+          <input type="text" class="form-control input-form-datos" formControlName="nombre2" placeholder="Nombre"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.nombre2.errors }">
         </div>
       </div>
-      <div class="form-row  mt-2">
+      <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Apellido paterno">
+          <input type="text" class="form-control input-form-datos" formControlName="apaterno2" placeholder="Apellido paterno"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.apaterno2.errors }">
         </div>
       </div>
-      <div class="form-row  mt-2">
+      <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Apellido materno">
+          <input type="text" class="form-control input-form-datos" formControlName="amaterno2" placeholder="Apellido materno"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.amaterno2.errors }">
         </div>
       </div>
-      <div class="form-row  mt-2">
+      <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" placeholder="Fecha de nacimiento">
+          <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefono2" placeholder="Teléfono"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.telefono2.errors }">
         </div>
+      </div>
+      <div class="form-row  mt-1">
         <div class="col">
-          <select class="form-control input-form-datos">
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
+          <input type="text" class="form-control input-form-datos" formControlName="correo2" placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.correo2.errors }">
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <input class="form-control input-form-datos" #drp="bsDatepicker" bsDatepicker [maxDate]="maxDate"
+          [bsConfig]="{ isAnimated: true, adaptivePosition: true }" placement="top"
+          formControlName="fnacimiento2" placeholder="Fecha de nacimiento"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.fnacimiento2.errors }">
+
+        </div>
+      </div>
+      <div class="form-row  mt-1">
+        <div class="col">
+          <select class="form-control input-form-datos" formControlName="sexo2"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.sexo2.value == '0' }">
+          <option value="0" disabled>Sexo</option>
+            <option value="{{item.sexoid}}" *ngFor="let item of sexos">{{item.sexo}}</option>
           </select>
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-12 text-center">
-          <button class="btn btn-pink btn-block">Guardar</button>
+          <button class="btn btn-pink btn-block" (click)="addUserPadres()">Guardar</button>
         </div>
-        <!-- <div class="col-6">
-          <button class="btn btn-blue btn-block">Continuar</button>
-        </div> -->
       </div>
     </form>
   </div>
 </ng-template>
-<!--Login Page Ends-->
+<!-- Fin Modal Datos Familia -->
+
+<!--Page Ends-->

@@ -33,7 +33,12 @@ export class ApiService {
    }
 
    loginapp() {
-    const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'byapplogin': 'true'
+    };
     return this._http.post(`${this.url}/auth/loginapp`,
     {
       "appKey": this.encrypt('4pK3y4WeB..$')
@@ -42,9 +47,10 @@ export class ApiService {
     ).pipe(
       map((data : any) => {
         if (data.idToken) {
+          // console.log(data.idToken);
           localStorage.setItem("tokenApp", JSON.stringify(data.idToken));
           this.currentTokenSubject.next(data.idToken);
-          this.startRefreshTokenTimer();
+          // this.startRefreshTokenTimer();
         }
         return data
       }
@@ -61,7 +67,8 @@ export class ApiService {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
     };
     return this._http.get(this.url + "/questionsheet/byid/" + id, {headers}).pipe(
       map((data) => data),
@@ -73,10 +80,183 @@ export class ApiService {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
     };
     return this._http.get(this.url + "/getPropuesta/" + curp, {headers}).pipe(
       map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  getResumenPropuesta(curp, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+    return this._http.get(this.url + "/getResumenPropuesta/" + curp, {headers}).pipe(
+      map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  getPais(token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+    return this._http.get(this.url + "/getCatPais", {headers}).pipe(
+      map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  getEstado(idPais, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+    return this._http.get(this.url + "/getCatEstado/" + idPais, {headers}).pipe(
+      map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  getDataBeneficiariosById(id, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+    return this._http.get(this.url + "/propuesta/alldatabyid/" + id, {headers}).pipe(
+      map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  postCuestionario(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/register/create`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  postAceptarPropuesta(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/propuesta/aceptar`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  addUserTitularPareja(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/user/create`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  updateUserTitularPareja(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.put(`${this.url}/user/create`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  addUserBeneficiario(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/user/create`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  updateUserBeneficiario(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.put(`${this.url}/user/update`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
       catchError((e) => throwError(e))
     );
   }
@@ -111,12 +291,13 @@ private refreshTokenTimeout;
 
 private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    const jwtToken = JSON.parse(atob(this.currentTokenValue.jwtToken.split('.')[1]));
+    const jwtToken = JSON.parse(atob(this.currentTokenValue.split('.')[1]));
 
     // set a timeout to refresh the token a minute before it expires
-    const expires = new Date(jwtToken.exp * 1000);
-    const timeout = expires.getTime() - Date.now() - (60 * 1000);
-    this.refreshTokenTimeout = setTimeout(() => this.loginapp().subscribe(), timeout);
+    // const expires = new Date(jwtToken.exp * 1000);
+    // const timeout = expires.getTime() - Date.now() - (60 * 1000);
+
+    this.refreshTokenTimeout = setTimeout(() => this.loginapp().subscribe(), 1500000);
 }
 
 private stopRefreshTokenTimer() {

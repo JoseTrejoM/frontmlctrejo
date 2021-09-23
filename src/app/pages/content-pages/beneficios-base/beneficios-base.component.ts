@@ -12,7 +12,10 @@ import {
 } from '@angular/material/snack-bar';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
-import {ApiService} from '../../../shared/services/api.service'
+import { ApiService } from '../../../shared/services/api.service'
+import { ImgSrcDirective } from '@angular/flex-layout';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export enum PageNames {
   Curp,
@@ -37,6 +40,7 @@ export class BeneficiosBaseComponent {
   index = 0;
   stepIndex = PageNames.Curp;
   familia: any[];
+  arrPropuesta = [];
   familiaFunerario: any[];
   familiaEducacion: any[];
   familiaEnvio: any[];
@@ -47,6 +51,12 @@ export class BeneficiosBaseComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   checkedMenor: boolean = false;
   checkedMayor: boolean = false;
+  beneficiarios = [];
+  beneficios = [];
+  arrBeneficios = [];
+  arrSeleccionados = [15];
+  envioDineroSelected = false;
+  decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
 
 
   stepperOrientation: Observable<StepperOrientation>;
@@ -58,25 +68,27 @@ export class BeneficiosBaseComponent {
     private ref: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private api: ApiService,
+    public router: Router,
+    public jwtHelper: JwtHelperService
   ) {
+    this.beneficiarios.push(15);
     this.stepperOrientation = breakpointObserver.observe('(min-width: 800px)')
       .pipe(map(({ matches }) => matches ? 'horizontal' : 'vertical'));
 
-      this.api
-      .loginapp()
-      .pipe(first())
-      .subscribe(
-        (data:any) => {
-          console.log(data);
-        },
-        (error) => { }
-      );
+    this.api.loginapp().pipe(first()).subscribe((data: any) => { });
+
+
 
   }
 
-
-
   ngOnInit() {
+
+    // let decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
+    // if (decodedToken.exp < new Date().getTime() / 1000) {
+    //   console.log("EXPIRED");
+    // } else {
+    //   console.log("ACTIVE");
+    // }
 
     this.firstFormGroup = this._formBuilder.group({
       curp: ['',
@@ -96,153 +108,504 @@ export class BeneficiosBaseComponent {
       { label: '' }
     ];
 
-    this.familia = [
+    this.arrPropuesta = [
       {
-        idMiembro: 1,
-        img: '../../../../assets/img/icons/Padre-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Padre.png',
-        imgApagado: '../../../../assets/img/icons/Padre-Apagado.png',
-        beneficio: 1,
-        index: 0
-      },
-      {
-        idMiembro: 2,
-        img: '../../../../assets/img/icons/Madre-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Madre.png',
-        imgApagado: '../../../../assets/img/icons/Madre-Apagado.png',
-        beneficio: 1,
-        index: 1
-      },
-      {
-        idMiembro: 3,
-        img: '../../../../assets/img/icons/Titular.png',
-        selected: 1,
-        imgPrendido: '../../../../assets/img/icons/Titular.png',
-        imgApagado: '../../../../assets/img/icons/Titular-Apagado.png',
-        beneficio: 1,
-        index: 2
-      },
-      {
-        idMiembro: 4,
-        img: '../../../../assets/img/icons/Pareja-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Pareja.png',
-        imgApagado: '../../../../assets/img/icons/Pareja-Apagado.png',
-        beneficio: 1,
-        index: 3
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-1-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-1.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-1-Apagado.png',
-        beneficio: 1,
-        index: 4
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-2-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-2.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-2-Apagado.png',
-        beneficio: 1,
-        index: 5
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-3-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-3.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-3-Apagado.png',
-        beneficio: 1,
-        index: 6
+        "propuestaid": 3,
+        "curp": "BEGO731126HDFLMS02",
+        "estatuspropuesta": "Cuestionario",
+        "clestatuspropuestaid": 1,
+        "flag": 1,
+        "beneficios": [
+          {
+            "beneficioid": 1,
+            "titulobeneficio": "Repatriación a México",
+            "subtitulobeneficio": "(Por fallecimiento en EU)",
+            "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
+            // "beneficiosbeneficiarios": [
+            //   {
+            //     "imagenactivo": "Padre",
+            //     "imageninactivo": "Padre-Apagado",
+            //     "imagendefault": "Padre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Padre",
+            //     "tipobeneficiarioid": "17",
+            //   },
+            //   {
+            //     "imagenactivo": "Madre",
+            //     "imageninactivo": "Madre-Apagado",
+            //     "imagendefault": "Madre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Madre",
+            //     "tipobeneficiarioid": "18",
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 1,
+            //     "imagenactivo": "Titular",
+            //     "imageninactivo": "Titular-Apagado",
+            //     "imagendefault": "Titular",
+            //     "esseleccionado": true,
+            //     "beneficiarioid": 4,
+            //     "tipobeneficiario": "Titular",
+            //     "tipobeneficiarioid": "15",
+            //     "serviciobeneficiarioid": 6
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 2,
+            //     "imagenactivo": "Pareja",
+            //     "imageninactivo": "Pareja-Apagado",
+            //     "imagendefault": "Pareja-Apagado",
+            //     "esseleccionado": false,
+            //     "beneficiarioid": 5,
+            //     "tipobeneficiario": "Pareja",
+            //     "tipobeneficiarioid": "16",
+            //     "serviciobeneficiarioid": 7
+            //   },
+            //   {
+            //     "imagenactivo": "Hijo",
+            //     "imageninactivo": "Hijo-Apagado",
+            //     "imagendefault": "Hijo-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Hijo",
+            //     "tipobeneficiarioid": "19",
+            //   },
+            // ],
+            "servicios": []
+          },
+          {
+            "beneficioid": 2,
+            "titulobeneficio": "Servicio Funerario",
+            "subtitulobeneficio": "(Residentes  de México)",
+            "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
+            // "beneficiosbeneficiarios": [
+            //   {
+            //     "imagenactivo": "Padre",
+            //     "imageninactivo": "Padre-Apagado",
+            //     "imagendefault": "Padre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Padre",
+            //     "tipobeneficiarioid": "17",
+            //   },
+            //   {
+            //     "imagenactivo": "Madre",
+            //     "imageninactivo": "Madre-Apagado",
+            //     "imagendefault": "Madre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Madre",
+            //     "tipobeneficiarioid": "18",
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 1,
+            //     "imagenactivo": "Titular",
+            //     "imageninactivo": "Titular-Apagado",
+            //     "imagendefault": "Titular",
+            //     "esseleccionado": true,
+            //     "beneficiarioid": 4,
+            //     "tipobeneficiario": "Titular",
+            //     "tipobeneficiarioid": "15",
+            //     "serviciobeneficiarioid": 6
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 2,
+            //     "imagenactivo": "Pareja",
+            //     "imageninactivo": "Pareja-Apagado",
+            //     "imagendefault": "Pareja-Apagado",
+            //     "esseleccionado": false,
+            //     "beneficiarioid": 5,
+            //     "tipobeneficiario": "Pareja",
+            //     "tipobeneficiarioid": "16",
+            //     "serviciobeneficiarioid": 7
+            //   },
+            //   {
+            //     "imagenactivo": "Hijo",
+            //     "imageninactivo": "Hijo-Apagado",
+            //     "imagendefault": "Hijo-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Hijo",
+            //     "tipobeneficiarioid": "19",
+            //   },
+            // ],
+            "servicios": []
+          },
+          {
+            "beneficioid": 4,
+            "titulobeneficio": "Educación financiera",
+            "subtitulobeneficio": "(Administración del dinero)",
+            "descripcionbeneficio": "Este beneficio está incluido para todos los miembros.",
+            // "beneficiosbeneficiarios": [
+            //   {
+            //     "imagenactivo": "Padre",
+            //     "imageninactivo": "Padre-Apagado",
+            //     "imagendefault": "Padre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Padre",
+            //     "tipobeneficiarioid": "17",
+            //   },
+            //   {
+            //     "imagenactivo": "Madre",
+            //     "imageninactivo": "Madre-Apagado",
+            //     "imagendefault": "Madre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Madre",
+            //     "tipobeneficiarioid": "18",
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 1,
+            //     "imagenactivo": "Titular",
+            //     "imageninactivo": "Titular-Apagado",
+            //     "imagendefault": "Titular",
+            //     "esseleccionado": true,
+            //     "beneficiarioid": 4,
+            //     "tipobeneficiario": "Titular",
+            //     "tipobeneficiarioid": "15",
+            //     "serviciobeneficiarioid": 6
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 2,
+            //     "imagenactivo": "Pareja",
+            //     "imageninactivo": "Pareja-Apagado",
+            //     "imagendefault": "Pareja-Apagado",
+            //     "esseleccionado": false,
+            //     "beneficiarioid": 5,
+            //     "tipobeneficiario": "Pareja",
+            //     "tipobeneficiarioid": "16",
+            //     "serviciobeneficiarioid": 7
+            //   },
+            //   {
+            //     "imagenactivo": "Hijo",
+            //     "imageninactivo": "Hijo-Apagado",
+            //     "imagendefault": "Hijo-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Hijo",
+            //     "tipobeneficiarioid": "19",
+            //   },
+            // ],
+            "servicios": []
+          },
+          {
+            "beneficioid": 5,
+            "titulobeneficio": "Envío de dinero",
+            "subtitulobeneficio": "(Cuenta digital en México)",
+            "descripcionbeneficio": "¿Quién de tu familia recibe el dinero que envías de EUA?\r\nSeleciona a una persona para otorgarle este beneficio. Debe vivir en México.",
+            // "beneficiosbeneficiarios": [
+            //   {
+            //     "imagenactivo": "Padre",
+            //     "imageninactivo": "Padre-Apagado",
+            //     "imagendefault": "Padre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Padre",
+            //     "tipobeneficiarioid": "17",
+            //   },
+            //   {
+            //     "imagenactivo": "Madre",
+            //     "imageninactivo": "Madre-Apagado",
+            //     "imagendefault": "Madre-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Madre",
+            //     "tipobeneficiarioid": "18",
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 1,
+            //     "imagenactivo": "Titular",
+            //     "imageninactivo": "Titular-Apagado",
+            //     "imagendefault": "Titular",
+            //     "esseleccionado": true,
+            //     "beneficiarioid": 4,
+            //     "tipobeneficiario": "Titular",
+            //     "tipobeneficiarioid": "15",
+            //     "serviciobeneficiarioid": 6
+            //   },
+            //   {
+            //     "beneficiobeneficiarioid": 2,
+            //     "imagenactivo": "Pareja",
+            //     "imageninactivo": "Pareja-Apagado",
+            //     "imagendefault": "Pareja-Apagado",
+            //     "esseleccionado": false,
+            //     "beneficiarioid": 5,
+            //     "tipobeneficiario": "Pareja",
+            //     "tipobeneficiarioid": "16",
+            //     "serviciobeneficiarioid": 7
+            //   },
+            //   {
+            //     "imagenactivo": "Hijo",
+            //     "imageninactivo": "Hijo-Apagado",
+            //     "imagendefault": "Hijo-Apagado",
+            //     "esseleccionado": false,
+            //     "tipobeneficiario": "Hijo",
+            //     "tipobeneficiarioid": "19",
+            //   },
+            // ],
+            "servicios": []
+          },
+          {
+            "beneficioid": 3,
+            "titulobeneficio": "Seguro de vida",
+            "subtitulobeneficio": "(MX $50,000)",
+            "descripcionbeneficio": "Incluido para el titula.\r\nEste beneficio está sujeto a elegibilidad.",
+            "fechaalta": "2021-08-31T22:43:47.000+00:00",
+            "fechamodificacion": "2021-08-31T22:43:47.000+00:00",
+            // "beneficiosbeneficiarios": [
+            //   {
+            //     "beneficiobeneficiarioid": 11,
+            //     "imagenactivo": "Titular",
+            //     "imageninactivo": "Titular-Apagado",
+            //     "imagendefault": "Titular",
+            //     "esseleccionado": true,
+            //     "beneficiarioid": 4,
+            //     "tipobeneficiario": "Titular",
+            //     "tipobeneficiarioid": "15",
+            //     "serviciobeneficiarioid": 10
+            //   }
+            // ],
+            "servicios": []
+          }
+        ],
+        "cuestionario": [
+          {
+            "propuestaid": 3,
+            "beneficiarioid": 4,
+            "serviciobeneficiarioid": 6,
+            "preguntaid": 1,
+            "descripcionpregunta": "<p class\"\"> 1. ¿Estás embarazada?</p>",
+            "respuestaid": 3,
+            "respuesta": "si"
+          },
+          {
+            "propuestaid": 3,
+            "beneficiarioid": 4,
+            "serviciobeneficiarioid": 6,
+            "preguntaid": 2,
+            "descripcionpregunta": "<p class=\"\">\n2. ¿Estás enfermo(a), estás buscando o recibiendo algún tratamiento médico, terapia o medicación? </p>",
+            "respuestaid": 4,
+            "respuesta": "no"
+          }
+        ]
       }
     ]
 
-    this.familiaEnvio = [
-      {
-        idMiembro: 1,
-        img: '../../../../assets/img/icons/Padre-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Padre.png',
-        imgApagado: '../../../../assets/img/icons/Padre-Apagado.png',
-        beneficio: 1,
-        index: 0
-      },
-      {
-        idMiembro: 2,
-        img: '../../../../assets/img/icons/Madre-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Madre.png',
-        imgApagado: '../../../../assets/img/icons/Madre-Apagado.png',
-        beneficio: 1,
-        index: 1
-      },
-      {
-        idMiembro: 3,
-        img: '../../../../assets/img/icons/Titular.png',
-        selected: 1,
-        imgPrendido: '../../../../assets/img/icons/Titular.png',
-        imgApagado: '../../../../assets/img/icons/Titular-Apagado.png',
-        beneficio: 1,
-        index: 2
-      },
-      {
-        idMiembro: 4,
-        img: '../../../../assets/img/icons/Pareja-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Pareja.png',
-        imgApagado: '../../../../assets/img/icons/Pareja-Apagado.png',
-        beneficio: 1,
-        index: 3
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-1-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-1.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-1-Apagado.png',
-        beneficio: 1,
-        index: 4
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-2-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-2.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-2-Apagado.png',
-        beneficio: 1,
-        index: 5
-      },
-      {
-        idMiembro: 5,
-        img: '../../../../assets/img/icons/Hijo-3-Apagado.png',
-        selected: 0,
-        imgPrendido: '../../../../assets/img/icons/Hijo-3.png',
-        imgApagado: '../../../../assets/img/icons/Hijo-3-Apagado.png',
-        beneficio: 1,
-        index: 6
-      }
-    ]
+    this.arrBeneficios = this.arrPropuesta[0].beneficios.sort((a, b) => (a.beneficioid > b.beneficioid) ? 1 : ((b.beneficioid > a.beneficioid) ? -1 : 0))
+    // console.log(this.arrBeneficios);
+
   }
 
   get s1() {
     return this.firstFormGroup.controls;
   }
 
-  getPropuesta(curp, token) {
-    this.api.getPropuesta(curp, token).pipe(first()).subscribe((data:any) => {
-          console.log(data);
-        },
-        (error) => { }
-      );
+  getPropuesta(curp, token, stepper) {
+    this.api.getPropuesta(curp, token).pipe(first()).subscribe((data: any) => {
+      this.arrPropuesta = data
+      console.log(data);
+
+      if (data.propuestaid == 0) {
+        this.arrPropuesta['beneficios'].forEach((element, index) => {
+          if (element.beneficioid != 3) {
+            element['beneficiosbeneficiarios'] = [];
+            element['beneficiosbeneficiarios'].push(
+              {
+                "imagenactivo": "Padre",
+                "imageninactivo": "Padre-Apagado",
+                "imagendefault": "Padre-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Padre",
+                "tipobeneficiarioid": "17",
+              },
+              {
+                "imagenactivo": "Madre",
+                "imageninactivo": "Madre-Apagado",
+                "imagendefault": "Madre-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Madre",
+                "tipobeneficiarioid": "18",
+              },
+              {
+                "imagenactivo": "Titular",
+                "imageninactivo": "Titular-Apagado",
+                "imagendefault": element.beneficioid == 5 ? "Titular-Apagado" : "Titular",
+                "esseleccionado": false,
+                "tipobeneficiario": "Titular",
+                "tipobeneficiarioid": "15"
+              },
+              {
+                "imagenactivo": "Pareja",
+                "imageninactivo": "Pareja-Apagado",
+                "imagendefault": "Pareja-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Pareja",
+                "tipobeneficiarioid": "16",
+              },
+              {
+                "imagenactivo": "Hijo",
+                "imageninactivo": "Hijo-Apagado",
+                "imagendefault": "Hijo-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+              {
+                "imagenactivo": "Hijo-2",
+                "imageninactivo": "Hijo-Apagado-2",
+                "imagendefault": "Hijo-Apagado-2",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+              {
+                "imagenactivo": "Hijo-3",
+                "imageninactivo": "Hijo-Apagado-3",
+                "imagendefault": "Hijo-Apagado-3",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+            );
+          } else if (element.beneficioid == 3) {
+            element['beneficiosbeneficiarios'] = [];
+            this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios'].push(
+              {
+                "imagenactivo": "Titular",
+                "imageninactivo": "Titular-Apagado",
+                "imagendefault": "Titular",
+                "esseleccionado": false,
+                "tipobeneficiario": "Titular",
+                "tipobeneficiarioid": "15",
+              }
+            );
+          } else if (element.beneficioid == 5) {
+            element['beneficiosbeneficiarios'] = [];
+            this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios'].push(
+              {
+                "imagenactivo": "Titular",
+                "imageninactivo": "Titular-Apagado",
+                "imagendefault": "Titular-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Titular",
+                "tipobeneficiarioid": "15",
+              }
+            );
+          }
+
+          // Ordenar la propuesta inicial
+          this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios']
+            .sort((a, b) => (a.tipobeneficiarioid > b.tipobeneficiarioid) ? 1 : ((b.tipobeneficiarioid > a.tipobeneficiarioid) ? -1 : 0));
+
+        });
+
+      } else {
+        this.arrPropuesta['beneficios'].forEach((element, index) => {
+          if (element.beneficioid == 1) {
+            element.beneficiosbeneficiarios.forEach(bb => {
+              if (bb.tipobeneficiarioid == 15) {
+                localStorage.setItem('servicioBeneficiarioId', bb.serviciobeneficiarioid);
+              }
+            });
+          }
+
+          if (element.beneficiosbeneficiarios.length == 4 && element.beneficioid != 3) {
+            this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios'].push(
+              {
+                "imagenactivo": "Hijo",
+                "imageninactivo": "Hijo-Apagado",
+                "imagendefault": "Hijo-Apagado",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+              {
+                "imagenactivo": "Hijo-2",
+                "imageninactivo": "Hijo-Apagado-2",
+                "imagendefault": "Hijo-Apagado-2",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+              {
+                "imagenactivo": "Hijo-3",
+                "imageninactivo": "Hijo-Apagado-3",
+                "imagendefault": "Hijo-Apagado-3",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+            );
+          } else if (element.beneficiosbeneficiarios.length == 5 && element.beneficioid != 3) {
+            this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios'].push({
+              "imagenactivo": "Hijo-2",
+              "imageninactivo": "Hijo-Apagado-2",
+              "imagendefault": "Hijo-Apagado-2",
+              "esseleccionado": false,
+              "tipobeneficiario": "Hijo",
+              "tipobeneficiarioid": "19",
+            },
+              {
+                "imagenactivo": "Hijo-3",
+                "imageninactivo": "Hijo-Apagado-3",
+                "imagendefault": "Hijo-Apagado-3",
+                "esseleccionado": false,
+                "tipobeneficiario": "Hijo",
+                "tipobeneficiarioid": "19",
+              },
+            );
+          } else if (element.beneficiosbeneficiarios.length == 6 && element.beneficioid != 3) {
+            this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios'].push({
+              "imagenactivo": "Hijo-3",
+              "imageninactivo": "Hijo-Apagado-3",
+              "imagendefault": "Hijo-Apagado-3",
+              "esseleccionado": false,
+              "tipobeneficiario": "Hijo",
+              "tipobeneficiarioid": "19",
+            });
+          }
+
+          // Ordenar la propuesta inicial
+          this.arrPropuesta['beneficios'][index]['beneficiosbeneficiarios']
+            .sort((a, b) => (a.tipobeneficiarioid > b.tipobeneficiarioid) ? 1 : ((b.tipobeneficiarioid > a.tipobeneficiarioid) ? -1 : 0));
+
+          // Autoselección del Titular en todos los beneficios
+          if (element.beneficioid == 5) {
+            element['beneficiosbeneficiarios'].forEach(bb => {
+              if (bb.tipobeneficiarioid == 15) {
+                bb.esseleccionado = true;
+                bb.imagendefault = bb.imagenactivo
+              } else {
+                bb.esseleccionado = false;
+                bb.imagendefault = bb.imageninactivo
+              }
+
+            });
+          }
+
+        });
+
+      }
+
+
+      // Guardo en storage los parámetros
+      localStorage.setItem("flag", this.arrPropuesta['flag']);
+      localStorage.setItem("propuestaId", this.arrPropuesta['propuestaid']);
+      localStorage.setItem("curp", this.arrPropuesta['curp']);
+      localStorage.setItem("cuestionario", JSON.stringify(this.arrPropuesta['cuestionario']));
+
+      // Ordenar los beneficios
+      this.arrBeneficios = this.arrPropuesta['beneficios'].sort((a, b) => (a.beneficioid > b.beneficioid) ? 1 : ((b.beneficioid > a.beneficioid) ? -1 : 0));
+      this.arrBeneficios = this.arrPropuesta['beneficios'];
+
+      console.log(this.arrBeneficios);
+      // Avanzar step
+      stepper.next();
+      this.index++;
+      this.ref.detectChanges();
+    },
+      (error) => { }
+    );
   }
 
   showResponsiveDialog() {
     this.displayModalResponsive = true
+  }
+
+  changeStepInicial(stepper) {
+    stepper.next();
+    this.index++;
   }
 
   changeStepCurp(stepper, beneficio) {
@@ -250,84 +613,196 @@ export class BeneficiosBaseComponent {
     if (this.firstFormGroup.invalid) {
       return;
     }
-    this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue);
-    stepper.next();
-    this.index++;
+    console.log(new Date().getTime() / 1000);
 
+      this.api.loginapp().pipe(first()).subscribe((data: any) => {
+        this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+      });
 
-    // this.curpValida(this.s1.curp.value);
+    // if (this.decodedToken.exp < new Date().getTime() / 1000) {
+    //   this.api.loginapp().pipe(first()).subscribe((data: any) => {
+    //     this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+    //   });
+    // } else {
+    //   this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+    // }
+  }
+
+  backStep(stepper) {
+    stepper.previous();
+    this.index--;
   }
 
   changeStep(stepper, beneficio) {
-    switch (beneficio) {
-      case 1: {
-        this.familiaFunerario = this.familia;
-        console.table(this.familia);
-        break;
-      }
-      case 2: {
-        this.familiaEducacion = this.familia;
-        console.table(this.familiaFunerario);
-        break;
-      }
-    }
+    let arrB = [];
 
+    // console.log(this.arrBeneficios);
+
+    let arr = this.arrBeneficios.filter(function (e) {
+      return e.beneficioid == beneficio;
+    });
+    arr[0].beneficiosbeneficiarios.forEach(element => {
+
+      if (beneficio == 5) {
+        if (element.esseleccionado) {
+          arrB.push(
+            element.tipobeneficiarioid
+          )
+        }
+      } else if (element.esseleccionado || element.tipobeneficiarioid == 15) {
+        arrB.push(
+          element.tipobeneficiarioid
+        )
+      }
+
+      if (element.esseleccionado) {
+        this.beneficiarios.push(parseInt(element.tipobeneficiarioid))
+      }
+      // element.esseleccionado ? this.beneficiarios.push(parseInt(element.tipobeneficiarioid)) : '';
+    });
+
+    this.beneficios.push({
+      "beneficioId": beneficio,
+      "beneficiarios": arrB
+
+    });
+
+    if (this.index == this.arrBeneficios.length + 1) {
+      this.beneficiarios = Array.from(new Set(this.beneficiarios));
+      localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
+      localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
+      this.router.navigate(["./pages/formulario-eligibilidad"]);
+    }
+    // console.log(this.beneficios);
     stepper.next();
     this.index++;
   }
 
-  changeImg(i, beneficio) {
-    console.log(beneficio);
-    switch (beneficio) {
-      case 1: {
-        // Cambio la imagen
-        this.familia[i].selected == 0 ? this.familia[i].img = this.familia[i].imgPrendido :
-          this.familia[i].selected == 1 ? this.familia[i].img = this.familia[i].imgApagado : '';
+  changeImg(indexBeneficios, i, beneficio, tipobeneficiarioid, imagenactivo) {
 
-        // Cambio la bandera de selección
-        this.familia[i].selected == 0 ? this.familia[i].selected = 1 : this.familia[i].selected = 0;
-        this.ref.detectChanges();
-        break;
-      }
-      case 2: {
-        // Cambio la imagen
-        this.familiaFunerario[i].selected == 0 ? this.familiaFunerario[i].img = this.familiaFunerario[i].imgPrendido :
-          this.familiaFunerario[i].selected == 1 ? this.familiaFunerario[i].img = this.familiaFunerario[i].imgApagado : '';
+    this.arrSeleccionados.push(parseInt(tipobeneficiarioid));
 
-        // Cambio la bandera de selección
-        this.familiaFunerario[i].selected == 0 ? this.familiaFunerario[i].selected = 1 : this.familiaFunerario[i].selected = 0;
+
+      let seleccionado = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i].esseleccionado;
+      let arr = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i];
+
+      // // Cambio la imagen
+      !seleccionado ? arr.imagendefault = arr.imagenactivo : arr.imagendefault = arr.imageninactivo;
+
+      // // Cambio la bandera de selección
+      !arr.esseleccionado ? arr.esseleccionado = true : arr.esseleccionado = false;
+
+
+      if (beneficio == 5) {
+        // Bebeficio Envío de dinero
+        this.envioDineroSelected = true;
+        this.arrBeneficios.forEach(element => {
+          element['beneficiosbeneficiarios'].forEach(bb => {
+            if (bb.imagenactivo != imagenactivo) {
+              bb.esseleccionado = false;
+              bb.imagendefault = bb.imageninactivo;
+            }
+          });
+
+        });
         this.ref.detectChanges();
-        break;
-      }
+      } else {
+
+        this.arrBeneficios.forEach(element => {
+          if (element.beneficioid > beneficio && element.beneficioid != 3 && element.beneficioid != 5) {
+            element['beneficiosbeneficiarios'].forEach(bb => {
+              if (bb.imagenactivo == imagenactivo && bb.tipobeneficiarioid != 15) {
+                bb.esseleccionado = arr.esseleccionado;
+                bb.esseleccionado ? bb.imagendefault = bb.imagenactivo : bb.imagendefault = bb.imageninactivo;
+              }
+            });
+          }
+        });
+        this.ref.detectChanges();
+
     }
+  }
 
-
+  checkSeleccionados(tipobeneficiarioid) {
+    console.log(tipobeneficiarioid);
+    if (this.arrSeleccionados.indexOf(tipobeneficiarioid) == -1) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   agregarHijos(beneficio) {
     this.countHijo++;
     this.indexHijo++;
-    // this.familia.push({
-    //   idMiembro : 5,
-    //   img: '../../../../assets/img/icons/Hijo-'+this.countHijo+'-Apagado.png',
-    //   selected: 1,
-    //   imgPrendido: '../../../../assets/img/icons/Hijo-'+this.countHijo+'.png',
-    //   imgApagado: '../../../../assets/img/icons/Hijo-'+this.countHijo+'-Apagado.png',
-    //   beneficio: 1,
-    //   index: this.indexHijo
-    // });
-    this.ref.detectChanges();
-    console.table(this.familia);
+
+    this.arrBeneficios.forEach(element => {
+      if ((element.beneficioid == beneficio) && element.beneficioid != 3 && element.beneficioid != 5) {
+        element['beneficiosbeneficiarios'].forEach(bb => {
+          if (bb.tipobeneficiarioid == 19) {
+            bb.esseleccionado = true;
+            bb.imagendefault = bb.imagenactivo;
+          }
+        });
+        element['beneficiosbeneficiarios'].push(
+          {
+            "imagenactivo": "Hijo-1",
+            "imageninactivo": "Hijo-Apagado-1",
+            "imagendefault": "Hijo-1",
+            "esseleccionado": true,
+            "tipobeneficiario": "Hijo",
+            "tipobeneficiarioid": "19",
+            "agregado": true
+          });
+      } else if (element.beneficioid > beneficio && element.beneficioid != 3 && element.beneficioid != 5) {
+        element['beneficiosbeneficiarios'].forEach(bb => {
+          if (bb.tipobeneficiarioid == 19) {
+            bb.esseleccionado = true;
+            bb.imagendefault = bb.imagenactivo;
+          }
+        });
+        element['beneficiosbeneficiarios'].push(
+          {
+            "imagenactivo": "Hijo-1",
+            "imageninactivo": "Hijo-Apagado-1",
+            "imagendefault": "Hijo-1",
+            "esseleccionado": true,
+            "tipobeneficiario": "Hijo",
+            "tipobeneficiarioid": "19",
+            "agregado": true
+          });
+      }
+      this.ref.detectChanges();
+    });
+
+
   }
 
-  plus() {
-    this.countHijo++;
+  plus(beneficio) {
+    this.agregarHijos(beneficio);
   }
-  minus() {
+  minus(beneficio) {
     if (this.countHijo != 0) {
       this.countHijo--;
+      this.arrBeneficios.forEach(element => {
+        if ((element.beneficioid == beneficio) && element.beneficioid != 3 && element.beneficioid != 5) {
+          element['beneficiosbeneficiarios'].forEach((bb, i) => {
+            if (bb.tipobeneficiarioid == 19 && bb.agregado) {
+              element['beneficiosbeneficiarios'].splice(i, 1);
+            }
+          });
+        } else if ((element.beneficioid > beneficio) && element.beneficioid != 3 && element.beneficioid != 5) {
+          element['beneficiosbeneficiarios'].forEach((bb, i) => {
+            if (bb.tipobeneficiarioid == 19 && bb.agregado) {
+              element['beneficiosbeneficiarios'].splice(i, 1);
+            }
+          });
+        }
+      });
     }
   }
+
+
 
   inputCurp(chkMayor, chkMenor) {
     this.checkedMenor = false;
@@ -343,6 +818,7 @@ export class BeneficiosBaseComponent {
       this.checkedMenor = false;
       return;
     }
+
     let fecha = this.s1.curp.value.slice(4, 10);
     let anio = this.s1.curp.value.slice(4, 6);
     let mes = this.s1.curp.value.slice(6, 8);
@@ -352,11 +828,10 @@ export class BeneficiosBaseComponent {
 
     var fechaActual = new Date();
 
-    let yearsDiff =  fechaActual.getFullYear() - fechaCurp.getFullYear();
-    let monthDiif =  fechaActual.getMonth() - fechaCurp.getMonth();
+    let yearsDiff = fechaActual.getFullYear() - fechaCurp.getFullYear();
+    let monthDiif = fechaActual.getMonth() - fechaCurp.getMonth();
 
-    if (monthDiif < 0 || (monthDiif === 0 && fechaActual.getDate() < fechaCurp.getDate()))
-    {
+    if (monthDiif < 0 || (monthDiif === 0 && fechaActual.getDate() < fechaCurp.getDate())) {
       yearsDiff--;
     }
 
@@ -366,22 +841,28 @@ export class BeneficiosBaseComponent {
       this.checkedMayor = false;
       chk.checked = false;
       this.openSnackBar();
-    } else if(edad == 'Menor'){
+    } else if (edad == 'Menor') {
       chk.checked = false;
       this.checkedMenor = true;
       this.checkedMayor = false;
-    } else if(edad == 'Mayor' && yearsDiff < 56){
+    } else if (edad == 'Mayor' && yearsDiff < 56) {
       e.source.checked = false;
       this.checkedMenor = false;
       this.checkedMayor = false;
       chk.checked = false;
       this.openSnackBar();
-    } else if(edad == 'Mayor'){
+    } else if (edad == 'Mayor') {
       chk.checked = false;
       this.checkedMenor = false;
       this.checkedMayor = true;
     }
 
+  }
+
+  tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    console.log(expiry);
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 
   openSnackBar() {

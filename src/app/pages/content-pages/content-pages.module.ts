@@ -17,7 +17,11 @@ import {StepsModule} from 'primeng/steps';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { esLocale } from "ngx-bootstrap/locale";
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { NgxStripeModule } from 'ngx-stripe';
+import { MomentModule } from 'ngx-moment';
 
 /////// ****** Components
 
@@ -29,8 +33,9 @@ import { BeneficiosBaseComponent } from './beneficios-base/beneficios-base.compo
 import { FormularioEligibilidadComponent } from './formulario-eligibilidad/formulario-eligibilidad.component';
 import { PropuestaComponent } from './propuesta/propuesta.component';
 import { HomeComponent } from './home/home.component';
+import { AutorizacionComponent } from './autorizacion/autorizacion.component';
 
-
+defineLocale("es", esLocale);
 
 
 @NgModule({
@@ -51,8 +56,10 @@ import { HomeComponent } from './home/home.component';
         StepsModule,
         FlexLayoutModule,
         MatRadioModule,
-        MatSnackBarModule
-
+        MatSnackBarModule,
+        BsDatepickerModule.forRoot(),
+        NgxStripeModule.forRoot('pk_test_51JZMBDLm93TetmkamLaX6DbO9PrSOY7zTlNJB2hLfXQLCwBWZMcH9LuCW0ZG6ZYURPVWWzGxyeD9JO9Q5zAruFmf00QuPJRxUr'),
+        MomentModule
     ],
     declarations: [
         ErrorPageComponent,
@@ -62,8 +69,13 @@ import { HomeComponent } from './home/home.component';
         DatosFormularioComponent,
         FormularioEligibilidadComponent,
         PropuestaComponent,
-        HomeComponent
+        HomeComponent,
+        AutorizacionComponent
     ],
 
 })
-export class ContentPagesModule { }
+export class ContentPagesModule {
+  constructor(private bsLocaleService: BsLocaleService) {
+    this.bsLocaleService.use("es"); //fecha en español, datepicker
+  }
+}

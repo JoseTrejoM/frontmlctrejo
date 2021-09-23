@@ -77,10 +77,10 @@
                     <span [innerHTML]="pregunta.descripcionPregunta"></span>
                   </div>
                   <div class="col-sm-12 col-md-6 text-center mt-2 mb-2">
-                    <mat-radio-group aria-label="Selecciona una opción" #rbtn1
-                    (change)="cuestionario[i].selected = true; this.respuesta = $event.value">
-                      <mat-radio-button value="Sí">Sí</mat-radio-button>
-                      <mat-radio-button value="No">No</mat-radio-button>
+                    <mat-radio-group aria-label="Selecciona una opción" [ngClass]="{'disable-click': pregunta.respuesta == 'si'}"
+                    (change)="pregunta.selected = true; this.respuesta = $event.value">
+                      <mat-radio-button value="si" [checked]="pregunta.respuesta == 'si'">Sí</mat-radio-button>
+                      <mat-radio-button value="no" [checked]="pregunta.respuesta == 'no'">No</mat-radio-button>
                     </mat-radio-group>
                   </div>
                   <div class="col-sm-12 col-md-6 text-center mt-2" *ngIf="pregunta.selected">
