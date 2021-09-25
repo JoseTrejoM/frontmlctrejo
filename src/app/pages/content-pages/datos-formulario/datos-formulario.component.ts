@@ -51,6 +51,9 @@ export class DatosFormularioComponent implements OnInit {
   index = 1;
   arrResumen = [];
   personaId = 0;
+  plan =[];
+
+  sexo = 'Sexo'
 
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
 
@@ -77,6 +80,7 @@ export class DatosFormularioComponent implements OnInit {
         this.getEstadosMexico(142);
         this.getData();
         this.getResumenPropuesta();
+        this.getPropuesta();
       });
 
   }
@@ -94,7 +98,7 @@ export class DatosFormularioComponent implements OnInit {
       ],],
       correo: ["", Validators.required],
       fnacimiento: ["", Validators.required],
-      sexo: ["0", Validators.required],
+      sexo: ["", Validators.required],
       estado: ["0", Validators.required],
       estadoEU: ["0", Validators.required],
       pais: ["0", Validators.required],
@@ -214,6 +218,12 @@ export class DatosFormularioComponent implements OnInit {
       this.arrBeneficios = [...new Set(arr)];
       this.ref.detectChanges();
 
+    });
+  }
+
+  getPropuesta() {
+    this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      this.plan = data.plan;
     });
   }
 
@@ -418,12 +428,6 @@ export class DatosFormularioComponent implements OnInit {
 
     }
 
-
-
-
-
-
-
   }
 
   openModal(content, item) {
@@ -438,12 +442,12 @@ export class DatosFormularioComponent implements OnInit {
           'apaterno': item.apellidoPaterno ? item.apellidoPaterno : '',
           'amaterno': item.apellidoMaterno ? item.apellidoMaterno : '',
           'fnacimiento': item.fechaNacimiento ? new Date(item.fechaNacimiento.replace(/-/g, '\/').replace(/T.+/, '')) : '',
-          'sexo': item.sexoId,
-          'telefono': item.telefono,
-          'correo': item.correo,
-          'estado': item.estadoOrigenId,
-          'estadoEU': item.estadoTrabajoId,
-          'pais': item.paisTrabajoId
+          'sexo': item.sexoId ? item.sexoId : '0',
+          'telefono': item.telefono ? item.telefono : '',
+          'correo': item.correo ? item.correo : '' ,
+          'estado': item.estadoOrigenId ? item.estadoOrigenId : '0',
+          'estadoEU': item.estadoTrabajoId ? item.estadoTrabajoId : '0',
+          'pais': item.paisTrabajoId ? item.paisTrabajoId : '0'
         });
         this.getEstadosEU(item.paisTrabajoId);
 
@@ -454,10 +458,10 @@ export class DatosFormularioComponent implements OnInit {
           'apaternoP': item.apellidoPaterno ? item.apellidoPaterno : '',
           'amaternoP': item.apellidoMaterno ? item.apellidoMaterno : '',
           'fnacimientoP': item.fechaNacimiento ? new Date(item.fechaNacimiento.replace(/-/g, '\/').replace(/T.+/, '')) : '',
-          'sexoP': item.sexoId,
+          'sexoP': item.sexoId ? item.sexoId : '0',
           'telefonoP': item.telefono,
           'correoP': item.correo,
-          'estadoP': item.estadoOrigenId,
+          'estadoP': item.estadoOrigenId ? item.estadoOrigenId : '0',
         });
     } else if (item.tipoBeneficiarioId > 16) {
       this.frm2.patchValue(
@@ -466,7 +470,7 @@ export class DatosFormularioComponent implements OnInit {
           'apaterno2': item.apellidoPaterno ? item.apellidoPaterno : '',
           'amaterno2': item.apellidoMaterno ? item.apellidoMaterno : '',
           'fnacimiento2': item.fechaNacimiento ? new Date(item.fechaNacimiento.replace(/-/g, '\/').replace(/T.+/, '')) : '',
-          'sexo2': item.sexoId,
+          'sexo2': item.sexoId ? item.sexoId : '0',
           'telefono2': item.telefono,
           'correo2': item.correo,
         });

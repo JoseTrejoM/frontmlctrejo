@@ -11,6 +11,7 @@
     <hr class="separador mb-0 mt-4-s">
   </div>
 </div>
+
 <div class="container">
   <div class="row vCenter">
     <div class="col-md-4 col-sm-6 mt-1">
@@ -20,7 +21,7 @@
       <a  class="btn btn-pink btn-block btn-lg" [routerLink] = "['/pages/beneficios-base']">Aún no soy cliente</a>
     </div>
     <div class="col-md-4 col-sm-6 mt-1">
-      <a  class="btn btn-green btn-block btn-lg" >Completar contratación</a>
+      <a  class="btn btn-green btn-block btn-lg" (click)="completarContratacion()">Completar contratación</a>
     </div>
   </div>
   <div class="row mt-3 vCenter">

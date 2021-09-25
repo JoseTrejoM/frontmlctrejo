@@ -21,6 +21,8 @@ export class FormularioEligibilidadComponent implements OnInit {
   cuestionarioLocal = [];
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
   public selection: string;
+  arrPropuesta: any;
+  serviciobeneficiarioid: any;
 
   constructor(
     private api: ApiService,
@@ -38,15 +40,29 @@ export class FormularioEligibilidadComponent implements OnInit {
 
       this.api.loginapp().pipe(first()).subscribe((data: any) => {
         this.getPreguntas();
+        this.getPropuesta();
       });
-
-
-
-
 
   }
 
   ngOnInit(): void {
+  }
+
+  getPropuesta() {
+      this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+        this.arrPropuesta = data
+        if (data.propuestaid > 0) {
+          this.arrPropuesta['beneficios'].forEach((element, index) => {
+            if (element.beneficioid == 1) {
+              element.beneficiosbeneficiarios.forEach(bb => {
+                if (bb.tipobeneficiarioid == 15) {
+                  this.serviciobeneficiarioid = bb.serviciobeneficiarioid
+                }
+              });
+            }
+          });
+        }
+      });
   }
 
   checkToken() {
@@ -91,19 +107,23 @@ export class FormularioEligibilidadComponent implements OnInit {
     );
   }
 
-  changeStep(stepper, index){
-    let arrSend = [];
+  seleccionarRespuesta(index, value) {
     if (this.cuestionario[index].respuesta == 'si') {
-    } else if (this.respuesta) {
-      this.cuestionario[index].respuesta = this.respuesta;
     } else {
-      this.cuestionario[index].respuesta = 'no';
+      this.cuestionario[index].respuesta = value;
     }
+  }
 
+  changeStep(stepper, index, value){
+    console.log(value);
+    let arrSend = [];
     if (index == this.cuestionario.length - 1) {
+      this.respuestas=[];
+
+
+
 
       this.cuestionario.forEach(element => {
-
         if (parseInt(localStorage.getItem('propuestaId')) == 0) {
           this.respuestas.push(
             {
@@ -122,8 +142,6 @@ export class FormularioEligibilidadComponent implements OnInit {
         }
 
       });
-
-
       if (parseInt(localStorage.getItem('propuestaId')) == 0) {
       arrSend.push({
         "curp": localStorage.getItem('curp'),
@@ -134,7 +152,7 @@ export class FormularioEligibilidadComponent implements OnInit {
     } else {
       arrSend.push({
         "propuestaId": localStorage.getItem('propuestaId'),
-        "servicioBeneficiarioId": localStorage.getItem('servicioBeneficiarioId'),
+        "servicioBeneficiarioId": this.serviciobeneficiarioid,
         "curp": localStorage.getItem('curp'),
         "beneficiarios": JSON.parse(localStorage.getItem('beneficiarios')),
         "beneficios": JSON.parse(localStorage.getItem('beneficios')),
@@ -143,7 +161,7 @@ export class FormularioEligibilidadComponent implements OnInit {
     }
 
         console.log(JSON.stringify(arrSend[0]));
-        this.api.loginapp().pipe(first()).subscribe((data: any) => {
+
           this.api.postCuestionario(JSON.stringify(arrSend[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
             console.log(data);
 
@@ -162,7 +180,7 @@ export class FormularioEligibilidadComponent implements OnInit {
             },
             (error) => { }
           );
-        });
+
 
       // this.router.navigate(["/pages/propuesta"]);
     } else {

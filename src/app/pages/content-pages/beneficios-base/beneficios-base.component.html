@@ -68,8 +68,7 @@
   <div class="row m-0">
     <div class="col-12">
       <mat-stepper [linear]="true" class="example-stepper stepper-beneficios" #stepper>
-        <mat-step label="">
-
+        <mat-step label="" *ngIf="!completarContratacion">
           <div class="col-12 auth-img-bg mt-3" style="height: 70vh;">
             <!-- <ngb-carousel class="w-100"
             (swipeleft)="swipe($event.type)"
@@ -114,7 +113,7 @@
                     <div class="col-lg-8 offset-lg-2 mt-4">
                         <p class="fontResponsiveSlider">Recomendamos que el titular de tu Plan sea la persona de tu familia
                           que vive o trabaje temporalmente en Estados Unidos o Canadá.</p>
-                        <p class="fontResponsiveSlider">Si no eres tú. compártele esta app o pídele que ingrese a
+                        <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
                           <a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
                         <i class="fas fa-share-alt fa-2x text-pink  m-2"></i>
                         <p class="text-pink">Compartir</p>
@@ -157,7 +156,7 @@
           </div>
         </mat-step>
         <!--Step CURP-->
-        <mat-step label="">
+        <mat-step label="" *ngIf="!completarContratacion">
           <form [formGroup]="firstFormGroup">
             <div class="container">
               <div class="row">
@@ -235,6 +234,73 @@
                   </p>
                   <button (click) = "changeStepCurp(stepper, 0)" class="btn btn-blue btn-block mt-2"
                   *ngIf="this.firstFormGroup.valid && (this.checkedMayor || this.checkedMenor)">
+                    Continuar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step label="" *ngIf="completarContratacion">
+          <form [formGroup]="firstFormGroup">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <p class="">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP"
+                    [ngClass]="{
+                        'is-invalid': s1Submitted && s1.curp.invalid,
+                        'is-valid': s1Submitted && !s1.curp.invalid
+                      }" required />
+                    <div *ngIf="
+                        s1Submitted &&
+                        s1.curp.errors?.required
+                      " class="help-block mt-1 text-danger">
+                      <i class="ft-alert-circle align-middle"></i> Campo
+                      requerido.
+                    </div>
+                    <div *ngIf="s1.curp.errors?.maxlength || s1.curp.errors?.minlength" class="text-danger">La
+                      CURP debe ser de 18 dígitos.
+                    </div>
+                    <div *ngIf="s1.curp.errors?.pattern" class="text-danger">El formato de la
+                      CURP no es correcto.
+                    </div>
+                  </div>
+                  <div>
+                    <a class="btn btn-green btn-block" href="https://www.gob.mx/curp/" target="_blank">Saber cuál es mi
+                      CURP</a>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <p class=" fontResponsiveSliderNotes lh-13 text-left mt-1 mb-1">
+                    <mat-checkbox class="example-margin text-left" formControlName="chk" required [ngClass]="{
+                      'is-invalid': s1Submitted && s1.chk.invalid,
+                      'is-valid': s1Submitted && !s1.chk.invalid
+                    }">
+                      <p class="fontResponsiveSliderNotes lh-13">
+                        * Acepto que si el CURP que registré es incorrecto,
+                    los beneficios no podrán ser aprovechados cuando los
+                    requiera.
+                      </p>
+                      <div *ngIf="
+                        s1Submitted &&
+                        (s1.chk.invalid || s1.chk.errors?.required)
+                      " class="help-block mt-1 text-danger">
+                      <i class="ft-alert-circle align-middle"></i> Campo
+                      requerido
+                    </div>
+                    </mat-checkbox>
+
+                  </p>
+                  <button (click) = "changeStepCurp(stepper, 0)" class="btn btn-blue btn-block mt-2"
+                  *ngIf="this.firstFormGroup.valid">
                     Continuar
                   </button>
                 </div>

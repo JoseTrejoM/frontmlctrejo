@@ -59,10 +59,10 @@
                         <div class="col-3 col-sm-4 col-md text-center vCenter">
                           <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
                         </div>
-                        <div class="col-4 text-center" *ngIf="item.completo">
+                        <div class="col-5 text-center" *ngIf="item.completo">
                           <button class="btn btn-outline-success">¡Listo!</button>
                         </div>
-                        <div class="col-4 text-center" *ngIf="!item.completo">
+                        <div class="col-5 text-center" *ngIf="!item.completo">
                           <button class="btn btn-outline-danger">Incompleto</button>
                         </div>
                         <div class="col-4 text-center">
@@ -134,7 +134,9 @@
                 </div>
                 <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
                   <h4 class="mb-1"><b>Plan de previsión</b></h4>
-
+                  <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
+                  <p><b>Precio Anual: </b> US ${{plan['precioAnual']}}</p>
+                  <p><b>Precio Mensual: </b> US ${{plan['precioMensual']}}</p>
                 </div>
               </div>
               <div class="row mt-2">

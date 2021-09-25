@@ -57,6 +57,7 @@ export class BeneficiosBaseComponent {
   arrSeleccionados = [15];
   envioDineroSelected = false;
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
+  completarContratacion = false;
 
 
   stepperOrientation: Observable<StepperOrientation>;
@@ -74,10 +75,11 @@ export class BeneficiosBaseComponent {
     this.beneficiarios.push(15);
     this.stepperOrientation = breakpointObserver.observe('(min-width: 800px)')
       .pipe(map(({ matches }) => matches ? 'horizontal' : 'vertical'));
-
     this.api.loginapp().pipe(first()).subscribe((data: any) => { });
-
-
+    if (localStorage.getItem('completarContratacion')) {
+      this.completarContratacion = true;
+      this.index = 1;
+    }
 
   }
 
@@ -89,6 +91,8 @@ export class BeneficiosBaseComponent {
     // } else {
     //   console.log("ACTIVE");
     // }
+
+
 
     this.firstFormGroup = this._formBuilder.group({
       curp: ['',
@@ -121,54 +125,7 @@ export class BeneficiosBaseComponent {
             "titulobeneficio": "Repatriación a México",
             "subtitulobeneficio": "(Por fallecimiento en EU)",
             "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
-            // "beneficiosbeneficiarios": [
-            //   {
-            //     "imagenactivo": "Padre",
-            //     "imageninactivo": "Padre-Apagado",
-            //     "imagendefault": "Padre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Padre",
-            //     "tipobeneficiarioid": "17",
-            //   },
-            //   {
-            //     "imagenactivo": "Madre",
-            //     "imageninactivo": "Madre-Apagado",
-            //     "imagendefault": "Madre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Madre",
-            //     "tipobeneficiarioid": "18",
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 1,
-            //     "imagenactivo": "Titular",
-            //     "imageninactivo": "Titular-Apagado",
-            //     "imagendefault": "Titular",
-            //     "esseleccionado": true,
-            //     "beneficiarioid": 4,
-            //     "tipobeneficiario": "Titular",
-            //     "tipobeneficiarioid": "15",
-            //     "serviciobeneficiarioid": 6
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 2,
-            //     "imagenactivo": "Pareja",
-            //     "imageninactivo": "Pareja-Apagado",
-            //     "imagendefault": "Pareja-Apagado",
-            //     "esseleccionado": false,
-            //     "beneficiarioid": 5,
-            //     "tipobeneficiario": "Pareja",
-            //     "tipobeneficiarioid": "16",
-            //     "serviciobeneficiarioid": 7
-            //   },
-            //   {
-            //     "imagenactivo": "Hijo",
-            //     "imageninactivo": "Hijo-Apagado",
-            //     "imagendefault": "Hijo-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Hijo",
-            //     "tipobeneficiarioid": "19",
-            //   },
-            // ],
+
             "servicios": []
           },
           {
@@ -176,54 +133,7 @@ export class BeneficiosBaseComponent {
             "titulobeneficio": "Servicio Funerario",
             "subtitulobeneficio": "(Residentes  de México)",
             "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
-            // "beneficiosbeneficiarios": [
-            //   {
-            //     "imagenactivo": "Padre",
-            //     "imageninactivo": "Padre-Apagado",
-            //     "imagendefault": "Padre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Padre",
-            //     "tipobeneficiarioid": "17",
-            //   },
-            //   {
-            //     "imagenactivo": "Madre",
-            //     "imageninactivo": "Madre-Apagado",
-            //     "imagendefault": "Madre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Madre",
-            //     "tipobeneficiarioid": "18",
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 1,
-            //     "imagenactivo": "Titular",
-            //     "imageninactivo": "Titular-Apagado",
-            //     "imagendefault": "Titular",
-            //     "esseleccionado": true,
-            //     "beneficiarioid": 4,
-            //     "tipobeneficiario": "Titular",
-            //     "tipobeneficiarioid": "15",
-            //     "serviciobeneficiarioid": 6
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 2,
-            //     "imagenactivo": "Pareja",
-            //     "imageninactivo": "Pareja-Apagado",
-            //     "imagendefault": "Pareja-Apagado",
-            //     "esseleccionado": false,
-            //     "beneficiarioid": 5,
-            //     "tipobeneficiario": "Pareja",
-            //     "tipobeneficiarioid": "16",
-            //     "serviciobeneficiarioid": 7
-            //   },
-            //   {
-            //     "imagenactivo": "Hijo",
-            //     "imageninactivo": "Hijo-Apagado",
-            //     "imagendefault": "Hijo-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Hijo",
-            //     "tipobeneficiarioid": "19",
-            //   },
-            // ],
+
             "servicios": []
           },
           {
@@ -231,54 +141,7 @@ export class BeneficiosBaseComponent {
             "titulobeneficio": "Educación financiera",
             "subtitulobeneficio": "(Administración del dinero)",
             "descripcionbeneficio": "Este beneficio está incluido para todos los miembros.",
-            // "beneficiosbeneficiarios": [
-            //   {
-            //     "imagenactivo": "Padre",
-            //     "imageninactivo": "Padre-Apagado",
-            //     "imagendefault": "Padre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Padre",
-            //     "tipobeneficiarioid": "17",
-            //   },
-            //   {
-            //     "imagenactivo": "Madre",
-            //     "imageninactivo": "Madre-Apagado",
-            //     "imagendefault": "Madre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Madre",
-            //     "tipobeneficiarioid": "18",
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 1,
-            //     "imagenactivo": "Titular",
-            //     "imageninactivo": "Titular-Apagado",
-            //     "imagendefault": "Titular",
-            //     "esseleccionado": true,
-            //     "beneficiarioid": 4,
-            //     "tipobeneficiario": "Titular",
-            //     "tipobeneficiarioid": "15",
-            //     "serviciobeneficiarioid": 6
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 2,
-            //     "imagenactivo": "Pareja",
-            //     "imageninactivo": "Pareja-Apagado",
-            //     "imagendefault": "Pareja-Apagado",
-            //     "esseleccionado": false,
-            //     "beneficiarioid": 5,
-            //     "tipobeneficiario": "Pareja",
-            //     "tipobeneficiarioid": "16",
-            //     "serviciobeneficiarioid": 7
-            //   },
-            //   {
-            //     "imagenactivo": "Hijo",
-            //     "imageninactivo": "Hijo-Apagado",
-            //     "imagendefault": "Hijo-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Hijo",
-            //     "tipobeneficiarioid": "19",
-            //   },
-            // ],
+
             "servicios": []
           },
           {
@@ -286,54 +149,7 @@ export class BeneficiosBaseComponent {
             "titulobeneficio": "Envío de dinero",
             "subtitulobeneficio": "(Cuenta digital en México)",
             "descripcionbeneficio": "¿Quién de tu familia recibe el dinero que envías de EUA?\r\nSeleciona a una persona para otorgarle este beneficio. Debe vivir en México.",
-            // "beneficiosbeneficiarios": [
-            //   {
-            //     "imagenactivo": "Padre",
-            //     "imageninactivo": "Padre-Apagado",
-            //     "imagendefault": "Padre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Padre",
-            //     "tipobeneficiarioid": "17",
-            //   },
-            //   {
-            //     "imagenactivo": "Madre",
-            //     "imageninactivo": "Madre-Apagado",
-            //     "imagendefault": "Madre-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Madre",
-            //     "tipobeneficiarioid": "18",
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 1,
-            //     "imagenactivo": "Titular",
-            //     "imageninactivo": "Titular-Apagado",
-            //     "imagendefault": "Titular",
-            //     "esseleccionado": true,
-            //     "beneficiarioid": 4,
-            //     "tipobeneficiario": "Titular",
-            //     "tipobeneficiarioid": "15",
-            //     "serviciobeneficiarioid": 6
-            //   },
-            //   {
-            //     "beneficiobeneficiarioid": 2,
-            //     "imagenactivo": "Pareja",
-            //     "imageninactivo": "Pareja-Apagado",
-            //     "imagendefault": "Pareja-Apagado",
-            //     "esseleccionado": false,
-            //     "beneficiarioid": 5,
-            //     "tipobeneficiario": "Pareja",
-            //     "tipobeneficiarioid": "16",
-            //     "serviciobeneficiarioid": 7
-            //   },
-            //   {
-            //     "imagenactivo": "Hijo",
-            //     "imageninactivo": "Hijo-Apagado",
-            //     "imagendefault": "Hijo-Apagado",
-            //     "esseleccionado": false,
-            //     "tipobeneficiario": "Hijo",
-            //     "tipobeneficiarioid": "19",
-            //   },
-            // ],
+
             "servicios": []
           },
           {
@@ -343,19 +159,7 @@ export class BeneficiosBaseComponent {
             "descripcionbeneficio": "Incluido para el titula.\r\nEste beneficio está sujeto a elegibilidad.",
             "fechaalta": "2021-08-31T22:43:47.000+00:00",
             "fechamodificacion": "2021-08-31T22:43:47.000+00:00",
-            // "beneficiosbeneficiarios": [
-            //   {
-            //     "beneficiobeneficiarioid": 11,
-            //     "imagenactivo": "Titular",
-            //     "imageninactivo": "Titular-Apagado",
-            //     "imagendefault": "Titular",
-            //     "esseleccionado": true,
-            //     "beneficiarioid": 4,
-            //     "tipobeneficiario": "Titular",
-            //     "tipobeneficiarioid": "15",
-            //     "serviciobeneficiarioid": 10
-            //   }
-            // ],
+
             "servicios": []
           }
         ],
@@ -577,8 +381,6 @@ export class BeneficiosBaseComponent {
         });
 
       }
-
-
       // Guardo en storage los parámetros
       localStorage.setItem("flag", this.arrPropuesta['flag']);
       localStorage.setItem("propuestaId", this.arrPropuesta['propuestaid']);
@@ -588,8 +390,20 @@ export class BeneficiosBaseComponent {
       // Ordenar los beneficios
       this.arrBeneficios = this.arrPropuesta['beneficios'].sort((a, b) => (a.beneficioid > b.beneficioid) ? 1 : ((b.beneficioid > a.beneficioid) ? -1 : 0));
       this.arrBeneficios = this.arrPropuesta['beneficios'];
-
       console.log(this.arrBeneficios);
+
+
+      // Si cntinúa su proceso activo
+      if (data.flag == 1) {
+        this.beneficiariosSeleccionados();
+        if (data.estatuspropuesta == 'Cuestionario') {
+          this.router.navigate(["./pages/formulario-eligibilidad"]);
+        } else if (data.estatuspropuesta == 'Propuesta Aceptada') {
+          this.router.navigate(["./pages/propuesta"]);
+        }
+
+      }
+
       // Avanzar step
       stepper.next();
       this.index++;
@@ -597,6 +411,33 @@ export class BeneficiosBaseComponent {
     },
       (error) => { }
     );
+  }
+
+  beneficiariosSeleccionados() {
+    let arrB = []
+    this.arrBeneficios.forEach(element => {
+      arrB = []
+      element['beneficiosbeneficiarios'].forEach(bb => {
+        if (bb.esseleccionado) {
+          arrB.push(
+            bb.tipobeneficiarioid
+          );
+          this.beneficiarios.push(
+            parseInt(bb.tipobeneficiarioid)
+            );
+        }
+      });
+      this.beneficios.push({
+        "beneficioId": element.beneficioid,
+        "beneficiarios": arrB
+
+      });
+    });
+
+
+      this.beneficiarios = Array.from(new Set(this.beneficiarios));
+      localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
+      localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
   }
 
   showResponsiveDialog() {
@@ -615,17 +456,9 @@ export class BeneficiosBaseComponent {
     }
     console.log(new Date().getTime() / 1000);
 
-      this.api.loginapp().pipe(first()).subscribe((data: any) => {
-        this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
-      });
-
-    // if (this.decodedToken.exp < new Date().getTime() / 1000) {
-    //   this.api.loginapp().pipe(first()).subscribe((data: any) => {
-    //     this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
-    //   });
-    // } else {
-    //   this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
-    // }
+    this.api.loginapp().pipe(first()).subscribe((data: any) => {
+      this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+    });
   }
 
   backStep(stepper) {
@@ -683,42 +516,45 @@ export class BeneficiosBaseComponent {
     this.arrSeleccionados.push(parseInt(tipobeneficiarioid));
 
 
-      let seleccionado = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i].esseleccionado;
-      let arr = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i];
+    let seleccionado = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i].esseleccionado;
+    let arr = this.arrBeneficios[indexBeneficios]['beneficiosbeneficiarios'][i];
 
-      // // Cambio la imagen
-      !seleccionado ? arr.imagendefault = arr.imagenactivo : arr.imagendefault = arr.imageninactivo;
+    // // Cambio la imagen
+    !seleccionado ? arr.imagendefault = arr.imagenactivo : arr.imagendefault = arr.imageninactivo;
 
-      // // Cambio la bandera de selección
-      !arr.esseleccionado ? arr.esseleccionado = true : arr.esseleccionado = false;
+    // // Cambio la bandera de selección
+    !arr.esseleccionado ? arr.esseleccionado = true : arr.esseleccionado = false;
 
 
-      if (beneficio == 5) {
-        // Bebeficio Envío de dinero
-        this.envioDineroSelected = true;
-        this.arrBeneficios.forEach(element => {
-          element['beneficiosbeneficiarios'].forEach(bb => {
-            if (bb.imagenactivo != imagenactivo) {
-              bb.esseleccionado = false;
-              bb.imagendefault = bb.imageninactivo;
-            }
-          });
-
-        });
-        this.ref.detectChanges();
-      } else {
-
-        this.arrBeneficios.forEach(element => {
-          if (element.beneficioid > beneficio && element.beneficioid != 3 && element.beneficioid != 5) {
-            element['beneficiosbeneficiarios'].forEach(bb => {
-              if (bb.imagenactivo == imagenactivo && bb.tipobeneficiarioid != 15) {
-                bb.esseleccionado = arr.esseleccionado;
-                bb.esseleccionado ? bb.imagendefault = bb.imagenactivo : bb.imagendefault = bb.imageninactivo;
-              }
-            });
+    if (beneficio == 5) {
+      // Bebeficio Envío de dinero
+      if (tipobeneficiarioid == 19) {
+        this.openSnackBarHijo();
+      }
+      this.envioDineroSelected = true;
+      this.arrBeneficios.forEach(element => {
+        element['beneficiosbeneficiarios'].forEach(bb => {
+          if (bb.imagenactivo != imagenactivo) {
+            bb.esseleccionado = false;
+            bb.imagendefault = bb.imageninactivo;
           }
         });
-        this.ref.detectChanges();
+
+      });
+      this.ref.detectChanges();
+    } else {
+
+      this.arrBeneficios.forEach(element => {
+        if (element.beneficioid > beneficio && element.beneficioid != 3 && element.beneficioid != 5) {
+          element['beneficiosbeneficiarios'].forEach(bb => {
+            if (bb.imagenactivo == imagenactivo && bb.tipobeneficiarioid != 15) {
+              bb.esseleccionado = arr.esseleccionado;
+              bb.esseleccionado ? bb.imagendefault = bb.imagenactivo : bb.imagendefault = bb.imageninactivo;
+            }
+          });
+        }
+      });
+      this.ref.detectChanges();
 
     }
   }
@@ -867,6 +703,13 @@ export class BeneficiosBaseComponent {
 
   openSnackBar() {
     this._snackBar.open('¡Atención! La opción seleccionada no corresponde a tu edad.', 'Ok', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+  openSnackBarHijo() {
+    this._snackBar.open('¡Atención! El beneficiario debe ser mayor de 18 años.', 'Ok', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
