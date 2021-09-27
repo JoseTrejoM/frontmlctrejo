@@ -63,7 +63,7 @@
             </p>
             <div class="row mt-4">
               <div class="col-12 text-center">
-                <button class="btn btn-blue" (click)="changeStepInicial(stepper)">Continuar</button>
+                <button class="btn btn-blue" (click)="changeStepInicial(stepper)" *ngIf="cuestionario.length > 0">Continuar</button>
               </div>
             </div>
           </div>

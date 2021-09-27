@@ -162,6 +162,7 @@ export class FormularioEligibilidadComponent implements OnInit {
 
         console.log(JSON.stringify(arrSend[0]));
 
+        this.api.loginapp().pipe(first()).subscribe((data: any) => {
           this.api.postCuestionario(JSON.stringify(arrSend[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
             console.log(data);
 
@@ -180,7 +181,7 @@ export class FormularioEligibilidadComponent implements OnInit {
             },
             (error) => { }
           );
-
+          });
 
       // this.router.navigate(["/pages/propuesta"]);
     } else {
