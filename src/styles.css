@@ -1,14 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
-@font-face {
-  font-family: "Gibson";
-  src: url("./assets/fonts/gibson/Gibson-Regular.ttf");
-}
+
 
 /* Estilos Gris */
 body {
   font-family: "Noto Sans JP", sans-serif !important;
+  text-align: center !important;
+  margin: 0 auto;
 }
+
+.btn {
+  font-family: "Noto Sans JP", sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1rem .5rem;
+}
+
+
+
+
 
 .mat-h2,
 .mat-title,
@@ -31,6 +42,11 @@ line-height: 1.5em; */
   font-size: .7rem !important;
   } */
 
+
+  .clear10 {
+
+  margin-bottom: 1rem;
+    } */
 /* Termina estilos Gris */
 
 .p-dataview-grid > .p-dataview-content > .p-grid {
@@ -39,6 +55,10 @@ line-height: 1.5em; */
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+.condiciones {
+ font-size: .7rem;
 }
 
 .vCenter {
@@ -255,8 +275,18 @@ body {
   display: flex;
 }
 
-.text-pink {
-  color: #e31c79;
+
+.icono-compartir{
+  color: #e31c79 !important;
+  font-size: 3rem;
+}
+
+
+.text-pink{
+  color: #e31c79 !important;
+text-transform: uppercase;
+font-size: .5rem;
+
 }
 
 .carousel-indicators li {
@@ -378,6 +408,7 @@ h2 {
 
 .img-thumbnail {
   background: transparent !important;
+
 }
 
 .auth-page .auth-img .auth-img-bg {
