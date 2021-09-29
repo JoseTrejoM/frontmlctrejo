@@ -14,10 +14,9 @@
       </div>
       <div class="col-10 text-center" *ngIf="index">
         <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad">
-      </div>
-      <div class="col-md-12 p-0">
-        <hr class="separador mb-0 mt-4-s">
-      </div>
+      </div> </div>
+      <div class="separador">
+
     </div>
 
 
@@ -26,7 +25,9 @@
 <div class="container-fluid">
   <div class="row d-flex-center mt-3" *ngIf="index > 1">
     <div class="col-12 text-center p-0">
-      <img src="../../../assets/img/icons/simple.svg" class="img-propuesta"><span><b> Beneficios base</b></span>
+      <div class="titulo-beneficios-base">
+         Beneficios base
+       </div>
     </div>
   </div>
 
@@ -43,14 +44,14 @@
       <hr class="separador mt-4 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 2">
-      <h2><b>Repatriación a México</b></h2>
-      <h3 class="mb-0"><b>(Por fallecimiento en EU)</b></h3>
+      <p class="subtitulo-beneficios">Servicio Funerario</p>
+      <p class="subtitulo-beneficios">(Residentes en México)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Servicio funerario</b></h2>
-      <h3 class="mb-0"><b>(Residentes de México)</b></h3>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 4">
@@ -126,7 +127,7 @@
                           <a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
                         <i class="fas fa-share-alt fa-2x icono-compartir  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="fontResponsiveSliderNotes">* El servicio se contrata en México y el titular debe tener CURP.
+                        <p class="condiciones">* El servicio se contrata en México y el titular debe tener CURP.
                         <br>* Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
                     </div>
                   </div>
@@ -151,7 +152,7 @@
                           <p class="fontResponsive m-0"><b>Beneficios a la medida</b></p>
                           <p class="fontResponsive" style="text-transform: none !important;">(con costo adicional)</p>
                         </div>
-                        <h3>¿Listo? ¡Comencemos!</h3>
+                        <p class="comencemos">¿Listo? ¡Comencemos!</p>
                         <div class="condiciones"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         Acepto los Terminos & Condiciones y el Aviso de Privacidad.</div>
 
@@ -160,6 +161,7 @@
 
                           <button class="btn btn-blue mt-1" (click) = "changeStepInicial(stepper)" style="width: 21rem;">Continuar</button>
                         </div>
+                        <div class="clear10"></div>
                       </div>
                     </div>
                   </div>
@@ -184,7 +186,7 @@
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP (18 dígitos)"
                     (click)="inputCurp(chkMayor, chkMenor)"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
@@ -212,10 +214,11 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                      <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1"
+                      <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1" style="background-color: #F7A120; color:#fff;"
                       (change) = "validaCurp('Menor', $event, chkMayor)" [checked]="checkedMenor" [ngClass]="{'btn-selected': checkedMenor}">
                         <p class="fontResponsiveSliderNotes lh-13">
-                          Soy <u>menor</u> de 56 años
+                          Soy <u>menor</u>
+                        <br>de 56 años
                         </p>
                       </mat-slide-toggle>
                     </div>
@@ -223,7 +226,9 @@
                       <mat-slide-toggle #chkMayor  name="menor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Mayor', $event, chkMenor)" [checked]="checkedMayor" [ngClass]="{'btn-selected': checkedMayor}">
                         <p class=" fontResponsiveSliderNotes lh-13">
-                          Soy <u>mayor</u> de 56 años
+                          Soy <u>mayor</u>
+                          <br>
+                          de 56 años
                         </p>
                       </mat-slide-toggle>
                     </div>
@@ -233,7 +238,7 @@
                       'is-invalid': s1Submitted && s1.chk.invalid,
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
-                      <p class="fontResponsiveSliderNotes lh-13">
+                      <p class="condiciones lh-13">
                         * Acepto que si el CURP que registré es incorrecto,
                     los beneficios no podrán ser aprovechados cuando los
                     requiera.
@@ -333,7 +338,7 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
+                <p class="textos-beneficios-base lh-13"> {{itemB.descripcionbeneficio}} </p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
@@ -403,7 +408,7 @@
                 <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
                 <div class="row mt-1" *ngIf="itemB.beneficioid < 3">
                   <div class="col-12">
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(itemB.beneficioid) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
+                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(itemB.beneficioid) : ''" *ngIf="countHijo < 4">Agregar mas hijos</button>
                   </div>
                 </div>
               </div>
@@ -430,7 +435,7 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia podría requerir este beneficio? <br>
+                <p class=" fontResponsiveSliderNotes lh-13">¿Quién  podría requerir este beneficio? <br>
                   Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
@@ -506,7 +511,7 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia podría requerir este beneficio? <br>
+                <p class=" fontResponsiveSliderNotes lh-13">¿ tu familia podría requerir este beneficio? <br>
                   Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
@@ -669,7 +674,7 @@
                 <div class="row mt-1">
                   <div class="col-12">
                     <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
+                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">más hijos</button>
                   </div>
                 </div>
               </div>
