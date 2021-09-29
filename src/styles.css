@@ -9,6 +9,8 @@ body {
   margin: 0 auto;
 }
 
+
+
 .btn {
   font-family: "Noto Sans JP", sans-serif !important;
   text-transform: uppercase;
@@ -17,7 +19,13 @@ body {
   padding: 1rem .5rem;
 }
 
+.subtitulo-beneficios {
+  font-family: "Noto Sans JP", sans-serif !important;
+color: #454f63;
+  font-weight: 600;
+  font-size: 1.2rem;
 
+}
 
 
 
@@ -46,7 +54,12 @@ line-height: 1.5em; */
   .clear10 {
 
   margin-bottom: 1rem;
-    } */
+    }
+
+    .condiciones {
+      font-size: .7rem;
+     }
+
 /* Termina estilos Gris */
 
 .p-dataview-grid > .p-dataview-content > .p-grid {
@@ -57,9 +70,7 @@ line-height: 1.5em; */
   margin-left: -15px;
 }
 
-.condiciones {
- font-size: .7rem;
-}
+
 
 .vCenter {
   display: flex;
@@ -220,8 +231,12 @@ body {
 
 .btn-inactive {
   background-color: #dee0e7;
-  border-color: #dee0e7;
-  color: #000 !important;
+  border: 0;
+  color: #6c6c6c !important;
+  min-height: 5rem;
+  padding: 1.2rem 1rem !important;
+  max-width: 16rem !important;
+  margin: 0;
 }
 
 .btnExpand {
@@ -290,21 +305,35 @@ font-size: .5rem;
 }
 
 .carousel-indicators li {
-  background-color: #000 !important;
+  background-color: #707070 !important;
   display: inline-block;
   border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.55);
   padding: 4px;
   margin: 0 3px;
   transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
   transition: 0.4s;
-  height: 1px;
-  width: 1px;
+
+  border: 0;
+  width: 10px;
+  height: 10px ;
+}
+
+
+.carousel-indicators .active {
+
+  background-color: #dd0063 !important;
+  border: 0;
+  width: 10px;
+  height: 10px ;
+
 }
 
 .carousel-indicators {
-  bottom: -33px !important;
+
+  bottom: -40px !important;
+
 }
+
 
 .mat-step-header .mat-step-icon-selected,
 .mat-step-header .mat-step-icon-state-done,
@@ -404,6 +433,11 @@ h2 {
 
 .form-control {
   background-color: #fff !important;
+  text-align: center;
+  padding: 1.5rem;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 2px 3px 3px #dddddd;
 }
 
 .img-thumbnail {
@@ -566,6 +600,8 @@ body {
   .img-propuesta {
     width: 20px;
   }
+
+
 
   .img-propuesta-ico-table {
     width: 35px;
@@ -816,6 +852,7 @@ body {
 
   .img-propuesta {
     width: 20px;
+
   }
 }
 
