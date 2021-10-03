@@ -52,6 +52,7 @@ export class DatosFormularioComponent implements OnInit {
   arrResumen = [];
   personaId = 0;
   plan =[];
+  costoInicial = 0;
 
   sexo = 'Sexo'
 
@@ -204,6 +205,7 @@ export class DatosFormularioComponent implements OnInit {
     this.arrBeneficios = [];
     let arr = [];
     this.api.getResumenPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.arrResumen = data.beneficiarios;
       this.arrResumen.forEach(element => {
         element['beneficioSimpleDTO'].forEach(item => {
@@ -223,7 +225,9 @@ export class DatosFormularioComponent implements OnInit {
 
   getPropuesta() {
     this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.plan = data.plan;
+      this.costoInicial = this.plan['costo'] + 5;
     });
   }
 

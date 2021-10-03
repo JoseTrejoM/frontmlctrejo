@@ -60,7 +60,7 @@ export class AutorizacionComponent implements OnInit {
       .subscribe((result) => {
         if (result.token) {
           // Use the token
-          console.log(result.token.id);
+          console.log(result.token);
         } else if (result.error) {
           // Error creating the token
           console.log(result.error.message);

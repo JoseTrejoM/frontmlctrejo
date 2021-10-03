@@ -48,7 +48,7 @@
 <div class="container-fluid mt-3 p-0">
   <div class="row m-0">
     <div class="col-12 p-0">
-          <div class="container">
+          <div class="container" [ngClass]="{'container-fluid': index == 3}">
           <mat-stepper [linear]="true" class="stepper-datos-formulario" #stepper>
             <mat-step label="">
               <div class="row d-flex-center mt-2">
@@ -75,7 +75,8 @@
                   </div>
                 </div>
               </div>
-              <div class="row mt-2" *ngIf="this.formlarioCompleto">
+              <div class="row mt-2">
+                <!-- <div class="row mt-2" *ngIf="this.formlarioCompleto"> -->
                 <div class="col-12 text-center">
                   <button class="btn btn-blue mb-1" (click)="changeStep(stepper)">Continuar</button>
                 </div>
@@ -126,17 +127,77 @@
             <!-- Fin Step Conormación datos -->
             <!-- Step Conormación plan -->
             <mat-step label="">
-              <div class="row d-flex-center mt-2">
-                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
-                  <h4 class="mb-1"><b>Beneficios del plan</b></h4>
-                  <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p>
+              <div class="row d-flex-center mt-2 p-1">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-2" ngClass.sm="mb-4">
+                  <h4 class="mb-1 text-center"><b>Beneficios del plan</b></h4>
+                  <!-- <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p> -->
+                  <div class="row mt-2 vCenter text-center rowTable">
+                    <div class="col-2 center-flex"></div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/Repatriacion.png" class="img-propuesta-ico-table">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/Serv Funerario.png" class="img-propuesta-ico-table ml-2">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/Seguro Vida.png" class="img-propuesta-ico-table ml-2">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/Educ Financiera.png" class="img-propuesta-ico-table ml-2 ">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/Envio Dinero.png" class="img-propuesta-ico-table ml-2 mb-1">
+                    </div>
+                  </div>
+                  <div class="row vCenter mt-1 text-center bb-1">
+                    <div class="col-2 center-flex"></div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Repatriación a México</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Servicio funerario</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Seguro de vida</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Educación financiera</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Envío de dinero</p>
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
+
+                    <div class="col-2 center-flex">
+                      {{itemB.tipobeneficiario}}
+                    </div>
+                    <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
+                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 2">
+                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 3">
+                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 4">
+                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 5">
+                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                    </ng-container>
+                  </div>
 
                 </div>
-                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
+                <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
                   <h4 class="mb-1"><b>Plan de previsión</b></h4>
                   <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
-                  <p><b>Precio Anual: </b> US ${{plan['precioAnual']}}</p>
-                  <p><b>Precio Mensual: </b> US ${{plan['precioMensual']}}</p>
+                  <p><b>Forma de pago: </b> {{plan['formaPago']}}</p>
+                  <p><b>Primer pago: </b> US ${{costoInicial}}</p>
+                  <p><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
                 </div>
               </div>
               <div class="row mt-2">
