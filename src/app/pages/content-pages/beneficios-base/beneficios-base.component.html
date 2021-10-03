@@ -14,13 +14,14 @@
       </div>
       <div class="col-10 text-center" *ngIf="index">
         <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad">
-      </div> </div>
-      <div class="separador">
+      </div>
 
     </div>
 
-
+<hr class="separador mt-4 mb-1" />
 </div>
+</div>
+
 
 <div class="container-fluid">
   <div class="row d-flex-center mt-3" *ngIf="index > 1">
@@ -51,25 +52,29 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-
+      <p class="subtitulo-beneficios">Repatriación a México</p>
+      <p class="subtitulo-beneficios">(Por fallecimiento en EUA)</p>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 4">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Seguro de vida</b></h2>
-      <h3 class="mb-0"><b>(MX $50,000)</b></h3>
+      <p class="subtitulo-beneficios">Seguro de vida</p>
+      <p class="subtitulo-beneficios">(MX $50,000)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 5">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Educación financiera</b></h2>
-      <h3 class="mb-0"><b>(Administración del dinero)</b></h3>
+      <p class="subtitulo-beneficios">Educación financiera</p>
+      <p class="subtitulo-beneficios">(Administración del dinero)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 6">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Envío de dinero</b></h2>
-      <h3 class="mb-0"><b>(Cuenta digital en México)</b></h3>
+      <p class="subtitulo-beneficios">Envío de dinero</p>
+      <p class="subtitulo-beneficios">(Cuenta digital en México)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
   </div>
@@ -87,7 +92,7 @@
 
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
-                  <h2 class="mb-1">Bienvenido a México Lindo Contigo.</h2>
+                  <div class="titular-bienvenido">Bienvenido a México Lindo Contigo.</div>
                   <p class="text-center mt-1">Somos la central digital de soluciones para el ciudado de tu dinero y la salud de tu familia.</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
@@ -134,11 +139,11 @@
                 </div>
               </ng-template>
               <ng-template ngbSlide>
-                <div class="picsum-img-wrapper" style="height: 410px">
+                <div class="picsum-img-wrapper" style="min-height: 470px">
                   <div class="row text-center">
                     <div class="col-12">
-                      <div class="row">
-                        <div class="col-12">
+                      <div class="row" >
+                        <div class="col-12" >
                             <p class="fontResponsiveSlider">El Plan incluye dos tipos de beneficios:</p>
                         </div>
                         <div class="dos-col">
@@ -157,11 +162,12 @@
                         Acepto los Terminos & Condiciones y el Aviso de Privacidad.</div>
 
                       </div>
+
                         <div class="col-12 vCenter">
 
                           <button class="btn btn-blue mt-1" (click) = "changeStepInicial(stepper)" style="width: 21rem;">Continuar</button>
                         </div>
-                        <div class="clear10"></div>
+                        <div class="clear15"></div>
                       </div>
                     </div>
                   </div>
@@ -415,7 +421,7 @@
               <div class="col-lg-3 col-md-3 col-sm-12 text-center">
                 <div class="card cardBeneficios mb-1">
                   <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
+                    <p class="pago-mensual lh-13">Pago mensual</p>
                     <h1 class="mb-0"><b>US $0.00</b></h1>
                   </div>
                 </div>

@@ -18,6 +18,15 @@ p {
   line-height: 1.6em;
 }
 
+.titular-bienvenido {
+  line-height: 2.2em;
+  color:#353A50;
+  font-size: 2.2em;
+  font-family: "Noto Sans JP", sans-serif !important;
+  font-weight: bold;
+}
+
+
 h2 {
   line-height: 2.2em;
   color:#454F63;
@@ -73,6 +82,9 @@ background-repeat: no-repeat;
   cursor: none;
 }
 
+hr, .p-2 {
+  margin: 0 !important;
+}
 .separador {
   border: 0px solid #333;
   height: 4px;
@@ -161,9 +173,19 @@ max-height: 5rem;
     font-size: .7rem;
    }
 
+
+   .pago-mensual {
+    font-size: .7rem;
+text-align: center;
+      }
+
   .fontResponsiveSlider {
     font-size: calc(0.85em + 0.85vmin);
   }
+
+
+
+
 
   .fontResponsiveSliderNotes {
     font-size: calc(0.7em + 0.9vmin);
@@ -297,15 +319,46 @@ max-height: 5rem;
   @media screen and (max-width: 1024px) {
     .iconos-home {
 
-      padding: 0 15% !important;
+      padding: 0 0% !important;
       text-align: center !important;
       width:fit-content;
 
       border: 0px solid #E31C79;
       margin: 2rem auto;
+      display: block;
+
 
 
     }
+.titular-bienvenido {
+  line-height: 2em;
+  color:#353A50;
+  font-size: 1em;
+  font-family: "Noto Sans JP", sans-serif !important;
+  font-weight: bold;
+}
+
+    h2 {
+      line-height: 1.2em;
+      margin: 0 0 1em 0 !important;
+      font-size: 2em;
+      border: 1px solid #E31C79;
+    }
+
+
+
+    .text-center {
+
+      font-size: 1em;
+      line-height: 1.2em;
+    }
+.img-header
+{
+  border: 0px solid #E31C79;
+  max-width: 12rem;
+  margin: 1em 0 1em 0;
+}
+
 
     .col-xs-5,
     .col-sm-5,
@@ -316,22 +369,46 @@ max-height: 5rem;
     }
     .col-xs-5 {
       float: left;
-      width: 20%;
+      width: 48%;
     }
 
 
     .fontResponsive {
-      font-size: calc(0.6em + 0.1vw);
+      font-size: calc(0.7em + 0.1vw);
       color:#353A50;
       text-transform: uppercase;
       font-weight: 700;
+      border: 0px solid #6ab336;
+      line-height: 1.2em;
     }
 
     .img-thumbnail {
-      border: 0px solid #E31C79 ;
-      min-height: 10rem !important;
+
+      min-height: 6rem !important;
       margin: 0 auto !important;
+      float:center;
 
     }
+
+    .dos-col
+
+{
+border: 0px solid #000;
+width: 90% !important;
+
+    }
+
+    .comencemos {
+      font-size: 1.7em;
+      clear: both;
+      padding:0;
+      margin-top: 7em !important;
+
+
+          }
+
+
+
+
 
     }
