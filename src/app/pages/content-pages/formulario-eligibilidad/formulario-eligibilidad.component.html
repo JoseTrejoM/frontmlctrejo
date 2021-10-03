@@ -84,7 +84,7 @@
                     </mat-radio-group>
                   </div>
                   <div class="col-sm-12 col-md-6 text-center mt-2" *ngIf="pregunta.selected">
-                    <button class="btn btn-blue" (click)="changeStep(stepper, i, chk.value)">Continuar</button>
+                    <button class="btn btn-blue" (click)="changeStep(stepper, i, chk.value, $event)">Continuar</button>
                   </div>
                 </div>
               </div>

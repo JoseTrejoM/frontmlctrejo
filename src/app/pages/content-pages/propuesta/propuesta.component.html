@@ -240,12 +240,12 @@
                         <div class="col-6 text-center mb-1">
                           <p class="fontResponsiveSliderNotes">Mensual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
-                          <p class="fontResponsiveSliderNotes">1er. Pago de US $0.00</p>
+                          <p class="fontResponsiveSliderNotes">*1er. Pago de US ${{(+precioMensual) + (5)}}</p>
                         </div>
                         <div class="col-6 text-center mb-1">
                           <p class=" fontResponsiveSliderNotes">Anual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
-                          <p class="fontResponsiveSliderNotes">1er. Año de US $0.00</p>
+                          <p class="fontResponsiveSliderNotes">*1er. Año de US ${{(+precioAnual) + (5)}}</p>
                         </div>
                       </div>
 
@@ -253,7 +253,7 @@
                   </div>
                   <div class="row mt-1 text-left">
                     <div class="col-12">
-                      <p class="condiciones">* Al primer pago se le agregará un costo administrativo de, $5.00 USD por única vez.</p>
+                      <p class="fontResponsiveSliderNotes">* Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.</p>
                       <button class="btn btn-blue btn-block mt-1" (click)="aceptarPropuesta()" *ngIf="tipoPago != 0">
                         Continuar
                       </button>

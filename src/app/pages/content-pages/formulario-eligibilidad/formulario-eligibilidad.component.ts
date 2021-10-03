@@ -114,12 +114,12 @@ export class FormularioEligibilidadComponent implements OnInit {
     }
   }
 
-  changeStep(stepper, index, value){
+  changeStep(stepper, index, value, event){
     console.log(value);
     let arrSend = [];
     if (index == this.cuestionario.length - 1) {
       this.respuestas=[];
-
+      event.target.disabled = true;
 
 
 

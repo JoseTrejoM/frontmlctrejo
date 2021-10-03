@@ -47,6 +47,11 @@ h2 {
     font-size: calc(0.5em + 0.7vmin);
   }
 
+  .fontResponsiveTableText {
+    font-size: calc(0.5em + 0.2vmin);
+    line-height: 10px;
+  }
+
   .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
     background-color: #E31C79 !important;
   }
@@ -92,6 +97,10 @@ h2 {
 
   .cardBeneficios {
     margin: 5px 0;
+  }
+
+  .bb-1 {
+    border-bottom: 1px solid;
   }
 
   @media screen and (max-width: 800px) {

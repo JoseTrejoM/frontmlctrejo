@@ -257,6 +257,10 @@ text-align: center;
     max-height: 110px;
   }
 
+  .grayscale {
+    filter: grayscale(1);
+  }
+
   // .picsum-img-wrapper {
   //   .row {
   //     width: 100vw;

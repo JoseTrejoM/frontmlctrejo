@@ -102,6 +102,19 @@ export class ApiService {
     );
   }
 
+  getPlan(token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+    return this._http.get(this.url + "/plan/all/", {headers}).pipe(
+      map((data) => data),
+      catchError((e) => throwError(e))
+    );
+  }
+
   getPais(token) {
     const headers = {
       'Content-Type': 'application/json',
