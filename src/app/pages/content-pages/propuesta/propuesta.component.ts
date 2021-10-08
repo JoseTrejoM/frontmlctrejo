@@ -49,6 +49,9 @@ export class PropuestaComponent implements OnInit {
     console.log('Entra');
     this.api.getResumenPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
       console.log(data);
+
+      this.precioMensual = data.mensual ? data.mensual : localStorage.getItem('precioAnual');
+      this.precioAnual = data.anual ? data.anual : localStorage.getItem('precioMensual');
       this.arrResumen = data.beneficiarios;
       this.ref.detectChanges();
     });

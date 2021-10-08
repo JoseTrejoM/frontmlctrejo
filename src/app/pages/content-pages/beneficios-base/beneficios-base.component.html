@@ -317,22 +317,38 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
+                <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
                 <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
                     <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5,
-                    'pointerEvents': itemB.beneficioid > 2 && !item.esseleccionado,
-                    'grayscale': itemB.beneficioid > 2 && !item.esseleccionado,
-                    'pointerEvents': edad > 56}"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo) ||
+                     (edad > 56),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo) || edad > 56}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+
+                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.esseleccionado ?
                         item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
-                        ></a>
+                        ></a> -->
+
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
+                          (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                          >
+                        </a>
+
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          >
+                        </a>
+
+
                     </div>
                   </ng-container>
                 </div>
@@ -340,10 +356,10 @@
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
                     <div class="col-3 col-sm-4 text-center ng-star-inserted"
                     *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5,
-                    'grayscale': itemB.beneficioid > 2 && !item.esseleccionado,
-                    'pointerEvents': (item.tipobeneficiarioid == 15 && (itemB.beneficioid == 1 || itemB.beneficioid == 2)) ||
-                    (itemB.beneficioid > 2 && !item.esseleccionado)}"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (item.tipobeneficiarioid == 15 && (itemB.beneficioid == 1 || itemB.beneficioid == 2)) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="item.tipobeneficiarioid != 15  ?
                     changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo) :
                     itemB.beneficioid == 5 ? changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo) :
@@ -357,9 +373,13 @@
                         >
                       </a>
 
-                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!-- <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="(!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                         (mouseout)="(!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                        >
+                      </a> -->
+
+                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         >
                       </a>
 
@@ -369,15 +389,28 @@
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index; trackBy: trackByFn;">
                     <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5,
-                    'pointerEvents': itemB.beneficioid > 2 && !item.esseleccionado,
-                    'grayscale': itemB.beneficioid > 2 && !item.esseleccionado}"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
 
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : !item.esseleccionado ? item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
-                        ></a>
+                        ></a> -->
+
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
+                          (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                          >
+                        </a>
+
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          >
+                        </a>
+
                     </div>
                   </ng-container>
                   <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3 && itemB.beneficioid != 3">
@@ -417,8 +450,21 @@
             </div>
           </form>
         </mat-step>
+
       </mat-stepper>
     </div>
   </div>
 </div>
+
+<p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+            [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
+            <div class="text-center">
+
+              <h1 class="text-white">¿Quién recibe?</h1>
+              <hr class="separador">
+              <p class="text-white">A esa persona le regalamos una cuenta digital</p>
+              <p class="text-white">con la terjeta de débito para que reciba sus envíos.</p>
+              <p class="text-white">Debe ser mayor de 18 años</p>
+            </div>
+          </p-dialog>
 <!--Login Page Ends-->

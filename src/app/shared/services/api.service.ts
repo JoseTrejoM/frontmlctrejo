@@ -20,7 +20,8 @@ export class ApiService {
 
   secretKey = "4pK3y4WeBM1C1..$";
   encryptedData = "";
-  private url = "http://www.monitorproyecto.com:8080/api/v1";
+  private url = "http://mlc.monitorproyecto.com:8080/api/v1";
+  // private urlPago = "http://www.monitorproyecto.com:8080/";
 
   constructor(private _http: HttpClient) {
 
@@ -264,6 +265,26 @@ export class ApiService {
 
 
     return this._http.put(`${this.url}/user/update`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
+  postIntentarPagar(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/pagoservice/pagar`, sendArray,
     {headers}
     ).pipe(
       map((data : any) => {

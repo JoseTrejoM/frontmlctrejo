@@ -23,6 +23,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MomentModule } from 'ngx-moment';
 
+
 /////// ****** Components
 
 import { ErrorPageComponent } from "./error/error-page.component";
@@ -59,7 +60,8 @@ defineLocale("es", esLocale);
         MatSnackBarModule,
         BsDatepickerModule.forRoot(),
         NgxStripeModule.forRoot('pk_test_51JZMBDLm93TetmkamLaX6DbO9PrSOY7zTlNJB2hLfXQLCwBWZMcH9LuCW0ZG6ZYURPVWWzGxyeD9JO9Q5zAruFmf00QuPJRxUr'),
-        MomentModule
+        MomentModule,
+        NgxSpinnerModule
     ],
     declarations: [
         ErrorPageComponent,

@@ -117,6 +117,7 @@ export class FormularioEligibilidadComponent implements OnInit {
   changeStep(stepper, index, value, event){
     console.log(value);
     let arrSend = [];
+    let arrSendPropuesta = [];
     if (index == this.cuestionario.length - 1) {
       this.respuestas=[];
       event.target.disabled = true;
@@ -174,9 +175,19 @@ export class FormularioEligibilidadComponent implements OnInit {
               localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
               localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
 
+              arrSendPropuesta.push({
+                "propuestaId": data.propuesta['propuestaId'],
+                "frecuenciaPagoId": 65,
+                "tipoPlanId": data.plan['tipoplanId'],
+                "formaPagoId": 20
+              });
 
-              this.router.navigate(["./pages/propuesta"]);
-
+              this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+                console.log(data);
+                if (data.servicioContratadoId) {
+                  this.router.navigate(["./pages/propuesta"]);
+                }
+              });
             }
             },
             (error) => { }

@@ -1,10 +1,22 @@
-<div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
+<div
+  class="container-fluid"
+  ngStyle.lg="display:block"
+  ngStyle.md="display:block"
+  ngStyle.sm="display:block"
+  ngStyle.xs="display:none"
+>
   <div class="row bg-white">
     <div class="col-2 text-center pt-1">
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      <img
+        src="../../../../assets/img/logos/mlc_logo_rosa.png"
+        class="img-header"
+      />
     </div>
     <div class="col-10 text-center pt-1">
-      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+      <img
+        src="../../../../assets/img/logos/tranquilidad.png"
+        class="img-header-tranquilidad"
+      />
     </div>
     <div class="col-md-12 p-0">
       <hr class="separador mt-1 mb-0" />
@@ -14,8 +26,16 @@
 
 <div class="container-fluid">
   <div class="row d-flex-center mt-3">
-    <div class="col-12 text-center p-0" ngStyle.lg="display:none" ngStyle.md="display:none" ngStyle.sm="display:none" >
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+    <div
+      class="col-12 text-center p-0"
+      ngStyle.lg="display:none"
+      ngStyle.md="display:none"
+      ngStyle.sm="display:none"
+    >
+      <img
+        src="../../../../assets/img/logos/mlc_logo_rosa.png"
+        class="img-header"
+      />
       <hr class="separador mt-4 mb-1" />
     </div>
   </div>
@@ -25,11 +45,14 @@
     <div class="col-md-8 offset-md-2 col-12">
       <div class="col-12 text-center">
         <h2 class="mb-1">Autorización</h2>
-        <p class="text-center mt-1">Para procesar el pago, debes proporcionar tu CURP al vendedor y recibir una autorización.</p>
+        <p class="text-center mt-1">
+          Para procesar el pago, debes proporcionar tu CURP al vendedor y
+          recibir una autorización.
+        </p>
         <div class="card">
           <div class="card-body">
             <p>Tu CURP</p>
-            <h2 class="mb-2">{{curp}}</h2>
+            <h2 class="mb-2">{{ curp }}</h2>
           </div>
         </div>
       </div>
@@ -39,19 +62,50 @@
   <div class="row mt-4">
     <div class="col-md-8 offset-md-2 col-12">
       <div class="col-12 text-center">
-        <h2 class="mb-1">Ingresa los datos de tu tarjeta para realizar el pago</h2>
-        <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest" class="card p-4">
-          <input type="text" class="form-control mb-3" formControlName="name" placeholder="Ingresa tu nombre">
+        <h2 class="mb-1">
+          Ingresa los datos de tu tarjeta para realizar el pago
+        </h2>
+        <form
+          novalidate
+          (ngSubmit)="createToken()"
+          [formGroup]="stripeTest"
+          class="card p-4"
+        >
+          <input
+            type="text"
+            class="form-control mb-3"
+            formControlName="name"
+            placeholder="Ingresa tu nombre"
+          />
           <ngx-stripe-card
             [options]="cardOptions"
             [elementsOptions]="elementsOptions"
           ></ngx-stripe-card>
-          <button type="submit" class="btn btn-blue mt-3">
-            Pagar
-          </button>
+          <button type="submit" class="btn btn-blue mt-3">Pagar</button>
         </form>
       </div>
       <!-- <button (click)="makePayment(1)" class="btn btn-danger btn-block">Pay $15</button> -->
     </div>
   </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+<p-dialog
+  header="Header"
+  [(visible)]="displayModalResponsive"
+  [modal]="true"
+  [breakpoints]="{ '960px': '75vw' }"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  header=""
+>
+  <div class="text-center">
+    <h1 class="text-white">Gracias por tu pago</h1>
+    <hr class="separador" />
+    <p class="text-white">¡Bienvenido! Revisa tu correo electrónico con los </p>
+    <p class="text-white">
+      detalles de tu cuenta y pasos a seguir.
+    </p>
+
+  </div>
+</p-dialog>
