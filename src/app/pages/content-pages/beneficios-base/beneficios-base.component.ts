@@ -219,6 +219,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Padre",
                 "tipobeneficiarioid": "17",
+                "activo": false
               },
               {
                 "imagenactivo": "Madre",
@@ -227,6 +228,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Madre",
                 "tipobeneficiarioid": "18",
+                "activo": false
               },
               {
                 "imagenactivo": "Titular",
@@ -234,7 +236,8 @@ export class BeneficiosBaseComponent {
                 "imagendefault": element.beneficioid == 5 ? "Titular-Apagado" : "Titular",
                 "esseleccionado": true,
                 "tipobeneficiario": "Titular",
-                "tipobeneficiarioid": "15"
+                "tipobeneficiarioid": "15",
+                "activo": false
               },
               {
                 "imagenactivo": "Pareja",
@@ -243,6 +246,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Pareja",
                 "tipobeneficiarioid": "16",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo",
@@ -259,6 +263,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-3",
@@ -267,6 +272,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficioid == 3) {
@@ -279,6 +285,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": true,
                 "tipobeneficiario": "Titular",
                 "tipobeneficiarioid": "15",
+                "activo": false
               }
             );
           } else if (element.beneficioid == 5) {
@@ -291,6 +298,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Titular",
                 "tipobeneficiarioid": "15",
+                "activo": false
               }
             );
           }
@@ -305,6 +313,7 @@ export class BeneficiosBaseComponent {
         this.arrPropuesta['beneficios'].forEach((element, index) => {
           if (element.beneficioid == 1) {
             element.beneficiosbeneficiarios.forEach(bb => {
+              bb.activo = false;
               if (bb.tipobeneficiarioid == 15) {
                 localStorage.setItem('servicioBeneficiarioId', bb.serviciobeneficiarioid);
                 this.serviciobeneficiarioid = bb.serviciobeneficiarioid
@@ -321,6 +330,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-2",
@@ -329,6 +339,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-3",
@@ -337,6 +348,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficiosbeneficiarios.length == 5 && element.beneficioid != 3) {
@@ -347,6 +359,7 @@ export class BeneficiosBaseComponent {
               "esseleccionado": false,
               "tipobeneficiario": "Hijo",
               "tipobeneficiarioid": "19",
+              "activo": false
             },
               {
                 "imagenactivo": "Hijo-3",
@@ -355,6 +368,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficiosbeneficiarios.length == 6 && element.beneficioid != 3) {
@@ -365,6 +379,7 @@ export class BeneficiosBaseComponent {
               "esseleccionado": false,
               "tipobeneficiario": "Hijo",
               "tipobeneficiarioid": "19",
+              "activo": false
             });
           }
 
@@ -478,6 +493,7 @@ export class BeneficiosBaseComponent {
   }
 
   showResponsiveDialog() {
+    console.log('Modal');
     this.displayModalResponsive = true
   }
 
@@ -515,6 +531,7 @@ export class BeneficiosBaseComponent {
   changeStep(stepper, beneficio) {
     let arrB = [];
     let arrSend = [];
+    let arrSendPropuesta = [];
     // console.log(this.arrBeneficios);
     let arr = this.arrBeneficios.filter(function (e) {
       return e.beneficioid == beneficio;
@@ -579,7 +596,20 @@ export class BeneficiosBaseComponent {
               localStorage.setItem('precioMensual', this.precioMensual.toString());
               localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
               localStorage.setItem('descripcionPlan', this.descripcionPlan);
-              this.router.navigate(["./pages/propuesta"]);
+
+              arrSendPropuesta.push({
+                "propuestaId": data.propuesta['propuestaId'],
+                "frecuenciaPagoId": 65,
+                "tipoPlanId": data.plan['tipoplanId'],
+                "formaPagoId": 20
+              });
+
+              this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+                console.log(data);
+                if (data.servicioContratadoId) {
+                  this.router.navigate(["./pages/propuesta"]);
+                }
+              });
 
             }
           },
@@ -1040,9 +1070,16 @@ export class BeneficiosBaseComponent {
       this.envioDineroSelected = true;
       this.arrBeneficios.forEach(element => {
         element['beneficiosbeneficiarios'].forEach(bb => {
-          if (bb.imagenactivo != imagenactivo) {
-            bb.esseleccionado = false;
-            bb.imagendefault = bb.imageninactivo;
+          if (element.beneficioid == 5) {
+            if ((bb.imagenactivo != imagenactivo) && bb.esseleccionado) {
+              bb.esseleccionado = false;
+              bb.activo = true;
+              bb.imagendefault = bb.imageninactivo;
+            } else if (bb.imagenactivo == imagenactivo) {
+              bb.esseleccionado = true;
+              bb.activo = true;
+              bb.imagendefault = bb.imagenactivo;
+            }
           }
         });
 

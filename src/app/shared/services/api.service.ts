@@ -274,6 +274,26 @@ export class ApiService {
     );
   }
 
+  postIntentarPagar(sendArray, token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + token,
+      'byapplogin': 'true'
+    };
+
+
+    return this._http.post(`${this.url}/pagoservice/pagar`, sendArray,
+    {headers}
+    ).pipe(
+      map((data : any) => {
+        return data
+      }
+      ),
+      catchError((e) => throwError(e))
+    );
+  }
+
   encrypt(textToEncrypt) {
     var secretK64 = btoa(this.secretKey);
     var key = CryptoJS.enc.Base64.parse(secretK64);
