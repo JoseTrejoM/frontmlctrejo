@@ -1,6 +1,6 @@
 <!--Login Page Starts-->
-<div class="container-fluid">
-  <div class="row bg-white" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
+<div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
+  <div class="row bg-white" >
     <div class="col-2 text-center pt-1 "
     *ngIf="index == 0" ngClass.sm="col-12 text-center" ngClass.md="col-12 text-center" ngClass.lg="col-12 text-center" >
       <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" ngClass.lg="img-header-big" ngClass.md="img-header-big" ngClass.sm="img-header-big"/>
@@ -455,7 +455,7 @@
     </div>
   </div>
 </div>
-
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
 <p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
             [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
             <div class="text-center">

@@ -16,6 +16,7 @@ import { ApiService } from '../../../shared/services/api.service'
 import { ImgSrcDirective } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NgxSpinnerService } from "ngx-spinner";
 
 export enum PageNames {
   Curp,
@@ -77,7 +78,8 @@ export class BeneficiosBaseComponent {
     private _snackBar: MatSnackBar,
     private api: ApiService,
     public router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private spinner: NgxSpinnerService
   ) {
     this.beneficiarios.push(15);
     this.stepperOrientation = breakpointObserver.observe('(min-width: 800px)')
@@ -203,6 +205,7 @@ export class BeneficiosBaseComponent {
   }
 
   getPropuesta(curp, token, stepper) {
+    this.spinner.show();
     this.api.getPropuesta(curp, token).pipe(first()).subscribe((data: any) => {
       this.arrPropuesta = data
       console.log(data);
@@ -443,6 +446,7 @@ export class BeneficiosBaseComponent {
       stepper.next();
       this.index++;
       this.ref.detectChanges();
+      this.spinner.hide();
     },
       (error) => { }
     );
@@ -562,6 +566,7 @@ export class BeneficiosBaseComponent {
     });
 
     if (this.index == this.arrBeneficios.length + 1) {
+      this.spinner.show();
       this.beneficiarios = Array.from(new Set(this.beneficiarios));
       localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
       localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
@@ -607,6 +612,7 @@ export class BeneficiosBaseComponent {
               this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
                 console.log(data);
                 if (data.servicioContratadoId) {
+                  this.spinner.hide();
                   this.router.navigate(["./pages/propuesta"]);
                 }
               });
@@ -618,6 +624,7 @@ export class BeneficiosBaseComponent {
         });
 
       } else {
+        this.spinner.hide();
         this.router.navigate(["./pages/formulario-eligibilidad"]);
       }
     }

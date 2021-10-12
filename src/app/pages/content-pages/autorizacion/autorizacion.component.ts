@@ -48,6 +48,7 @@ export class AutorizacionComponent implements OnInit {
   };
 
   stripeTest: FormGroup;
+  numTransaccion: any;
 
   constructor(
     private fb: FormBuilder,
@@ -110,6 +111,7 @@ export class AutorizacionComponent implements OnInit {
               this.spinner.hide();
               if (data.estatustransaccion == "succeeded") {
                 this.displayModalResponsive=true;
+                this.numTransaccion = data.transaccion;
               }
               this.ref.detectChanges();
             });

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ApiService} from '../../../shared/services/api.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { NgxSpinnerService } from "ngx-spinner";
+
 const helper = new JwtHelperService();
 
 @Component({
@@ -27,7 +29,8 @@ export class FormularioEligibilidadComponent implements OnInit {
   constructor(
     private api: ApiService,
     public router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private spinner: NgxSpinnerService
   ) {
     if (parseInt(localStorage.getItem('propuestaId')) == 0) {
       this.cuestionarioLocal = [];
@@ -72,6 +75,7 @@ export class FormularioEligibilidadComponent implements OnInit {
   }
 
   getPreguntas() {
+    this.spinner.show();
     this.api.getCuestionario(1, this.api.currentTokenValue).pipe(first()).subscribe((dataCuestionario:any) => {
       console.log(dataCuestionario);
         dataCuestionario['preguntas'].forEach(item => {
@@ -101,7 +105,8 @@ export class FormularioEligibilidadComponent implements OnInit {
           return a;
         });
 
-        this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0))
+        this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0));
+        this.spinner.hide();
       },
       (error) => { }
     );
@@ -121,9 +126,7 @@ export class FormularioEligibilidadComponent implements OnInit {
     if (index == this.cuestionario.length - 1) {
       this.respuestas=[];
       event.target.disabled = true;
-
-
-
+      this.spinner.show();
       this.cuestionario.forEach(element => {
         if (parseInt(localStorage.getItem('propuestaId')) == 0) {
           this.respuestas.push(
@@ -185,6 +188,7 @@ export class FormularioEligibilidadComponent implements OnInit {
               this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
                 console.log(data);
                 if (data.servicioContratadoId) {
+                  this.spinner.hide();
                   this.router.navigate(["./pages/propuesta"]);
                 }
               });

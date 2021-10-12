@@ -339,31 +339,31 @@
       <div class="form-row">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="nombreP" placeholder="Nombre"
-          [ngClass]="{ 'is-invalid': submitted && fP.nombreP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.nombreP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="apaternoP" placeholder="Apellido paterno"
-          [ngClass]="{ 'is-invalid': submitted && fP.apaternoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.apaternoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="amaternoP" placeholder="Apellido materno"
-          [ngClass]="{ 'is-invalid': submitted && fP.amaternoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.amaternoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefonoP" placeholder="Teléfono"
-          [ngClass]="{ 'is-invalid': submitted && fP.telefonoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.telefonoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="correoP" placeholder="Email"
-          [ngClass]="{ 'is-invalid': submitted && fP.correoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.correoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
@@ -371,14 +371,14 @@
           <input class="form-control input-form-datos" #drp="bsDatepicker" bsDatepicker [maxDate]="maxDate"
           [bsConfig]="{ isAnimated: true, adaptivePosition: false }" placement="top"
           formControlName="fnacimientoP" placeholder="Fecha de nacimiento"
-          [ngClass]="{ 'is-invalid': submitted && fP.fnacimientoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.fnacimientoP.errors }">
 
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <select class="form-control input-form-datos" formControlName="sexoP" placeholder="Sexo"
-          [ngClass]="{ 'is-invalid': submitted && fP.sexoP.value == '0' }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.sexoP.value == '0' }">
             <option value="0" disabled>Sexo</option>
             <option value="{{item.sexoid}}" *ngFor="let item of sexos">{{item.sexo}}</option>
           </select>
@@ -387,7 +387,7 @@
       <div class="form-row  mt-1">
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
-          [ngClass]="{ 'is-invalid': submitted && fP.estadoP.value == '0' }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.estadoP.value == '0' }">
             <option value="0" disabled>Estado origen de México</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
@@ -469,6 +469,8 @@
     </form>
   </div>
 </ng-template>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+
 <!-- Fin Modal Datos Familia -->
 
 <!--Page Ends-->
