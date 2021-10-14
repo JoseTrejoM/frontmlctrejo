@@ -9,6 +9,7 @@ import {
 import { ApiService } from 'app/shared/services/api.service';
 import { first } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-autorizacion',
@@ -23,8 +24,10 @@ export class AutorizacionComponent implements OnInit {
   paymentIntent = [];
   clavePlan = '';
   costo = 0;
+  total = 0;
   descripcionPlan = '';
   plan = [];
+  arrPlan = [];
   autorizacion = ''
   displayModalResponsive = false;
 
@@ -49,13 +52,15 @@ export class AutorizacionComponent implements OnInit {
 
   stripeTest: FormGroup;
   numTransaccion: any;
+  membresia: any;
 
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private api: ApiService,
     private ref: ChangeDetectorRef,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public router: Router,
     ) {
       this.curp = localStorage.getItem('curp');
       this.api.loginapp().pipe(first()).subscribe((data: any) => {
@@ -74,9 +79,13 @@ export class AutorizacionComponent implements OnInit {
   getPropuesta() {
     this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
       this.plan = data;
+      this.arrPlan = this.plan['plan'];
       console.log(this.plan);
-      this.costo = this.plan['costo'];
-      this.clavePlan = this.plan['clavePlan'];
+      this.costo = this.plan['plan']['costo'];
+      this.clavePlan = this.plan['plan']['clavePlan']
+      this.descripcionPlan = this.plan['plan']['descripcionPlan'];
+      this.total = this.plan['plan']['total'];
+      this.ref.detectChanges();
     });
   }
 
@@ -112,6 +121,7 @@ export class AutorizacionComponent implements OnInit {
               if (data.estatustransaccion == "succeeded") {
                 this.displayModalResponsive=true;
                 this.numTransaccion = data.transaccion;
+                this.membresia = data.membresia;
               }
               this.ref.detectChanges();
             });
@@ -123,6 +133,10 @@ export class AutorizacionComponent implements OnInit {
           console.log(result.error.message);
         }
       });
+  }
+
+  redirect () {
+    this.router.navigate(["./pages/login"]);
   }
 
   makePayment(amount) {

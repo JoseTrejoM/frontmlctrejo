@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ApiService} from '../../../shared/services/api.service';
@@ -30,7 +30,8 @@ export class FormularioEligibilidadComponent implements OnInit {
     private api: ApiService,
     public router: Router,
     public jwtHelper: JwtHelperService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private ref: ChangeDetectorRef,
   ) {
     if (parseInt(localStorage.getItem('propuestaId')) == 0) {
       this.cuestionarioLocal = [];
@@ -107,6 +108,12 @@ export class FormularioEligibilidadComponent implements OnInit {
 
         this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0));
         this.spinner.hide();
+
+        if (localStorage.getItem('sexo') == 'H') {
+          this.cuestionario[0].respuesta = 'No';
+        }
+        console.log(this.cuestionario);
+        this.ref.detectChanges();
       },
       (error) => { }
     );
@@ -206,8 +213,16 @@ export class FormularioEligibilidadComponent implements OnInit {
   }
 
   changeStepInicial(stepper){
-    stepper.next();
-    this.index++;
+    if (localStorage.getItem('sexo') == 'H') {
+      stepper.next();
+      stepper.next();
+      this.index++;
+      this.index++;
+      console.log(this.cuestionario);
+    } else {
+      stepper.next();
+      this.index++;
+    }
   }
 
   save(e) {

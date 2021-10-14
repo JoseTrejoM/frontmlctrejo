@@ -58,32 +58,67 @@
       </div>
     </div>
   </div>
-
+</div>
+<div class="container-fluid">
   <div class="row mt-4">
-    <div class="col-md-8 offset-md-2 col-12">
-      <div class="col-12 text-center">
-        <h2 class="mb-1">
-          Ingresa los datos de tu tarjeta para realizar el pago
-        </h2>
-        <form
-          novalidate
-          (ngSubmit)="createToken()"
-          [formGroup]="stripeTest"
-          class="card p-4"
-        >
-          <input
-            type="text"
-            class="form-control mb-3"
-            formControlName="name"
-            placeholder="Ingresa tu nombre"
-          />
-          <ngx-stripe-card
-            [options]="cardOptions"
-            [elementsOptions]="elementsOptions"
-          ></ngx-stripe-card>
-          <button type="submit" class="btn btn-blue mt-3">Pagar</button>
-        </form>
+    <div class="col-md-10 offset-md-1 col-12">
+      <div class="row">
+        <div class="col-12 col-lg-6 col-md-12">
+          <h2 class="mb-1 text-center">
+            Resumen del pago
+          </h2>
+          <div class="card">
+            <div class="row">
+              <div class="col-8 ml-1">
+                <p>{{descripcionPlan}}</p>
+              </div>
+              <div class="col-3 text-right mr-1">
+                <p>USD ${{costo}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 ml-1">
+                <p>Gastos administrativos</p>
+              </div>
+              <div class="col-3 text-right mr-1">
+                <p>USD $5</p>
+              </div>
+            </div>
+            <div class="row font-weight-bolder">
+              <div class="col-8 ml-1">
+                <p>Total</p>
+              </div>
+              <div class="col-3 text-right mr-1">
+                <p>USD ${{total}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 col-md-12 text-center">
+          <h2 class="mb-1">
+            Ingresa los datos de tu tarjeta para realizar el pago
+          </h2>
+          <form
+            novalidate
+            (ngSubmit)="createToken()"
+            [formGroup]="stripeTest"
+            class="card p-4"
+          >
+            <input
+              type="text"
+              class="form-control mb-3"
+              formControlName="name"
+              placeholder="Ingresa tu nombre"
+            />
+            <ngx-stripe-card
+              [options]="cardOptions"
+              [elementsOptions]="elementsOptions"
+            ></ngx-stripe-card>
+            <button type="submit" class="btn btn-blue mt-3">Pagar</button>
+          </form>
+        </div>
       </div>
+
       <!-- <button (click)="makePayment(1)" class="btn btn-danger btn-block">Pay $15</button> -->
     </div>
   </div>
@@ -98,6 +133,7 @@
   [draggable]="false"
   [resizable]="false"
   header=""
+  (onHide)="redirect()"
 >
   <div class="text-center">
     <h1 class="text-white">Gracias por tu pago</h1>
@@ -107,5 +143,6 @@
       detalles de tu cuenta y pasos a seguir.
     </p>
     <p class="text-white"><b># Transacción: </b> {{numTransaccion}}</p>
+    <p class="text-white"><b># Membresía: </b> {{membresia}}</p>
   </div>
 </p-dialog>

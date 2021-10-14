@@ -69,6 +69,7 @@ export class BeneficiosBaseComponent {
   precioAnual = 0;
 
   stepperOrientation: Observable<StepperOrientation>;
+  sexo: any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -1223,6 +1224,9 @@ export class BeneficiosBaseComponent {
 
     localStorage.setItem("edad", yearsDiff.toString());
     this.edad = yearsDiff;
+
+    this.sexo = this.s1.curp.value.slice(10, 11);
+    localStorage.setItem("sexo", this.sexo);
 
     if (edad == 'Menor' && yearsDiff > 56) {
       e.source.checked = false;
