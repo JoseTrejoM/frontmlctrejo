@@ -356,7 +356,7 @@
                      (edad > 56),
                     'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo) || edad > 56}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
+                      <!--a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.esseleccionado ?
                         item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
@@ -399,7 +399,7 @@
                         >
                       </a>
 
-                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
+                      <!--a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="(!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                         (mouseout)="(!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
                         >
@@ -420,7 +420,7 @@
                     'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
 
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
+                      <!--a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : !item.esseleccionado ? item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
                         ></a> -->
