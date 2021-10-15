@@ -77,10 +77,12 @@ export class FormularioEligibilidadComponent implements OnInit {
 
   getPreguntas() {
     this.spinner.show();
+    let arrTemp = [];
     this.api.getCuestionario(1, this.api.currentTokenValue).pipe(first()).subscribe((dataCuestionario:any) => {
       console.log(dataCuestionario);
+
         dataCuestionario['preguntas'].forEach(item => {
-          this.cuestionario.push(
+          arrTemp.push(
             {
               clavePregunta: item.clavePregunta,
               descripcionPregunta: item.descripcionPregunta,
@@ -93,6 +95,8 @@ export class FormularioEligibilidadComponent implements OnInit {
             }
           )
         });
+
+        this.cuestionario = arrTemp;
 
         this.cuestionario = this.cuestionario.map(a => {
           const exists = this.cuestionarioLocal.find(b => b.preguntaid == a.preguntaId);

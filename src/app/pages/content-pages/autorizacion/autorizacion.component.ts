@@ -81,10 +81,10 @@ export class AutorizacionComponent implements OnInit {
       this.plan = data;
       this.arrPlan = this.plan['plan'];
       console.log(this.plan);
-      this.costo = this.plan['plan']['costo'];
+      this.costo = this.plan['plan']['costo'].toFixed(2);
       this.clavePlan = this.plan['plan']['clavePlan']
       this.descripcionPlan = this.plan['plan']['descripcionPlan'];
-      this.total = this.plan['plan']['total'];
+      this.total = this.plan['plan']['total'].toFixed(2);
       this.ref.detectChanges();
     });
   }
