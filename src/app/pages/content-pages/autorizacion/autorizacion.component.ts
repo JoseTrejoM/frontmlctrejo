@@ -10,6 +10,7 @@ import { ApiService } from 'app/shared/services/api.service';
 import { first } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-autorizacion',
@@ -30,6 +31,8 @@ export class AutorizacionComponent implements OnInit {
   arrPlan = [];
   autorizacion = ''
   displayModalResponsive = false;
+  fechaInicioVigencia = '';
+  fechaFinVigencia = '';
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -53,6 +56,7 @@ export class AutorizacionComponent implements OnInit {
   stripeTest: FormGroup;
   numTransaccion: any;
   membresia: any;
+  gastos: any;
 
   constructor(
     private fb: FormBuilder,
@@ -85,8 +89,11 @@ export class AutorizacionComponent implements OnInit {
       this.clavePlan = this.plan['plan']['clavePlan']
       this.descripcionPlan = this.plan['plan']['descripcionPlan'];
       this.total = this.plan['plan']['total'].toFixed(2);
+      this.gastos = this.plan['plan']['gastoAdmon'].toFixed(2);
       this.ref.detectChanges();
-    });
+    },
+      error => console.log('oops', error)
+    );
   }
 
   createToken(): void {
@@ -99,7 +106,7 @@ export class AutorizacionComponent implements OnInit {
         if (result.token) {
           result.token['paymentIntent'] = {
             "descripcion": this.plan['plan']['clavePlan'],
-            "monto": this.plan['plan']['costo'],
+            "monto": Number(this.plan['plan']['costo']) + Number(this.plan['plan']['gastoAdmon']),
             "moneda":"USD",
             "transaccion": "",
             "estatustransaccion": ""
@@ -109,7 +116,6 @@ export class AutorizacionComponent implements OnInit {
           result.token['curp'] = this.plan['curp'];
 
           // Use the token
-          console.log(result.token);
 
           console.log(JSON.stringify(result.token));
 
@@ -122,10 +128,24 @@ export class AutorizacionComponent implements OnInit {
                 this.displayModalResponsive=true;
                 this.numTransaccion = data.transaccion;
                 this.membresia = data.membresia;
+                this.fechaInicioVigencia = data.fechaInicioVigencia;
+                this.fechaFinVigencia = data.fechaFinVigencia;
               }
               this.ref.detectChanges();
-            });
-          });
+            },
+            error => {
+              console.log('Error Pago:', error);
+              this.spinner.hide();
+              Swal.fire({
+                icon: "error",
+                title: "Lo sentimos",
+                text: "No se pudo procesar tu pago, por favor inténtalo más tarde.",
+              });
+            }
+            );
+          },
+          error => console.log('oops', error)
+          );
 
         } else if (result.error) {
           // Error creating the token

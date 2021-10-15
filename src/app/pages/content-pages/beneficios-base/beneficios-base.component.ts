@@ -17,6 +17,7 @@ import { ImgSrcDirective } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgxSpinnerService } from "ngx-spinner";
+import Swal from "sweetalert2";
 
 export enum PageNames {
   Curp,
@@ -67,6 +68,7 @@ export class BeneficiosBaseComponent {
   tipoplanId = 0;
   descripcionPlan = '';
   precioAnual = 0;
+  continuarContratacion = 0;
 
   stepperOrientation: Observable<StepperOrientation>;
   sexo: any;
@@ -212,6 +214,17 @@ export class BeneficiosBaseComponent {
       console.log(data);
 
       if (data.propuestaid == 0) {
+        if (this.continuarContratacion == 1) {
+          this.spinner.hide();
+          Swal.fire({
+            icon: "error",
+            title: "Lo sentimos",
+            text: "No existe un proceso de contratación previo para esta CURP.",
+            willClose: () => {
+              this.router.navigate(["./pages/home"]);
+            }
+          });
+        }
         this.arrPropuesta['beneficios'].forEach((element, index) => {
           if (element.beneficioid != 3) {
             element['beneficiosbeneficiarios'] = [];
@@ -512,8 +525,19 @@ export class BeneficiosBaseComponent {
     if (this.firstFormGroup.invalid) {
       return;
     }
-    console.log(new Date().getTime() / 1000);
+    this.continuarContratacion = 0;
+    this.api.loginapp().pipe(first()).subscribe((data: any) => {
+      this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+      this.getPlan(this.api.currentTokenValue);
+    });
+  }
 
+  changeStepCurpContinuar (stepper, beneficio) {
+    this.s1Submitted = true;
+    if (this.firstFormGroup.invalid) {
+      return;
+    }
+    this.continuarContratacion = 1;
     this.api.loginapp().pipe(first()).subscribe((data: any) => {
       this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
       this.getPlan(this.api.currentTokenValue);
@@ -571,6 +595,10 @@ export class BeneficiosBaseComponent {
       this.beneficiarios = Array.from(new Set(this.beneficiarios));
       localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
       localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
+      localStorage.setItem('tipoplanId', this.tipoplanId.toString());
+      localStorage.setItem('precioAnual', this.precioAnual.toString());
+      localStorage.setItem('precioMensual', this.precioMensual.toString());
+      localStorage.setItem('descripcionPlan', this.descripcionPlan);
 
       if (this.edad >= 60) {
         // Guardo beneficios pmayor de 60 y direcciono a la propuesta
@@ -606,7 +634,7 @@ export class BeneficiosBaseComponent {
               arrSendPropuesta.push({
                 "propuestaId": data.propuesta['propuestaId'],
                 "frecuenciaPagoId": 65,
-                "tipoPlanId": data.plan['tipoplanId'],
+                "tipoPlanId": this.tipoplanId,
                 "formaPagoId": 20
               });
 
@@ -625,6 +653,7 @@ export class BeneficiosBaseComponent {
         });
 
       } else {
+        // console.log(this.tipoplanId);
         this.spinner.hide();
         this.router.navigate(["./pages/formulario-eligibilidad"]);
       }

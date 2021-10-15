@@ -67,28 +67,28 @@
           <h2 class="mb-1 text-center">
             Resumen del pago
           </h2>
-          <div class="card">
+          <div class="card" *ngIf="arrPlan">
             <div class="row">
-              <div class="col-8 ml-1">
+              <div class="col-7 ml-1">
                 <p class="fontResponsiveSlider">{{descripcionPlan}}</p>
               </div>
-              <div class="col-3 text-right mr-1">
+              <div class="col-4 text-right mr-1">
                 <p class="fontResponsiveSlider">${{costo}} USD</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-8 ml-1">
+              <div class="col-7 ml-1">
                 <p class="fontResponsiveSlider">Gastos administrativos (pago único)</p>
               </div>
-              <div class="col-3 text-right mr-1">
-                <p class="fontResponsiveSlider">$5.00 USD</p>
+              <div class="col-4 text-right mr-1">
+                <p class="fontResponsiveSlider">${{gastos}} USD</p>
               </div>
             </div>
             <div class="row font-weight-bolder">
-              <div class="col-8 ml-1">
+              <div class="col-7 ml-1">
                 <p class="fontResponsiveSlider">Total</p>
               </div>
-              <div class="col-3 text-right mr-1">
+              <div class="col-4 text-right mr-1">
                 <p class="fontResponsiveSlider">${{total}} USD</p>
               </div>
             </div>
@@ -142,7 +142,11 @@
     <p class="text-white">
       detalles de tu cuenta y pasos a seguir.
     </p>
+  </div>
+  <div class="mt-4">
     <p class="text-white"><b># Transacción: </b> {{numTransaccion}}</p>
     <p class="text-white"><b># Membresía: </b> {{membresia}}</p>
+    <p class="text-white"><b>Inicio vigencia: </b> {{fechaInicioVigencia}}</p>
+    <p class="text-white"><b>Fin vigencia: </b> {{fechaFinVigencia}}</p>
   </div>
 </p-dialog>

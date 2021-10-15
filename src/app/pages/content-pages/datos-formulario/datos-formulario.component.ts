@@ -76,8 +76,8 @@ export class DatosFormularioComponent implements OnInit {
 
     setTheme('bs4');
     this.maxDate.setDate(this.maxDate.getDate());
-    this.spinner.show();
-      this.api.loginapp().pipe(first()).subscribe((data: any) => {
+    this.api.loginapp().pipe(first()).subscribe((data: any) => {
+        this.spinner.show();
         this.getPais();
         this.getEstadosMexico(142);
         this.getData();
