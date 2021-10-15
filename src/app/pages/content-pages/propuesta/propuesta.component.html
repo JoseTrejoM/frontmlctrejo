@@ -93,126 +93,7 @@
                       </div>
                     </ng-container>
                   </div>
-                  <!-- <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Titular
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                  </div>
-                  <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Pareja
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
 
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                  </div>
-                  <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Padre
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                  </div>
-                  <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Madre
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                  </div>
-                  <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Hijo
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                  </div>
-                  <div class="row mt-2 vCenter text-center">
-                    <div class="col-2 center-flex">
-                      Hijo
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                    <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Bien.png" class="img-propuesta">
-                    </div>
-                    <div class="col-2 center-flex">
-
-                    </div>
-                  </div> -->
                   <div class="mt-2 row">
                     <div class="col-12 text-center">
                       <img src="../../../assets/img/icons/A la medida@2x.png" class="img-propuesta">
@@ -234,12 +115,12 @@
                         <div class="col-6 text-center mb-1">
                           <p class="fontResponsiveSliderNotes">Mensual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
-                          <p class="fontResponsiveSliderNotes">1er. Pago de US $0.00</p>
+                          <p class="fontResponsiveSliderNotes">*1er. Pago de US ${{(+precioMensual) + (5)}}</p>
                         </div>
                         <div class="col-6 text-center mb-1">
                           <p class=" fontResponsiveSliderNotes">Anual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
-                          <p class="fontResponsiveSliderNotes">1er. Año de US $0.00</p>
+                          <p class="fontResponsiveSliderNotes">*1er. Año de US ${{(+precioAnual) + (5)}}</p>
                         </div>
                       </div>
 
@@ -247,7 +128,7 @@
                   </div>
                   <div class="row mt-1 text-left">
                     <div class="col-12">
-                      <p class="fontResponsiveSliderNotes">* Al primer pago se le agregará un costo administrativo de, $5.00 USD por única vez.</p>
+                      <p class="fontResponsiveSliderNotes">* Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.</p>
                       <button class="btn btn-blue btn-block mt-1" (click)="aceptarPropuesta()" *ngIf="tipoPago != 0">
                         Continuar
                       </button>
@@ -260,4 +141,5 @@
     </div>
   </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
 <!--Login Page Ends-->

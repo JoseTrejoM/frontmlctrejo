@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
@@ -6,6 +6,10 @@ import {
   StripeCardElementOptions,
   StripeElementsOptions
 } from '@stripe/stripe-js';
+import { ApiService } from 'app/shared/services/api.service';
+import { first } from 'rxjs/operators';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-autorizacion',
@@ -17,6 +21,15 @@ export class AutorizacionComponent implements OnInit {
 
   curp = '';
   paymentHandler:any = null;
+  paymentIntent = [];
+  clavePlan = '';
+  costo = 0;
+  total = 0;
+  descripcionPlan = '';
+  plan = [];
+  arrPlan = [];
+  autorizacion = ''
+  displayModalResponsive = false;
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -38,12 +51,21 @@ export class AutorizacionComponent implements OnInit {
   };
 
   stripeTest: FormGroup;
+  numTransaccion: any;
+  membresia: any;
 
   constructor(
     private fb: FormBuilder,
-    private stripeService: StripeService
+    private stripeService: StripeService,
+    private api: ApiService,
+    private ref: ChangeDetectorRef,
+    private spinner: NgxSpinnerService,
+    public router: Router,
     ) {
       this.curp = localStorage.getItem('curp');
+      this.api.loginapp().pipe(first()).subscribe((data: any) => {
+        this.getPropuesta();
+      });
     }
 
   ngOnInit(): void {
@@ -53,19 +75,68 @@ export class AutorizacionComponent implements OnInit {
     });
   }
 
+
+  getPropuesta() {
+    this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      this.plan = data;
+      this.arrPlan = this.plan['plan'];
+      console.log(this.plan);
+      this.costo = this.plan['plan']['costo'].toFixed(2);
+      this.clavePlan = this.plan['plan']['clavePlan']
+      this.descripcionPlan = this.plan['plan']['descripcionPlan'];
+      this.total = this.plan['plan']['total'].toFixed(2);
+      this.ref.detectChanges();
+    });
+  }
+
   createToken(): void {
+    this.paymentIntent = [];
     const name = this.stripeTest.get('name').value;
+    this.spinner.show();
     this.stripeService
       .createToken(this.card.element, { name })
       .subscribe((result) => {
         if (result.token) {
+          result.token['paymentIntent'] = {
+            "descripcion": this.plan['plan']['clavePlan'],
+            "monto": this.plan['plan']['costo'],
+            "moneda":"USD",
+            "transaccion": "",
+            "estatustransaccion": ""
+          };
+
+          result.token['propuestaid'] = this.plan['propuestaid'];
+          result.token['curp'] = this.plan['curp'];
+
           // Use the token
-          console.log(result.token.id);
+          console.log(result.token);
+
+          console.log(JSON.stringify(result.token));
+
+
+          this.api.loginapp().pipe(first()).subscribe((data: any) => {
+            this.api.postIntentarPagar(JSON.stringify(result.token), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+              console.log(data);
+              this.spinner.hide();
+              if (data.estatustransaccion == "succeeded") {
+                this.displayModalResponsive=true;
+                this.numTransaccion = data.transaccion;
+                this.membresia = data.membresia;
+              }
+              this.ref.detectChanges();
+            });
+          });
+
         } else if (result.error) {
           // Error creating the token
+          this.spinner.hide();
           console.log(result.error.message);
         }
       });
+  }
+
+  redirect () {
+    this.router.navigate(["./pages/login"]);
   }
 
   makePayment(amount) {

@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -52,6 +53,7 @@ export class DatosFormularioComponent implements OnInit {
   arrResumen = [];
   personaId = 0;
   plan =[];
+  costoInicial = 0;
 
   sexo = 'Sexo'
 
@@ -68,13 +70,13 @@ export class DatosFormularioComponent implements OnInit {
     private ref: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     public jwtHelper: JwtHelperService,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
 
     setTheme('bs4');
     this.maxDate.setDate(this.maxDate.getDate());
-
+    this.spinner.show();
       this.api.loginapp().pipe(first()).subscribe((data: any) => {
         this.getPais();
         this.getEstadosMexico(142);
@@ -155,6 +157,7 @@ export class DatosFormularioComponent implements OnInit {
   }
 
   getData() {
+
     this.arrBeneficiarios = [];
     this.api.getDataBeneficiariosById(localStorage.getItem('propuestaId'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
       console.log(data);
@@ -195,6 +198,7 @@ export class DatosFormularioComponent implements OnInit {
       });
 
       this.arrBeneficiarios = data.beneficiario;
+      this.spinner.hide();
       this.ref.detectChanges();
     });
   }
@@ -204,6 +208,7 @@ export class DatosFormularioComponent implements OnInit {
     this.arrBeneficios = [];
     let arr = [];
     this.api.getResumenPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.arrResumen = data.beneficiarios;
       this.arrResumen.forEach(element => {
         element['beneficioSimpleDTO'].forEach(item => {
@@ -223,7 +228,9 @@ export class DatosFormularioComponent implements OnInit {
 
   getPropuesta() {
     this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.plan = data.plan;
+      this.costoInicial = this.plan['costo'] + 5;
     });
   }
 
@@ -262,6 +269,7 @@ export class DatosFormularioComponent implements OnInit {
       this.frm.value.estado == 0) {
       return;
     }
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,
@@ -321,9 +329,10 @@ export class DatosFormularioComponent implements OnInit {
   addUserPareja() {
     this.submittedP = true;
     let arrSend = [];
-    if (this.frmP.invalid || this.frmP.value.sexo == 0) {
+    if (this.frmP.invalid || this.frmP.value.sexoP == 0) {
       return;
     }
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,
@@ -379,7 +388,7 @@ export class DatosFormularioComponent implements OnInit {
     if (this.frm2.invalid || this.frm2.value.sexo2 == 0) {
       return;
     }
-
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,

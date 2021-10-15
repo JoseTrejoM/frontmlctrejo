@@ -1,6 +1,6 @@
 <!--Login Page Starts-->
-<div class="container-fluid">
-  <div class="row bg-white" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
+<div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
+  <div class="row bg-white" >
     <div class="col-2 text-center pt-1 "
     *ngIf="index == 0" ngClass.sm="col-12 text-center" ngClass.md="col-12 text-center" ngClass.lg="col-12 text-center" >
       <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" ngClass.lg="img-header-big" ngClass.md="img-header-big" ngClass.sm="img-header-big"/>
@@ -317,26 +317,49 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
+                <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
                 <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
                     <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5}"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo) ||
+                     (edad > 56),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo) || edad > 56}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+
+                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.esseleccionado ?
                         item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
-                        ></a>
+                        ></a> -->
+
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
+                          (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                          >
+                        </a>
+
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          >
+                        </a>
+
+
                     </div>
                   </ng-container>
                 </div>
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5}"
+                    <div class="col-3 col-sm-4 text-center ng-star-inserted"
+                    *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (item.tipobeneficiarioid == 15 && (itemB.beneficioid == 1 || itemB.beneficioid == 2)) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="item.tipobeneficiarioid != 15  ?
                     changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo) :
                     itemB.beneficioid == 5 ? changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo) :
@@ -350,9 +373,13 @@
                         >
                       </a>
 
-                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!-- <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="(!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                         (mouseout)="(!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                        >
+                      </a> -->
+
+                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         >
                       </a>
 
@@ -362,13 +389,28 @@
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index; trackBy: trackByFn;">
                     <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    [ngClass]="{'pointerEvents': itemB.beneficioid > 2 && itemB.beneficioid != 5}"
+                    [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
+                    (itemB.beneficioid > 2 && !item.esseleccionado) && (itemB.beneficioid == 5 && !item.activo),
+                    'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
 
-                      <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : !item.esseleccionado ? item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
-                        ></a>
+                        ></a> -->
+
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
+                          (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
+                          item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
+                          >
+                        </a>
+
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                          >
+                        </a>
+
                     </div>
                   </ng-container>
                   <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3 && itemB.beneficioid != 3">
@@ -395,7 +437,7 @@
                 <div class="card cardBeneficios mb-1">
                   <div class="card-body">
                     <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
+                    <h1 class="mb-0"><b>US ${{precioMensual}}.00</b></h1>
                   </div>
                 </div>
                 <button (click) = "changeStep(stepper, itemB.beneficioid)"  class="btn btn-pink btn-block mt-1" *ngIf="itemB.beneficioid == 5 && envioDineroSelected">
@@ -409,351 +451,12 @@
           </form>
         </mat-step>
 
-        <!--Step Repatriación-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia podría requerir este beneficio? <br>
-                  Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios mb-1">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <button (click) = "changeStep(stepper, 1)"  class="btn btn-pink btn-block mt-1">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Servicio funerario-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia podría requerir este beneficio? <br>
-                  Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 2)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Seguro de vida-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">Incluído para el titular.</p>
-                <p class=" fontResponsiveSliderNotes lh-13">Este beneficio está sujeto a eligibilidad.</p>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center mt-3">
-                <div class="row justify-content-center">
-                  <div class="col-3 mb-1 text-left">
-                    <a><img src="../../../../assets/img/icons/Titular.png" class="img-familia"></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <div class="card">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 4)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Educación financiera-->
-        <!-- <mat-step label=" ">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">Este beneficio está incluído para todos los miembros</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 4)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Envío de dinero-->
-        <!-- <mat-step label=" ">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <a (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia recibe el dinero que envías de EUA?
-                Selecciona a una persona para otorgarle este beneficio. Debe vivir en México.</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && tipobeneficiarioid == 19"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button class="btn btn-pink btn-block" [routerLink] = "['/pages/formulario-eligibilidad']">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-          <p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+      </mat-stepper>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+<p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
             [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
             <div class="text-center">
 
@@ -764,9 +467,4 @@
               <p class="text-white">Debe ser mayor de 18 años</p>
             </div>
           </p-dialog>
-        </mat-step> -->
-      </mat-stepper>
-    </div>
-  </div>
-</div>
 <!--Login Page Ends-->

@@ -63,7 +63,7 @@
             </p>
             <div class="row mt-4">
               <div class="col-12 text-center">
-                <button class="btn btn-blue" (click)="changeStepInicial(stepper)">Continuar</button>
+                <button class="btn btn-blue" (click)="changeStepInicial(stepper)" *ngIf="cuestionario.length > 0">Continuar</button>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
                     </mat-radio-group>
                   </div>
                   <div class="col-sm-12 col-md-6 text-center mt-2" *ngIf="pregunta.selected">
-                    <button class="btn btn-blue" (click)="changeStep(stepper, i, chk.value)">Continuar</button>
+                    <button class="btn btn-blue" (click)="changeStep(stepper, i, chk.value, $event)">Continuar</button>
                   </div>
                 </div>
               </div>
@@ -95,4 +95,5 @@
     </div>
   </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
 <!--Login Page Ends-->
