@@ -3,8 +3,11 @@
 
 .img-header-tranquilidad {
 
-height: 5rem;
-margin-top:1.5rem;
+height: 4rem;
+margin:1rem 0 0 25rem;
+border: 0px solid #333;
+float: right;
+clear: both;
 
 
 }
@@ -76,7 +79,6 @@ background-repeat: no-repeat;
 
 
 
-
 .pointerEvents {
   pointer-events: none;
   cursor: none;
@@ -131,7 +133,7 @@ hr, .p-2 {
 
   .img-thumbnail {
     border: 0px solid #E31C79 ;
-    min-height: 10rem !important;
+   height: 10rem ;
     margin: 0 auto !important;
 
   }
@@ -188,13 +190,14 @@ text-align: center;
 
 
   .fontResponsiveSliderNotes {
-    font-size: calc(0.7em + 0.9vmin);
-    text-transform: uppercase;
-    color: #fff !important;
-    font-weight: 600;
-    text-align: left;
-    line-height: 1.2rem !important;
-    padding: 1rem 0;
+    font-size: calc(0.6em + 0.8vmin);
+
+    color: #353A50 !important;
+
+    text-align: center;
+    line-height: 1rem !important;
+    padding: 0 1rem;
+
   }
 
   .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
@@ -315,6 +318,15 @@ text-align: center;
       text-transform: uppercase;
       font-weight: 700;
     }
+
+    .img-thumbnail  {
+
+      height: 3rem !important;
+      margin: 0 auto !important;
+      float:center;
+      border: 1px solid #6ab336;
+
+    }
   }
 
   @media screen and (min-width: 1023px) and (max-width: 1300px) {
@@ -327,6 +339,26 @@ text-align: center;
 
 
   }
+
+
+
+  @media screen and (min-width: 375px) and (max-width: 840px) {
+
+
+
+
+    .img-thumbnail  {
+
+      height: 6em !important;
+      margin: 0 auto !important;
+      float:center;
+      border: 0px solid #6ab336;
+
+    }
+  }
+
+
+
 
 
   @media screen and (max-width: 1023px) {
@@ -349,6 +381,7 @@ text-align: center;
   font-size: 1em;
   font-family: "Noto Sans JP", sans-serif !important;
   font-weight: bold;
+  margin: 0;
 }
 
     h2, .titulo-beneficios-base{
@@ -379,10 +412,12 @@ text-align: center;
 
     }
 
-    .text-center {
+    .text-center, .texto-exclusivo {
 
       font-size: 1em;
       line-height: 1.2em;
+      margin-top: 1em;
+
     }
 .img-header
 {
@@ -414,13 +449,7 @@ text-align: center;
       line-height: 1.2em;
     }
 
-    .img-thumbnail {
 
-      min-height: 6rem !important;
-      margin: 0 auto !important;
-      float:center;
-
-    }
 
     .dos-col
 
@@ -444,3 +473,21 @@ width: 90% !important;
 
 
     }
+
+    @media screen and (min-width: 1024px) and (max-width: 1380px) {
+
+      .img-header-tranquilidad {
+
+        height: 3rem;
+        margin:1rem 0 0 16rem;
+        border: 0px solid #333;
+        float: right;
+        clear: both;
+      }
+
+
+
+
+    }
+
+

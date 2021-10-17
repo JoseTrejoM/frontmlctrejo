@@ -88,6 +88,7 @@
             <!-- <ngb-carousel class="w-100"
             (swipeleft)="swipe($event.type)"
             (swiperight)="swipe($event.type)"> -->
+
             <ngb-carousel class="w-100" [interval]="false">
 
               <ng-template ngbSlide>
@@ -185,7 +186,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="texto-exclusivo">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
                 </div>
               </div>
 
@@ -274,7 +275,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="texto-exclusivo">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
                 </div>
               </div>
 
@@ -345,7 +346,7 @@
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
                 <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
-                <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
+                <div class="descripcion-beneficio"> {{itemB.descripcionbeneficio}} </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
                 <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">

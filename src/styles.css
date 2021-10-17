@@ -74,6 +74,17 @@ line-height: 1.5em; */
       font-size: .7rem;
      }
 
+
+
+     .descripcion-beneficio {
+      color: #353A50;
+      font-size: 1em;
+
+      text-align: center;
+      padding: 0 1em;
+
+     }
+
 /* Termina estilos Gris */
 
 .p-dataview-grid > .p-dataview-content > .p-grid {
@@ -346,7 +357,9 @@ font-size: .5rem;
 .carousel-indicators {
 
   bottom: 0px !important;
-  border:0px solid #000;
+  border: 0px solid #000;
+  margin-top: 30rem !important;
+
 
 }
 
@@ -843,11 +856,19 @@ body {
 
  }
  .carousel-indicators {
-   bottom: -30px !important;
+   bottom: -33px !important;
    border: 0px solid #E31C79 !important;
- margin-top: 3em !important;
+ margin-top: 30em !important;
  clear: both;
 
+
+  }
+  .btn-green  {
+
+    border: 0px solid #333 !important;
+    max-width: 17.2em !important;
+    font-size: 1em;
+    margin: 0 auto !important;
 
   }
 
@@ -900,6 +921,19 @@ body {
   }
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+
+.carousel-indicators {
+
+  bottom:-40px !important;
+  border: 0px solid #000 !important;
+  margin-top: 0rem !important;
+
+
+}
+}
+
+
 @media screen and (min-width: 1141px) {
   .img-familia {
     max-width: 100px;
@@ -949,3 +983,7 @@ body {
 
 
 }
+
+
+
+
