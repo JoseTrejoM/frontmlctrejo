@@ -31,7 +31,7 @@
                 <div class="col-md-6 col-sm-12">
                   <div class="row">
                     <div class="col-12 text-center">
-                      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios base</b></span>
+                      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios Base</b></span>
                     </div>
                   </div>
                   <div class="row mt-2 vCenter text-center rowTable">
@@ -97,7 +97,7 @@
                   <div class="mt-2 row">
                     <div class="col-12 text-center">
                       <img src="../../../assets/img/icons/A la medida@2x.png" class="img-propuesta">
-                      <span> Beneficios a la medida</span>
+                      <span> Beneficios a la Medida</span>
                       <p class="fontResponsiveSliderNotes">Disponibles después de contratar</p>
                     </div>
                   </div>
@@ -115,12 +115,12 @@
                         <div class="col-6 text-center mb-1">
                           <p class="fontResponsiveSliderNotes">Mensual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
-                          <p class="fontResponsiveSliderNotes">*1er. Pago de US ${{(+precioMensual) + (5)}}</p>
+                          <p class="fontResponsiveSliderNotes">1er. Pago de US ${{(+precioMensual) + (5)}} <sup>*</sup></p>
                         </div>
                         <div class="col-6 text-center mb-1">
                           <p class=" fontResponsiveSliderNotes">Anual</p>
                           <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
-                          <p class="fontResponsiveSliderNotes">*1er. Año de US ${{(+precioAnual) + (5)}}</p>
+                          <p class="fontResponsiveSliderNotes">1er. Año de US ${{(+precioAnual) + (5)}} <sup>*</sup></p>
                         </div>
                       </div>
 
@@ -128,7 +128,7 @@
                   </div>
                   <div class="row mt-1 text-left">
                     <div class="col-12">
-                      <p class="fontResponsiveSliderNotes">* Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.</p>
+                      <p class="fontResponsiveSliderNotes">*Tu primer pago incluye un cargo administrativo de US $5.00 por única vez.</p>
                       <button class="btn btn-blue btn-block mt-1" (click)="aceptarPropuesta()" *ngIf="tipoPago != 0">
                         Continuar
                       </button>

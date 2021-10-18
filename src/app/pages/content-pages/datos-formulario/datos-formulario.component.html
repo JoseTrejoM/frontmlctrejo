@@ -27,7 +27,7 @@
       <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2>Confirma los datos</h2>
 
-      <h3 class="m-0 fontResponsive">Por favor confirma que los datos son correctos.</h3>
+      <h3 class="m-0 fontResponsive">Por favor confirma que todos los datos son correctos</h3>
     </div>
     <div class="col-12 p-0">
       <hr class="separador mt-4 mb-0" />
@@ -37,7 +37,6 @@
     <div class="col-12 text-center p-0 mt-2">
       <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2>Confirma tu Plan</h2>
-      <br>
       <h3 class="m-0 fontResponsive">Por favor confirma el diseño de tu Plan y selecciona la forma de pago.</h3>
     </div>
     <div class="col-12 p-0">
@@ -193,7 +192,7 @@
 
                 </div>
                 <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
-                  <h4 class="mb-1"><b>Plan de previsión</b></h4>
+                  <!-- <h4 class="mb-1"><b>Plan de previsión</b></h4> -->
                   <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
                   <p><b>Forma de pago: </b> {{plan['formaPago']}}</p>
                   <p><b>Primer pago: </b> US ${{costoInicial}}</p>
@@ -293,7 +292,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estado" placeholder="País"
           [ngClass]="{ 'is-invalid': submitted && f.estado.value == '0' }">
-            <option value="0" disabled>Estado origen de México</option>
+            <option value="0" disabled>Estado de origen de México</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>
@@ -302,7 +301,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="pais" placeholder="País"
           [ngClass]="{ 'is-invalid': submitted && f.pais.value == '0' }" (change)="getEstadosEU($event.target.value)">
-            <option value="0" disabled>País de residencia</option>
+            <option value="0" disabled>País donde vives/trabajas</option>
             <option value="{{item.paisid}}" *ngFor="let item of paises">{{item.descripcionpais}}</option>
           </select>
         </div>
@@ -311,7 +310,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estadoEU" placeholder="Estado"
           [ngClass]="{ 'is-invalid': submitted && f.estadoEU.value == '0' }">
-            <option value="0" disabled>¿En dónde trabajas?</option>
+            <option value="0" disabled>Estado donde vives/trabajas</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estadosEU">{{item.nombreestado}}</option>
           </select>
         </div>
@@ -388,7 +387,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
           [ngClass]="{ 'is-invalid': submittedP && fP.estadoP.value == '0' }">
-            <option value="0" disabled>Estado origen de México</option>
+            <option value="0" disabled>Estado de origen de México</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>

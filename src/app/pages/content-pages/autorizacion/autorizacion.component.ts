@@ -139,7 +139,7 @@ export class AutorizacionComponent implements OnInit {
               Swal.fire({
                 icon: "error",
                 title: "Lo sentimos",
-                text: "No se pudo procesar tu pago, por favor inténtalo más tarde.",
+                text: "No se pudo procesar tu pago, por favor confirma los datos o consulta a tu banco.",
               });
             }
             );
