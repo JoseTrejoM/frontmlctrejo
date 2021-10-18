@@ -20,7 +20,7 @@
 <div class="container-fluid">
   <div class="row d-flex-center mt-3" *ngIf="index > 1">
     <div class="col-12 text-center p-0">
-      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios base</b></span>
+      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios Base</b></span>
     </div>
   </div>
 
@@ -35,13 +35,13 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 2">
       <h2><b>Repatriación a México</b></h2>
-      <h3 class="mb-0"><b>(Por fallecimiento en EU)</b></h3>
+      <h3 class="mb-0"><b>((por fallecimiento en EUA o Canadá)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2><b>Servicio funerario</b></h2>
-      <h3 class="mb-0"><b>(Residentes de México)</b></h3>
+      <h3 class="mb-0"><b>(en México)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 4">
@@ -53,13 +53,13 @@
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 5">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2><b>Educación financiera</b></h2>
-      <h3 class="mb-0"><b>(Administración del dinero)</b></h3>
+      <h3 class="mb-0"><b>((para el manejo del dinero)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 6">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2><b>Envío de dinero</b></h2>
-      <h3 class="mb-0"><b>(Cuenta digital en México)</b></h3>
+      <h3 class="mb-0"><b>(con cuenta digital en México)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
   </div>
@@ -78,7 +78,7 @@
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
                   <h2 class="mb-1">Bienvenido a México Lindo Contigo.</h2>
-                  <p class="text-center mt-1">Somos la central digital de soluciones para el ciudado de tu dinero y la salud de tu familia.</p>
+                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
                   <div class="row text-center">
@@ -111,14 +111,13 @@
                 <div class="picsum-img-wrapper" style="height: 410px">
                   <div class="row text-center">
                     <div class="col-lg-8 offset-lg-2 mt-4">
-                        <p class="fontResponsiveSlider">Recomendamos que el titular de tu Plan sea la persona de tu familia
-                          que vive o trabaje temporalmente en Estados Unidos o Canadá.</p>
+                        <p class="fontResponsiveSlider">Recomendamos que el titular de tu plan sea la persona de tu familia que vive o trabaja temporalmente en Estados Unidos o Canadá. <sup>(1)</sup></p>
                         <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
-                          <a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
+                          <a href="https://contigo.digital" target="_blank">contigo.digital</a> para conocernos. <sup>(2)</sup></p>
                         <i class="fas fa-share-alt fa-2x text-pink  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="fontResponsiveSliderNotes">* El servicio se contrata en México y el titular debe tener CURP.</p>
-                        <p class="fontResponsiveSliderNotes">* Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
+                        <p class="fontResponsiveSliderNotes"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP</p>
+                        <p class="fontResponsiveSliderNotes"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
                     </div>
                   </div>
                 </div>
@@ -133,12 +132,12 @@
                         </div>
                         <div class="col-6">
                           <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
-                          <p class="fontResponsive m-0"><b>Beneficios base</b></p>
-                          <p class="fontResponsive">(incluídos en el costo)</p>
+                          <p class="fontResponsive m-0"><b>Beneficios Base</b></p>
+                          <p class="fontResponsive">(incluidos en el costo)</p>
                         </div>
                         <div class="col-6">
                           <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
-                          <p class="fontResponsive m-0"><b>Beneficios a la medida</b></p>
+                          <p class="fontResponsive m-0"><b>Beneficios a la Medida</b></p>
                           <p class="fontResponsive">(con costo adicional)</p>
                         </div>
                         <div class="col-12 vCenter">
@@ -247,7 +246,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
@@ -285,9 +284,7 @@
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
                       <p class="fontResponsiveSliderNotes lh-13">
-                        * Acepto que si el CURP que registré es incorrecto,
-                    los beneficios no podrán ser aprovechados cuando los
-                    requiera.
+                        Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
                         s1Submitted &&
@@ -299,7 +296,7 @@
                     </mat-checkbox>
 
                   </p>
-                  <button (click) = "changeStepCurp(stepper, 0)" class="btn btn-blue btn-block mt-2"
+                  <button (click) = "changeStepCurpContinuar(stepper, 1)" class="btn btn-blue btn-block mt-2"
                   *ngIf="this.firstFormGroup.valid">
                     Continuar
                   </button>
