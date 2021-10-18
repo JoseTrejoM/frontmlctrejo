@@ -76,6 +76,12 @@ hr, .bg-white, .p-2 {
       height: 90%;
       width: 90%;
     }
+    .card {
+      background-color: #fff;
+      border: 1px solid #000;
+      min-width: 15em !important;
+    }
+
   }
 
   @media screen and (max-width: 1000px) {

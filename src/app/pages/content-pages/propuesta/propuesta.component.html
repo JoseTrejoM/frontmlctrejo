@@ -40,7 +40,7 @@
                   <div class="row mt-2 vCenter text-center rowTable">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table">
+                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
                       <img src="../../../assets/img/icons/servicios-funerarios.svg" class="img-propuesta-ico-table ml-2">
@@ -58,26 +58,26 @@
                   <div class="row vCenter mt-1 text-center bb-1">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Repatriación a México</p>
+                      <p class="fontResponsiveTableText">Repatriación<br>A México</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Servicio funerario</p>
+                      <p class="fontResponsiveTableText">Servicio<br>Funerario</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Seguro de vida</p>
+                      <p class="fontResponsiveTableText">Seguro<br>De Vida</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Educación financiera</p>
+                      <p class="fontResponsiveTableText">Educación<br>Financiera</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Envío de dinero</p>
+                      <p class="fontResponsiveTableText">Envío<br>De Dinero</p>
                     </div>
                   </div>
                   <div clas="clear15">&nbsp;</div>
                   <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
 
-                    <div class="col-2 center-flex">
-                      {{itemB.tipobeneficiario}}
+                    <div class="col-2">
+                      <div class="tipobeneficiario">{{itemB.tipobeneficiario}}</div>
                     </div>
                     <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
@@ -220,10 +220,13 @@
                   <div class="mt-2 row">
                     <div class="clear15">&nbsp;</div>
                     <div class="col-12 text-center">
-                      <img src="../../../assets/img/icons/simple.svg" class="img-propuesta">
-                      <span> Beneficios a la medida</span>
+                      <div class="img-titulo-plan-beneficios"><img src="../../../assets/img/icons/alamedida.svg"></div>
+                      <div class="titulo-plan-beneficios"> Beneficios a la medida
+                        <br> <span class="condiciones">Disponibles después de contratar</span>
+                      </div>
+
                       <div class="clear15"></div>
-                      <p class="fontResponsiveSliderNotes">Disponibles después de contratar</p>
+
                     </div>
                   </div>
                 </div>
@@ -239,12 +242,12 @@
                       <div class="row">
                         <div class="col-6 text-center mb-1">
                           <p class="fontResponsiveSliderNotes">Mensual</p>
-                          <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
+                          <div class="boton-mensual" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
                           <p class="fontResponsiveSliderNotes">*1er. Pago de US ${{(+precioMensual) + (5)}}</p>
                         </div>
                         <div class="col-6 text-center mb-1">
                           <p class=" fontResponsiveSliderNotes">Anual</p>
-                          <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
+                          <div class="boton-anual" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
                           <p class="fontResponsiveSliderNotes">*1er. Año de US ${{(+precioAnual) + (5)}}</p>
                         </div>
                       </div>

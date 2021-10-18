@@ -4,7 +4,7 @@
 
 /* Estilos Gris */
 body {
-  font-family: "Noto Sans JP", sans-serif !important;
+  font-family: "Montserrat", sans-serif;
   text-align: center !important;
   margin: 0 auto;
 }
@@ -12,15 +12,78 @@ body {
 
 
 .btn {
-  font-family: "Noto Sans JP", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 1rem .5rem;
 }
+.boton-mensual, .boton-anual, .boton-incompleto  {
+ border: 0px solid #6ab336 !important;
+max-height: 3em !important;
+width: 7em !important;
+line-height: 1em !important;
+padding: 1em !important;
+border-radius: 10px;
+float: center;
+margin: 0 auto !important;
+margin-top: .5em !important;
+margin-bottom: .5em !important;
+font-family: "Montserrat", sans-serif !important;
+font-size: 1.5em;
+color: #fff;
+font-weight: 800;
+}
+.boton-mensual{
+
+  background-color: #dd0063;
+}
+.boton-anual{
+
+  background-color: #77399d;
+}
+
+
+.boton-incompleto, .boton-editar  {
+  border: 0px solid #6ab336 !important;
+ min-height: 5em !important;
+ width: 10em !important;
+ line-height: 1em !important;
+ padding: 1em .5em !important;
+ border-radius: 12px;
+ float: center;
+ margin: 0 .5em 0 0 !important;
+ font-family: "Montserrat", sans-serif !important;
+ font-size: .7em;
+ color: #fff;
+ font-weight: 500;
+ text-transform: uppercase;
+
+ }
+
+
+.boton-incompleto  {
+  background-color: #f77700;
+}
+
+.boton-editar  {
+  background-color: #6ab336;
+}
+
+.card {
+  background-color: #fff;
+  border: 0px solid #000;
+  min-width: 25.5em !important;
+}
+
+.editar-datos {
+
+ color: #000 !important;
+
+}
 
 .subtitulo-beneficios {
-  font-family: "Noto Sans JP", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
 color: #454f63;
   font-weight: 600;
   font-size: 1.2rem;
@@ -45,7 +108,7 @@ color: #454f63;
   color: #454f63;
 }
 p {
-  font-family: "Noto Sans JP", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   color: #353a50 !important;
   /* font-size: 15px;
 font-weight: 500;
@@ -494,6 +557,9 @@ h2 {
   align-items: center;
   justify-items: center;
   justify-content: center;
+  margin: 0 auto;
+  border: 0px solid #000;
+  padding: 0px;
 }
 
 .center-no-flex {
@@ -507,8 +573,20 @@ h2 {
 }
 
 .img-propuesta-ico-table {
-  width: 50px;
+  width: 60px;
+  margin: 0 5px 0 0;
 }
+
+.tipobeneficiario  {
+ text-transform: uppercase;
+ margin-left: 1em;
+ text-align: left !important;
+ border: 0px solid #000;
+ font-size: .9em;
+
+}
+
+
 
 .mat-horizontal-stepper-header-container {
   display: none !important;
@@ -517,6 +595,7 @@ h2 {
 .input-form-datos {
   box-shadow: 0px 0px 5px 0 rgb(2 2 2 / 7%);
   border: 0px;
+
 }
 
 .mt-4-s {
@@ -633,8 +712,10 @@ body {
 
 
   .img-propuesta-ico-table {
-    width: 35px;
+    width: 6em;
   }
+
+
 
   .header-step-profesion {
     margin-top: 0px !important;
@@ -663,7 +744,7 @@ body {
   }
 
   .img-propuesta-ico-table {
-    width: 30px;
+    width: 6em;
   }
 
   .header {
@@ -691,6 +772,28 @@ body {
   .header {
     display: none;
   }
+
+  .img-titulo-plan-beneficios  {
+
+    float: left;
+    border: 0px solid #369;
+    width: 20%;
+    margin-left: 3em !important;
+  }
+  .img-titulo-plan-beneficios img{
+    width: 6em;
+
+  }
+
+  .titulo-plan-beneficios {
+    margin: 1.5em 0 0 0;
+    font-weight: 600;
+    float: left;
+    border: 0px solid #000;
+    width: 60%;
+
+  }
+
 }
 @media screen and (min-width: 480px) and (max-width: 549px) {
   .img-familia {
@@ -731,7 +834,7 @@ body {
     /* padding: 0px 10px; */
   }
 
-  .img-propuesta {
+ .img-propuesta {
     width: 20px;
   }
 
@@ -746,7 +849,7 @@ body {
     height: auto;
   }
 
-  .img-propuesta {
+ .img-propuesta  {
     width: 20px;
   }
 }
@@ -839,6 +942,8 @@ body {
   }
 
 
+
+
 }
 
 
@@ -870,6 +975,13 @@ body {
     font-size: 1em;
     margin: 0 auto !important;
 
+  }
+
+  .card {
+    background-color: #fff;
+    border: 3px solid #fff;
+    min-width: 17em !important;
+    padding: .2em !important;
   }
 
   }
@@ -915,7 +1027,7 @@ body {
     /* padding: 0px 10px; */
   }
 
-  .img-propuesta {
+.img-propuesta {
     width: 20px;
 
   }
@@ -931,6 +1043,35 @@ body {
 
 
 }
+.img-titulo-plan-beneficios  {
+
+  float: left;
+  border: 0px solid #000;
+  width: 20%;
+  margin-left: 8em;
+}
+.img-titulo-plan-beneficios img{
+  width: 6em;
+
+}
+
+.titulo-plan-beneficios {
+  margin: 1.5em 0 0 0;
+  font-weight: 600;
+  float: left;
+  border: 0px solid #000;
+  width: 40%;
+
+}
+
+.card {
+  background-color: #fff;
+  border: 3px solid #fff;
+  min-width: 20em !important;
+
+}
+
+
 }
 
 
@@ -978,6 +1119,26 @@ body {
     width: 20px;
   }
 
+  .img-titulo-plan-beneficios  {
+
+    float: left;
+    border: 0px solid #000;
+    width: 20%;
+    margin-left: 8em;
+  }
+  .img-titulo-plan-beneficios img{
+    width: 6em;
+
+  }
+
+  .titulo-plan-beneficios {
+    margin: 1.5em 0 0 0;
+    font-weight: 600;
+    float: left;
+    border: 0px solid #000;
+    width: 40%;
+
+  }
 
 
 

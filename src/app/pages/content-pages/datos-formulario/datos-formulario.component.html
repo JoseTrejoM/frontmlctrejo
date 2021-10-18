@@ -57,18 +57,18 @@
                     <div class="card-body">
                       <div class="row vCenter">
                         <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
+                          <span class="tipobeneficiario">{{item.tipoBeneficiario}}</span>
                         </div>
                         <div class="col-5 text-center" *ngIf="item.completo">
                           <button class="btn btn-outline-success">¡Listo!</button>
                         </div>
                         <div class="col-5 text-center" *ngIf="!item.completo">
-                          <button class="btn btn-outline-danger">Incompleto</button>
+                          <button class="boton-incompleto">Incompleto</button>
                         </div>
                         <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
                         </div>
                       </div>
                     </div>
@@ -249,7 +249,7 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" formControlName="apaterno" placeholder="Apellido paterno"
+          <input type="text" class="form-control input-form-datos " formControlName="apaterno" placeholder="Apellido paterno"
           [ngClass]="{ 'is-invalid': submitted && f.apaterno.errors }">
         </div>
       </div>
