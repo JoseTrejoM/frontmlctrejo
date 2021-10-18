@@ -60,7 +60,7 @@
                           <span class="tipobeneficiario">{{item.tipoBeneficiario}}</span>
                         </div>
                         <div class="col-5 text-center" *ngIf="item.completo">
-                          <button class="btn btn-outline-success">¡Listo!</button>
+                          <button class="boton-listo">¡Listo!</button>
                         </div>
                         <div class="col-5 text-center" *ngIf="!item.completo">
                           <button class="boton-incompleto">Incompleto</button>
@@ -86,8 +86,8 @@
             <mat-step label="">
               <div class="row d-flex-center mt-2">
                 <div class="col-md-6 col-lg-4 col-sm-12 mb-2" *ngFor="let item of arrBeneficiarios">
-                  <div *ngIf="item.tipoBeneficiarioId == 15">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 15" class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -98,8 +98,8 @@
                     <p><b>País residencia:</b> {{item.paisTrabajo}}</p>
                     <p><b>País residencia:</b> {{item.estadoTrabajo}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId == 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -108,8 +108,8 @@
                     <p><b>País origen:</b> {{item.paisOrigen}}</p>
                     <p><b>Estado origen:</b> {{item.estadoOrigen}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId > 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId > 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -129,24 +129,24 @@
             <mat-step label="">
               <div class="row d-flex-center mt-2 p-1">
                 <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-2" ngClass.sm="mb-4">
-                  <h4 class="mb-1 text-center"><b>Beneficios del plan</b></h4>
+                  <h4 class="mb-1 text-center"><b>BENEFICIOS DEL PLAN</b></h4>
                   <!-- <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p> -->
                   <div class="row mt-2 vCenter text-center rowTable">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Repatriacion.png" class="img-propuesta-ico-table">
+                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Serv Funerario.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/servicios-funerarios.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Seguro Vida.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/seguro-vida.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Educ Financiera.png" class="img-propuesta-ico-table ml-2 ">
+                      <img src="../../../assets/img/icons/educacion-financiera.svg" class="img-propuesta-ico-table ml-2 ">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Envio Dinero.png" class="img-propuesta-ico-table ml-2 mb-1">
+                      <img src="../../../assets/img/icons/envio-dinero.svg" class="img-propuesta-ico-table ml-2 mb-1">
                     </div>
                   </div>
                   <div class="row vCenter mt-1 text-center bb-1">
@@ -193,11 +193,11 @@
 
                 </div>
                 <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
-                  <h4 class="mb-1"><b>Plan de previsión</b></h4>
-                  <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
-                  <p><b>Forma de pago: </b> {{plan['formaPago']}}</p>
-                  <p><b>Primer pago: </b> US ${{costoInicial}}</p>
-                  <p><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
+
+                  <p class="mb-1"> <b>Plan: </b> {{plan['descripcionPlan']}}</p>
+                  <p class="mb-1"><b>Forma de pago: </b> {{plan['formaPago']}}</p>
+                  <p class="mb-1"><b>Primer pago: </b> US ${{costoInicial}}</p>
+                  <p class="mb-1"><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
                 </div>
               </div>
               <div class="row mt-2">
