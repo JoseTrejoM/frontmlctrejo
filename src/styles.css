@@ -44,7 +44,7 @@ font-weight: 800;
 }
 
 
-.boton-incompleto, .boton-editar  {
+.boton-incompleto, .boton-editar, .boton-listo {
   border: 0px solid #6ab336 !important;
  min-height: 5em !important;
  width: 10em !important;
@@ -66,10 +66,26 @@ font-weight: 800;
   background-color: #f77700;
 }
 
+.boton-listo  {
+  background-color: #dd0063;
+}
+
 .boton-editar  {
   background-color: #6ab336;
 }
 
+.datos-detalle-confirmar
+{
+  text-align: left !important;
+  border: 0px solid #000;
+  margin: 0 1em;
+  vertical-align: top !important;
+  color: #454f63;
+
+  min-height: 12em !important;
+
+
+}
 .card {
   background-color: #fff;
   border: 0px solid #000;
