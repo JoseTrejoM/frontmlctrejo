@@ -419,7 +419,7 @@ export class BeneficiosBaseComponent {
           }
 
           if (element.beneficioid == 3) {
-            if (this.edad >= 60) {
+            if (this.edad >= 50) {
               element['beneficiosbeneficiarios'].forEach(bb => {
                 bb.esseleccionado = false;
                 bb.imagendefault = bb.imageninactivo
@@ -446,11 +446,11 @@ export class BeneficiosBaseComponent {
       if (data.flag == 1) {
         this.beneficiariosSeleccionados();
 
-        if (data.estatuspropuesta == 'Cuestionario' && this.edad < 60) {
+        if (data.estatuspropuesta == 'Cuestionario' && this.edad < 50) {
           this.router.navigate(["./pages/formulario-eligibilidad"]);
-        } else if (data.estatuspropuesta == 'Propuesta Aceptada' && this.edad < 60) {
+        } else if (data.estatuspropuesta == 'Propuesta Aceptada' && this.edad < 50) {
           this.router.navigate(["./pages/propuesta"]);
-        } else if (this.edad >= 60) {
+        } else if (this.edad >= 50) {
           this.router.navigate(["./pages/propuesta"]);
         }
 
@@ -545,7 +545,7 @@ export class BeneficiosBaseComponent {
   }
 
   backStep(stepper) {
-    if (this.edad >= 60 && this.index == 5) {
+    if (this.edad >= 50 && this.index == 5) {
       stepper.previous();
       stepper.previous();
       this.index--;
@@ -600,7 +600,7 @@ export class BeneficiosBaseComponent {
       localStorage.setItem('precioMensual', this.precioMensual.toString());
       localStorage.setItem('descripcionPlan', this.descripcionPlan);
 
-      if (this.edad >= 60) {
+      if (this.edad >= 50) {
         // Guardo beneficios pmayor de 60 y direcciono a la propuesta
 
         if (parseInt(localStorage.getItem('propuestaId')) == 0) {
@@ -659,7 +659,7 @@ export class BeneficiosBaseComponent {
       }
     }
     // console.log(this.beneficios);
-    if (this.edad >= 60 && this.index == 3) {
+    if (this.edad >= 50 && this.index == 3) {
       stepper.next();
       stepper.next();
       this.index++;

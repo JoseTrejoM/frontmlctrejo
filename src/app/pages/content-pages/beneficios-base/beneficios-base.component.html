@@ -35,7 +35,7 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 2">
       <h2><b>Repatriación a México</b></h2>
-      <h3 class="mb-0"><b>((por fallecimiento en EUA o Canadá)</b></h3>
+      <h3 class="mb-0"><b>(por fallecimiento en EUA o Canadá)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
@@ -53,7 +53,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 5">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2><b>Educación financiera</b></h2>
-      <h3 class="mb-0"><b>((para el manejo del dinero)</b></h3>
+      <h3 class="mb-0"><b>(para el manejo del dinero)</b></h3>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 6">
@@ -78,7 +78,7 @@
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
                   <h2 class="mb-1">Bienvenido a México Lindo Contigo.</h2>
-                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia</p>
+                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
                   <div class="row text-center">
@@ -113,10 +113,10 @@
                     <div class="col-lg-8 offset-lg-2 mt-4">
                         <p class="fontResponsiveSlider">Recomendamos que el titular de tu plan sea la persona de tu familia que vive o trabaja temporalmente en Estados Unidos o Canadá. <sup>(1)</sup></p>
                         <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
-                          <a href="https://contigo.digital" target="_blank">contigo.digital</a> para conocernos. <sup>(2)</sup></p>
+                          <a href="https://www.contigo.digital" target="_blank">www.contigo.digital</a> para conocernos. <sup>(2)</sup></p>
                         <i class="fas fa-share-alt fa-2x text-pink  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="fontResponsiveSliderNotes"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP</p>
+                        <p class="fontResponsiveSliderNotes"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                         <p class="fontResponsiveSliderNotes"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
                     </div>
                   </div>
@@ -160,7 +160,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
@@ -217,9 +217,7 @@
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
                       <p class="fontResponsiveSliderNotes lh-13">
-                        * Acepto que si el CURP que registré es incorrecto,
-                    los beneficios no podrán ser aprovechados cuando los
-                    requiera.
+                        Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
                         s1Submitted &&
@@ -314,7 +312,7 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
+                <!-- <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a> -->
                 <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
@@ -452,7 +450,9 @@
     </div>
   </div>
 </div>
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true" ></ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" [fullScreen] = "true"
+template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />"></ngx-spinner> -->
 <p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
             [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
             <div class="text-center">
