@@ -381,9 +381,14 @@ body {
 }
 
 .btn-selected {
-  background-color: #f7a120;
-  border-color: #f7a120;
+  background-color: #6ab336;
+  border:0;
   color: #fff !important;
+
+  min-height: 5rem;
+  padding: 1.2rem 1rem !important;
+  max-width: 16rem !important;
+  margin: 0;
 }
 
 .btn {
@@ -599,7 +604,6 @@ h2 {
  text-align: left !important;
  border: 0px solid #000;
  font-size: .9em;
-
 }
 
 

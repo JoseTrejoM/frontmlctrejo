@@ -169,24 +169,25 @@
                   </div>
                   <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
 
-                    <div class="col-2 center-flex">
-                      {{itemB.tipobeneficiario}}
+                    <div class="col-2 text-left">
+                      <span class="tipobeneficiario">{{itemB.tipobeneficiario}} </span>
+
                     </div>
                     <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 2">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 3">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 4">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 5">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                     </ng-container>
                   </div>
