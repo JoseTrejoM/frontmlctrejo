@@ -167,7 +167,7 @@
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP"
                     (click)="inputCurp(chkMayor, chkMenor)"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
@@ -251,7 +251,7 @@
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
                         'is-valid': s1Submitted && !s1.curp.invalid
