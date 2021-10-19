@@ -103,6 +103,7 @@ export class FormularioEligibilidadComponent implements OnInit {
           const exists = this.cuestionarioLocal.find(b => b.preguntaid == a.preguntaId);
 
           if (exists) {
+            exists.respuestaid ? a.selected = true : a.selected = false;
             a.continuar = true;
             a.respuesta = exists.respuesta;
             a.respuestaId = exists.respuestaid;

@@ -480,6 +480,7 @@ export class BeneficiosBaseComponent {
       console.log("Plan:", this.arrPlan);
 
       this.precioMensual = this.arrPlan[0].precioMensual;
+      this.tipoplanId = this.arrPlan[0].tipoplanId;
     });
   }
 

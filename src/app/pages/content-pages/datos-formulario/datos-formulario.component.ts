@@ -60,6 +60,7 @@ export class DatosFormularioComponent implements OnInit {
   costoInicial = 0;
   selectedCountry: Country;
   sexo = 'Sexo'
+  frecuenciaPagoId = 0;
 
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
 
@@ -244,6 +245,7 @@ export class DatosFormularioComponent implements OnInit {
       console.log(data);
       this.plan = data.plan;
       this.costoInicial = this.plan['costo'] + 5;
+      this.frecuenciaPagoId = this.plan['clFrecuenciaPagoId'];
     });
   }
 
