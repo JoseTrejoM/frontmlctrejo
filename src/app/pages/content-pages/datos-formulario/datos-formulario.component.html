@@ -104,8 +104,8 @@
                     <p><b>Email:</b> {{item.correo}}</p>
                     <p><b>Fecha de Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
                     <p><b>Sexo:</b> {{item.sexo}}</p>
-                    <p *ngIf="cmbEstadoPareja != 500"><b>País de residencia:</b> {{item.paisOrigen}}</p>
-                    <p *ngIf="cmbEstadoPareja != 500"><b>Estado:</b> {{item.estadoOrigen}}</p>
+                    <p *ngIf="cmbEstadoPareja != 33"><b>País de residencia:</b> {{item.paisOrigen}}</p>
+                    <p *ngIf="cmbEstadoPareja != 33"><b>Estado:</b> {{item.estadoOrigen}}</p>
                   </div>
                   <div *ngIf="item.tipoBeneficiarioId > 16">
                     <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
@@ -402,7 +402,7 @@
           <select cmbEstadoPareja class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
           [ngClass]="{ 'is-invalid': submittedP && fP.estadoP.value == '0' }">
             <option value="0" disabled>Estado donde vives</option>
-            <option value="500">No aplica</option>
+            <option value="33">No aplica</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>
