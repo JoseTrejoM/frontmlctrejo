@@ -59,10 +59,10 @@
                           <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
                         </div>
                         <div class="col-4 col-sm-3 col-md-5 text-center" *ngIf="item.completo">
-                          <button class="btn btn-outline-success">¡Listo!</button>
+                          <button class="btn btn-outline-success btn-listo">¡Listo!</button>
                         </div>
                         <div class="col-4 col-sm-3 col-md-5 text-center" *ngIf="!item.completo">
-                          <button class="btn btn-outline-danger">Incompleto</button>
+                          <button class="btn btn-outline-danger btn-incompleto">Incompleto</button>
                         </div>
                         <div class="col-5 col-sm-4 col-md-4 text-center">
                           <button class="btn btn-pink" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>

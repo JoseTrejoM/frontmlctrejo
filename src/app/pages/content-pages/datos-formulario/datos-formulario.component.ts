@@ -460,6 +460,7 @@ export class DatosFormularioComponent implements OnInit {
     item.personaId ? this.personaId = item.personaId : 0;
 
     if (item.tipoBeneficiarioId == 15) {
+      this.getEstadosEU(item.paisTrabajoId);
       this.frm.patchValue(
         {
           'nombre': item.nombre ? item.nombre : '',
@@ -473,7 +474,6 @@ export class DatosFormularioComponent implements OnInit {
           'estadoEU': item.estadoTrabajoId ? item.estadoTrabajoId : '0',
           'pais': item.paisTrabajoId ? item.paisTrabajoId : '0'
         });
-        this.getEstadosEU(item.paisTrabajoId);
 
     } else if (item.tipoBeneficiarioId == 16) {
       this.frmP.patchValue(
