@@ -194,9 +194,9 @@
                 </div>
                 <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
                   <!-- <h4 class="mb-1"><b>Plan de previsión</b></h4> -->
-                  <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
-                  <p><b>Forma de pago: </b> {{plan['formaPago']}}</p>
-                  <p><b>Primer pago: </b> US ${{costoInicial}}</p>
+                  <p class="mb-1"><b>Plan: </b> {{plan['descripcionPlan']}}</p>
+                  <p class="mb-1"><b>Forma de pago: </b> {{plan['formaPago']}}</p>
+                  <p class="mb-1"><b>Primer pago: </b> US ${{costoInicial}}</p>
                   <p *ngIf="frecuenciaPagoId != 64"><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
                 </div>
               </div>
