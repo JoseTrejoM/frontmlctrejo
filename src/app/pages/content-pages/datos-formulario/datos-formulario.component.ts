@@ -10,6 +10,10 @@ import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+interface Country {
+  name: string,
+  code: string
+}
 
 @Component({
   selector: 'app-datos-formulario',
@@ -54,14 +58,16 @@ export class DatosFormularioComponent implements OnInit {
   personaId = 0;
   plan =[];
   costoInicial = 0;
-
+  selectedCountry: Country;
   sexo = 'Sexo'
+  frecuenciaPagoId = 0;
 
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
 
   config = {
     animated: true
   };
+  countries: { name: string; code: string; }[];
 
   constructor(
     private modalService: NgbModal,
@@ -85,6 +91,12 @@ export class DatosFormularioComponent implements OnInit {
         this.getPropuesta();
       });
 
+      this.countries = [
+        {name: 'USA +1', code: '1'},
+        {name: 'Canadá +1', code: '1'},
+        {name: 'México +52', code: '52'},
+    ];
+
   }
 
   ngOnInit(): void {
@@ -92,6 +104,7 @@ export class DatosFormularioComponent implements OnInit {
       nombre: ["", Validators.required],
       apaterno: ["", Validators.required],
       amaterno: ["", Validators.required],
+      // lada: ["0", Validators.required],
       telefono: ["",  [
         Validators.required,
         Validators.pattern("^[0-9]*$"),
@@ -110,6 +123,7 @@ export class DatosFormularioComponent implements OnInit {
       nombreP: ["", Validators.required],
       apaternoP: ["", Validators.required],
       amaternoP: ["", Validators.required],
+      // ladaP: ["0", Validators.required],
       telefonoP: ["",  [
         Validators.required,
         Validators.pattern("^[0-9]*$"),
@@ -126,13 +140,13 @@ export class DatosFormularioComponent implements OnInit {
       nombre2: ["", Validators.required],
       apaterno2: ["", Validators.required],
       amaterno2: ["", Validators.required],
+      // lada2: ["0", Validators.required],
       telefono2: ["",  [
-        Validators.required,
         Validators.pattern("^[0-9]*$"),
         Validators.minLength(10),
         Validators.maxLength(10),
       ],],
-      correo2: ["", Validators.required],
+      correo2: [""],
       fnacimiento2: ["", Validators.required],
       sexo2: ["0", Validators.required],
     });
@@ -231,6 +245,7 @@ export class DatosFormularioComponent implements OnInit {
       console.log(data);
       this.plan = data.plan;
       this.costoInicial = this.plan['costo'] + 5;
+      this.frecuenciaPagoId = this.plan['clFrecuenciaPagoId'];
     });
   }
 
