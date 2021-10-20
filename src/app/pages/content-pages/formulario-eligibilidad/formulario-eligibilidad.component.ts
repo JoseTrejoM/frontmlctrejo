@@ -92,6 +92,7 @@ export class FormularioEligibilidadComponent implements OnInit {
               selected: false,
               respuesta: '',
               respuestaId: 0,
+              continua: false
             }
           )
         });
@@ -102,7 +103,8 @@ export class FormularioEligibilidadComponent implements OnInit {
           const exists = this.cuestionarioLocal.find(b => b.preguntaid == a.preguntaId);
 
           if (exists) {
-            a.selected = true;
+            exists.respuestaid ? a.selected = true : a.selected = false;
+            a.continuar = true;
             a.respuesta = exists.respuesta;
             a.respuestaId = exists.respuestaid;
           }
@@ -114,7 +116,7 @@ export class FormularioEligibilidadComponent implements OnInit {
         this.spinner.hide();
 
         if (localStorage.getItem('sexo') == 'H') {
-          this.cuestionario[0].respuesta = 'No';
+          this.cuestionario[0].respuesta = 'no';
         }
         console.log(this.cuestionario);
         this.ref.detectChanges();
@@ -125,15 +127,27 @@ export class FormularioEligibilidadComponent implements OnInit {
 
   seleccionarRespuesta(index, value) {
     if (this.cuestionario[index].respuesta == 'si') {
+
     } else {
       this.cuestionario[index].respuesta = value;
     }
+    if (value == 'si') {
+      this.cuestionario[index].continua = false
+    }
+    // value == 'si' ? this.cuestionario[index].continua = false : this.cuestionario[index].continua = true;
   }
 
   changeStep(stepper, index, value, event){
     console.log(value);
     let arrSend = [];
     let arrSendPropuesta = [];
+
+    if (this.cuestionario[index].respuesta == 'si') {
+      let arrBeneficios = JSON.parse(localStorage.getItem('beneficios'));
+      arrBeneficios = arrBeneficios.filter(e => e.beneficioId != 3);
+      localStorage.setItem('beneficios', JSON.stringify(arrBeneficios));
+    }
+
     if (index == this.cuestionario.length - 1) {
       this.respuestas=[];
       event.target.disabled = true;
@@ -183,16 +197,16 @@ export class FormularioEligibilidadComponent implements OnInit {
 
             if (data.plan && data.propuesta) {
 
-              localStorage.setItem('tipoplanId', data.plan['tipoplanId']);
-              localStorage.setItem('precioAnual', data.plan['precioAnual']);
-              localStorage.setItem('precioMensual', data.plan['precioMensual']);
+              // localStorage.setItem('tipoplanId', data.plan['tipoplanId']);
+              // localStorage.setItem('precioAnual', data.plan['precioAnual']);
+              // localStorage.setItem('precioMensual', data.plan['precioMensual']);
+              // localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
               localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
-              localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
 
               arrSendPropuesta.push({
                 "propuestaId": data.propuesta['propuestaId'],
                 "frecuenciaPagoId": 65,
-                "tipoPlanId": data.plan['tipoplanId'],
+                "tipoPlanId": localStorage.getItem('tipoplanId'),
                 "formaPagoId": 20
               });
 

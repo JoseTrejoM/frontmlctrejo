@@ -282,7 +282,7 @@
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
                         'is-valid': s1Submitted && !s1.curp.invalid
@@ -327,7 +327,7 @@
                     </mat-checkbox>
 
                   </p>
-                  <button (click) = "changeStepCurp(stepper, 0)" class="btn btn-blue btn-block mt-2"
+                  <button (click) = "changeStepCurpContinuar(stepper, 1)" class="btn btn-blue btn-block mt-2"
                   *ngIf="this.firstFormGroup.valid">
                     Continuar
                   </button>
@@ -838,7 +838,9 @@
     </div>
   </div>
 </div>
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true" ></ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" [fullScreen] = "true"
+template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />"></ngx-spinner> -->
 <p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
             [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
             <div class="text-center">
