@@ -27,7 +27,7 @@
   <div class="row d-flex-center mt-3" *ngIf="index > 1">
     <div class="col-12 text-center p-0">
       <div class="titulo-beneficios-base">
-         Beneficios base
+         Beneficios Base
        </div>
     </div>
   </div>
@@ -45,15 +45,15 @@
       <hr class="separador mt-4 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 2">
-      <p class="subtitulo-beneficios">Servicio Funerario</p>
-      <p class="subtitulo-beneficios">(Residentes en México)</p>
+      <p class="subtitulo-beneficios">Repatriación a México</p>
+      <p class="subtitulo-beneficios">(por fallecimiento en EUA o Canadá)</p>
 
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <p class="subtitulo-beneficios">Repatriación a México</p>
-      <p class="subtitulo-beneficios">(Por fallecimiento en EUA)</p>
+      <p class="subtitulo-beneficios">Servicio funerario</p>
+      <p class="subtitulo-beneficios">(en México)</p>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 4">
@@ -66,14 +66,14 @@
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 5">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <p class="subtitulo-beneficios">Educación financiera</p>
-      <p class="subtitulo-beneficios">(Administración del dinero)</p>
+      <p class="subtitulo-beneficios">(para el manejo del dinero)</p>
 
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 6">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
       <p class="subtitulo-beneficios">Envío de dinero</p>
-      <p class="subtitulo-beneficios">(Cuenta digital en México)</p>
+      <p class="subtitulo-beneficios">(con cuenta digital en México)</p>
 
       <hr class="separador mt-1 mb-1" />
     </div>
@@ -94,7 +94,7 @@
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
                   <div class="titular-bienvenido">Bienvenido a México Lindo Contigo.</div>
-                  <p class="text-center mt-1">Somos la central digital de soluciones para el ciudado de tu dinero y la salud de tu familia.</p>
+                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
                   <div class="row iconos-home">
@@ -125,16 +125,14 @@
                 <div class="picsum-img-wrapper" style="height: 410px">
                   <div class="row text-center">
                     <div class="col-lg-8 offset-lg-2 mt-4">
-                        <p class="fontResponsiveSlider">Recomendamos que el titular de tu Plan sea la persona de tu familia
-                        <br>que vive o trabaje temporalmente en Estados Unidos o Canadá.</p>
+                        <p class="fontResponsiveSlider">Recomendamos que el titular de tu plan sea la persona de tu familia que vive o trabaja temporalmente en Estados Unidos o Canadá. <sup>(1)</sup></p>
                         <div class="clear10"></div>
                         <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
-                          <br>
-                          <a href="https://mexicolindocontigo.com" target="_blank">mexicolindocontigo.com</a> para conocernos</p>
+                          <a href="https://www.contigo.digital" target="_blank">www.contigo.digital</a> para conocernos. <sup>(2)</sup></p>
                         <i class="fas fa-share-alt fa-2x icono-compartir  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="condiciones">* El servicio se contrata en México y el titular debe tener CURP.
-                        <br>* Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
+                        <p class="condiciones"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</p>
+                        <p class="fontResponsiveSliderNotes"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
                     </div>
                   </div>
                 </div>
@@ -150,12 +148,12 @@
                         <div class="dos-col">
                         <div class="col-uno">
                           <img class="img-thumbnail" src="../../../../assets/img/elements/simple.svg">
-                          <p class="fontResponsive m-0"><b>Beneficios base</b></p>
+                          <p class="fontResponsive m-0"><b>Beneficios Base</b></p>
                           <p class="fontResponsive" style="text-transform: none !important;">(incluidos en el costo)</p>
                         </div>
                         <div class="col-dos">
                           <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.svg">
-                          <p class="fontResponsive m-0"><b>Beneficios a la medida</b></p>
+                          <p class="fontResponsive m-0"><b>Beneficios a la Medida</b></p>
                           <p class="fontResponsive" style="text-transform: none !important;">(con costo adicional)</p>
                         </div>
                         <p class="comencemos">¿Listo? ¡Comencemos!</p>
@@ -186,7 +184,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="texto-exclusivo">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
@@ -246,9 +244,7 @@
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
                       <p class="condiciones lh-13">
-                        * Acepto que si el CURP que registré es incorrecto,
-                    los beneficios no podrán ser aprovechados cuando los
-                    requiera.
+                        Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
                         s1Submitted &&
@@ -275,7 +271,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12 text-center">
-                  <p class="texto-exclusivo">Servicio exclusivo para mexicanos residentes en USA ya sea de forma permanente o temporal.</p>
+                  <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
@@ -313,9 +309,7 @@
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
                       <p class="condiciones lh-13">
-                        * Acepto que si el CURP que registré es incorrecto,
-                    los beneficios no podrán ser aprovechados cuando los
-                    requiera.
+                        Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
                         s1Submitted &&
@@ -345,7 +339,7 @@
           <form>
             <div class="row d-flex-center">
               <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
+                 <!--<a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a> -->
                 <div class="descripcion-beneficio"> {{itemB.descripcionbeneficio}} </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
@@ -363,7 +357,7 @@
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
                         ></a> -->
 
-                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
                           item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                           (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
@@ -371,7 +365,7 @@
                           >
                         </a>
 
-                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           >
                         </a>
 
@@ -406,7 +400,7 @@
                         >
                       </a> -->
 
-                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         >
                       </a>
 
@@ -426,7 +420,7 @@
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
                         ></a> -->
 
-                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
                           item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                           (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
@@ -434,7 +428,7 @@
                           >
                         </a>
 
-                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           >
                         </a>
 
@@ -478,362 +472,6 @@
           </form>
         </mat-step>
 
-        <!--Step Repatriación-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién  podría requerir este beneficio? <br>
-                  Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios mb-1">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <button (click) = "changeStep(stepper, 1)"  class="btn btn-pink btn-block mt-1">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Servicio funerario-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">¿ tu familia podría requerir este beneficio? <br>
-                  Selecciona a las personas que quieres incluir en el Plan. Puedes incluir personas que viven en México</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 15 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 2)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Seguro de vida-->
-        <!-- <mat-step label="">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">Incluído para el titular.</p>
-                <p class=" fontResponsiveSliderNotes lh-13">Este beneficio está sujeto a eligibilidad.</p>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center mt-3">
-                <div class="row justify-content-center">
-                  <div class="col-3 mb-1 text-left">
-                    <a><img src="../../../../assets/img/icons/Titular.png" class="img-familia"></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <div class="card">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 4)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Educación financiera-->
-        <!-- <mat-step label=" ">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <p class=" fontResponsiveSliderNotes lh-13">Este beneficio está incluído para todos los miembros</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && countHijo == 3"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button (click) = "changeStep(stepper, 4)" class="btn btn-pink btn-block">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-step> -->
-        <!--Step Envío de dinero-->
-        <!-- <mat-step label=" ">
-          <form>
-            <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-                <a (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a>
-                <p class=" fontResponsiveSliderNotes lh-13">¿Quién de tu familia recibe el dinero que envías de EUA?
-                Selecciona a una persona para otorgarle este beneficio. Debe vivir en México.</p>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index">
-                    <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 15 || item.tipobeneficiarioid == 16"
-                    (click)="item.idMiembro != 3 ? changeImg(i, item.beneficio, item.tipobeneficiarioid) : ''">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgPrendido : item.img = item.imgApagado)"
-                        (mouseout)="item.idMiembro != 3 && (item.selected == 0  ? item.img = item.imgApagado : item.img = item.imgPrendido)"
-                        ></a>
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="row justify-content-center" *ngIf="familia.length > 0">
-                  <ng-container *ngFor="let item of familia; let i=index; trackBy: trackByFn;">
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="item.tipobeneficiarioid == 19 && tipobeneficiarioid == 19"
-                    (click)="changeImg(i, item.beneficio, item.tipobeneficiarioid)">
-                      <a><img [src]="item.img" class="img-familia"
-                        (mouseover)="item.selected == 0 ? item.img = item.imgPrendido : item.selected == 1 ? item.img = item.imgApagado : ''"
-                        (mouseout)="item.selected == 0 ? item.img = item.imgApagado : item.img = item.imgPrendido"
-                        ></a>
-                    </div>
-                  </ng-container>
-                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3">
-                      <a><img src="../../../../assets/img/icons/Hijo-1.png" class="img-familia"
-                        ></a>
-                    </div>
-                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3">
-
-                    <div class="form-check-inline">
-                      <button class="btn btn-blue p-1" (click)="minus()"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
-                      <button class="btn btn-blue p-1" (click)="plus()"><i class="fa fa-plus"></i></button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row mt-1">
-                  <div class="col-12">
-                    <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(1) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                <div class="card cardBeneficios">
-                  <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
-                    <h1 class="mb-0"><b>US $0.00</b></h1>
-                  </div>
-                </div>
-                <p class=" fontResponsiveSliderNotes text-left lh-13">
-                  * Al primer pago se le agregará un costo administrativo de $5.00 USD por única vez.
-                </p>
-                <button class="btn btn-pink btn-block" [routerLink] = "['/pages/formulario-eligibilidad']">
-                  Continuar
-                </button>
-              </div>
-            </div>
-          </form>
-          <p-dialog header="Header" [(visible)]="displayModalResponsive" [modal]="true" [breakpoints]="{'960px': '75vw'}"
-            [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" header="">
-            <div class="text-center">
-
-              <h1 class="text-white">¿Quién recibe?</h1>
-              <hr class="separador">
-              <p class="text-white">A esa persona le regalamos una cuenta digital</p>
-              <p class="text-white">con la terjeta de débito para que reciba sus envíos.</p>
-              <p class="text-white">Debe ser mayor de 18 años</p>
-            </div>
-          </p-dialog>
-        </mat-step> -->
       </mat-stepper>
     </div>
   </div>
