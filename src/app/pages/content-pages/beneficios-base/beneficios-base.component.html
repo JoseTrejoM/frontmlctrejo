@@ -221,19 +221,19 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1" style="background-color: #F7A120; color:#fff;"
                       (change) = "validaCurp('Menor', $event, chkMayor)" [checked]="checkedMenor" [ngClass]="{'btn-selected': checkedMenor}">
-                        <p class="fontResponsiveSliderNotes lh-13">
-                          Soy <u>menor</u>
-                        <br>de 56 años
+                        <p class="fontResponsiveSliderNotes lh-13"><b>
+                          SOY <u>MENOR</u>
+                        <br>DE 56 AÑOS</b>
                         </p>
                       </mat-slide-toggle>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 text-center mb-2">
                       <mat-slide-toggle #chkMayor  name="menor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Mayor', $event, chkMenor)" [checked]="checkedMayor" [ngClass]="{'btn-selected': checkedMayor}">
-                        <p class=" fontResponsiveSliderNotes lh-13">
-                          Soy <u>mayor</u>
+                        <p class=" fontResponsiveSliderNotes lh-13"><b>
+                          SOY <u>MAYOR</u>
                           <br>
-                          de 56 años
+                          DE 56 AÑOS</b>
                         </p>
                       </mat-slide-toggle>
                     </div>
