@@ -102,6 +102,18 @@ h2 {
     border-bottom: 1px solid;
   }
 
+  .btn-listo {
+    background: #6AB33533;
+    border-color: #6AB335 !important;
+    color: #6AB335 !important;
+  }
+
+  .btn-incompleto {
+    background: #E0217634;
+    border-color: #E02176 !important;
+    color: #E02176 !important;
+  }
+
   @media screen and (max-width: 800px) {
     .img-header-tranquilidad {
       visibility: hidden;

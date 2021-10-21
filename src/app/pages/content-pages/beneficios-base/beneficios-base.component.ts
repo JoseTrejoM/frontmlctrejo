@@ -93,6 +93,9 @@ export class BeneficiosBaseComponent {
       this.index = 1;
     }
 
+    localStorage.removeItem('beneficiarios');
+    localStorage.removeItem('beneficios');
+
   }
 
   ngOnInit() {
@@ -440,7 +443,7 @@ export class BeneficiosBaseComponent {
       this.arrBeneficios = this.arrPropuesta['beneficios'].sort((a, b) => (a.beneficioid > b.beneficioid) ? 1 : ((b.beneficioid > a.beneficioid) ? -1 : 0));
       this.arrBeneficios = this.arrPropuesta['beneficios'];
       console.log(this.arrBeneficios);
-
+      this.getPlan(this.api.currentTokenValue);
 
       // Si cntinúa su proceso activo
       if (data.flag == 1) {
@@ -461,6 +464,7 @@ export class BeneficiosBaseComponent {
       this.index++;
       this.ref.detectChanges();
       this.spinner.hide();
+
     },
       (error) => { }
     );
@@ -470,7 +474,7 @@ export class BeneficiosBaseComponent {
     this.api.getPlan(token).pipe(first()).subscribe((data: any) => {
       console.log(data);
       console.log(this.edad);
-
+      let arrTemp = [];
       let edadPlan = 0;
 
       this.edad > 60 ? edadPlan = 60 : edadPlan = this.edad;
@@ -479,8 +483,15 @@ export class BeneficiosBaseComponent {
         e => edadPlan >= e.edadminima && edadPlan <= e.edadmaxima);
       console.log("Plan:", this.arrPlan);
 
-      this.precioMensual = this.arrPlan[0].precioMensual;
-      this.tipoplanId = this.arrPlan[0].tipoplanId;
+      if (this.arrPropuesta['plan']['tipoPlanId']) {
+        this.precioMensual = this.arrPropuesta['plan']['costo']
+        this.tipoplanId = this.arrPropuesta['plan']['tipoPlanId'];
+      } else {
+        this.precioMensual = this.arrPlan[0].precioMensual;
+        this.tipoplanId = this.arrPlan[0].tipoplanId;
+
+      }
+
     });
   }
 
@@ -529,7 +540,7 @@ export class BeneficiosBaseComponent {
     this.continuarContratacion = 0;
     this.api.loginapp().pipe(first()).subscribe((data: any) => {
       this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
-      this.getPlan(this.api.currentTokenValue);
+      // this.getPlan(this.api.currentTokenValue);
     });
   }
 
@@ -541,7 +552,7 @@ export class BeneficiosBaseComponent {
     this.continuarContratacion = 1;
     this.api.loginapp().pipe(first()).subscribe((data: any) => {
       this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
-      this.getPlan(this.api.currentTokenValue);
+      // this.getPlan(this.api.currentTokenValue);
     });
   }
 
