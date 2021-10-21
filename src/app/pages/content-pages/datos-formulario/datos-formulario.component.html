@@ -2,10 +2,10 @@
 <div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
   <div class="row bg-white">
     <div class="col-md-2 text-center pt-1">
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header" />
     </div>
     <div class="col-md-10 text-center pt-1">
-      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+      <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad" />
     </div>
     <div class="col-md-12 p-0">
       <hr class="separador mt-1 mb-0" />
@@ -55,8 +55,8 @@
                   <div class="card cardBeneficios p-1">
                     <div class="card-body">
                       <div class="row vCenter">
-                        <div class="col-3 col-sm-4 col-md-3 text-center vCenter">
-                          <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
+                        <div class="col-3 col-sm-4 col-md text-center vCenter">
+                          <span class="tipobeneficiario">{{item.tipoBeneficiario}}</span>
                         </div>
                         <div class="col-4 col-sm-3 col-md-5 text-center" *ngIf="item.completo">
                           <button class="btn btn-outline-success btn-listo">¡Listo!</button>
@@ -64,10 +64,10 @@
                         <div class="col-4 col-sm-3 col-md-5 text-center" *ngIf="!item.completo">
                           <button class="btn btn-outline-danger btn-incompleto">Incompleto</button>
                         </div>
-                        <div class="col-5 col-sm-4 col-md-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
+                        <div class="col-4 text-center">
+                          <button class="boton-editar" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
                         </div>
                       </div>
                     </div>
@@ -85,8 +85,8 @@
             <mat-step label="">
               <div class="row d-flex-center mt-2">
                 <div class="col-md-6 col-lg-4 col-sm-12 mb-2" *ngFor="let item of arrBeneficiarios">
-                  <div *ngIf="item.tipoBeneficiarioId == 15">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 15" class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -97,8 +97,8 @@
                     <p><b>País de residencia:</b> {{item.paisTrabajo}}</p>
                     <p><b>Estado/Provincia:</b> {{item.estadoTrabajo}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId == 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -107,8 +107,8 @@
                     <p *ngIf="cmbEstadoPareja != 33"><b>País de residencia:</b> {{item.paisOrigen}}</p>
                     <p *ngIf="cmbEstadoPareja != 33"><b>Estado:</b> {{item.estadoOrigen}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId > 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId > 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
@@ -133,19 +133,19 @@
                   <div class="row mt-2 vCenter text-center rowTable">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Repatriacion.png" class="img-propuesta-ico-table">
+                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Serv Funerario.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/servicios-funerarios.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Seguro Vida.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/seguro-vida.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Educ Financiera.png" class="img-propuesta-ico-table ml-2 ">
+                      <img src="../../../assets/img/icons/educacion-financiera.svg" class="img-propuesta-ico-table ml-2 ">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Envio Dinero.png" class="img-propuesta-ico-table ml-2 mb-1">
+                      <img src="../../../assets/img/icons/envio-dinero.svg" class="img-propuesta-ico-table ml-2 mb-1">
                     </div>
                   </div>
                   <div class="row vCenter mt-1 text-center bb-1">
@@ -168,24 +168,25 @@
                   </div>
                   <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
 
-                    <div class="col-2 center-flex">
-                      {{itemB.tipobeneficiario}}
+                    <div class="col-2 text-left">
+                      <span class="tipobeneficiario">{{itemB.tipobeneficiario}} </span>
+
                     </div>
                     <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 2">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 3">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 4">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 5">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                     </ng-container>
                   </div>
@@ -193,9 +194,9 @@
                 </div>
                 <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
                   <!-- <h4 class="mb-1"><b>Plan de previsión</b></h4> -->
-                  <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
-                  <p><b>Forma de pago: </b> {{plan['formaPago']}}</p>
-                  <p><b>Primer pago: </b> US ${{costoInicial}}</p>
+                  <p class="mb-1"><b>Plan: </b> {{plan['descripcionPlan']}}</p>
+                  <p class="mb-1"><b>Forma de pago: </b> {{plan['formaPago']}}</p>
+                  <p ><b>Primer pago: </b> US ${{costoInicial}}</p>
                   <p *ngIf="frecuenciaPagoId != 64"><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
                 </div>
               </div>
@@ -248,7 +249,7 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" formControlName="apaterno" placeholder="Apellido paterno"
+          <input type="text" class="form-control input-form-datos " formControlName="apaterno" placeholder="Apellido paterno"
           [ngClass]="{ 'is-invalid': submitted && f.apaterno.errors }">
         </div>
       </div>
