@@ -59,10 +59,12 @@
                           <span class="tipobeneficiario">{{item.tipoBeneficiario}}</span>
                         </div>
                         <div class="col-5 text-center" *ngIf="item.completo">
-                          <button class="boton-listo">¡Listo!</button>
+                          <!--button class="boton-listo">¡Listo!</button-->
+                          <button class="btn btn-outline-success btn-listo">Listo</button>
                         </div>
                         <div class="col-5 text-center" *ngIf="!item.completo">
-                          <button class="boton-incompleto">Incompleto</button>
+                          <!--button class="boton-incompleto">Incompleto</button-->
+                          <button class="btn btn-outline-danger btn-incompleto">Incompleto</button>
                         </div>
                         <div class="col-4 text-center">
                           <button class="boton-editar" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
