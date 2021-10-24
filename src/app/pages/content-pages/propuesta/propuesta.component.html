@@ -2,10 +2,10 @@
 <div class="container-fluid header">
   <div class="row bg-white">
     <div class="col-2 text-center pt-1">
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header" />
     </div>
     <div class="col-10 text-center pt-1">
-      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+      <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad" />
     </div>
     <div class="col-md-12 p-0">
       <hr class="separador mt-1 mb-0" />
@@ -31,74 +31,204 @@
                 <div class="col-md-6 col-sm-12">
                   <div class="row">
                     <div class="col-12 text-center">
-                      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios Base</b></span>
+                      <img src="../../../assets/img/icons/simple.svg" class="img-propuesta">
+
+                      <span><b> Beneficios Base</b></span>
+
                     </div>
                   </div>
                   <div class="row mt-2 vCenter text-center rowTable">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Repatriacion.png" class="img-propuesta-ico-table">
+                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Serv Funerario.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/servicios-funerarios.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Seguro Vida.png" class="img-propuesta-ico-table ml-2">
+                      <img src="../../../assets/img/icons/seguro-vida.svg" class="img-propuesta-ico-table ml-2">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Educ Financiera.png" class="img-propuesta-ico-table ml-2 ">
+                      <img src="../../../assets/img/icons/educacion-financiera.svg" class="img-propuesta-ico-table ml-2 ">
                     </div>
                     <div class="col-2 center-flex">
-                      <img src="../../../assets/img/icons/Envio Dinero.png" class="img-propuesta-ico-table ml-2 mb-1">
+                      <img src="../../../assets/img/icons/envio-dinero.svg" class="img-propuesta-ico-table ml-2 mb-1">
                     </div>
                   </div>
                   <div class="row vCenter mt-1 text-center bb-1">
                     <div class="col-2 center-flex"></div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Repatriación a México</p>
+                      <p class="fontResponsiveTableText">Repatriación<br>A México</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Servicio funerario</p>
+                      <p class="fontResponsiveTableText">Servicio<br>Funerario</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Seguro de vida</p>
+                      <p class="fontResponsiveTableText">Seguro<br>De Vida</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Educación financiera</p>
+                      <p class="fontResponsiveTableText">Educación<br>Financiera</p>
                     </div>
                     <div class="col-2 center-flex">
-                      <p class="fontResponsiveTableText">Envío de dinero</p>
+                      <p class="fontResponsiveTableText">Envío<br>De Dinero</p>
                     </div>
                   </div>
+                  <div clas="clear15">&nbsp;</div>
                   <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
 
-                    <div class="col-2 center-flex">
-                      {{itemB.tipobeneficiario}}
+                    <div class="col-2">
+                      <div class="tipobeneficiario">{{itemB.tipobeneficiario}}</div>
                     </div>
                     <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 2">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 3">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 4">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                       <div class="col-2 center-flex" *ngIf="item.beneficioId == 5">
-                        <img src="../../../assets/img/icons/Bien.png" class="img-propuesta" *ngIf="item.activo">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
                       </div>
                     </ng-container>
                   </div>
+                  <!-- <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Titular
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Pareja
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
 
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Padre
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Madre
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Hijo
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center">
+                    <div class="col-2 center-flex">
+                      Hijo
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/bien.svg" class="img-propuesta">
+                    </div>
+                    <div class="col-2 center-flex">
+
+                    </div>
+                  </div> -->
                   <div class="mt-2 row">
+                    <div class="clear15">&nbsp;</div>
                     <div class="col-12 text-center">
-                      <img src="../../../assets/img/icons/A la medida@2x.png" class="img-propuesta">
-                      <span><b>Beneficios a la Medida</b> </span>
-                      <p class="fontResponsiveSliderNotes">Disponibles con costo adiciona</p>
+                      <div class="img-titulo-plan-beneficios"><img src="../../../assets/img/icons/alamedida.svg"></div>
+                      <div class="titulo-plan-beneficios"> Beneficios a la Medida
+                        <br> <span class="condiciones">Disponibles con costo adicional
+
+                        </span>
+                      </div>
+
+                      <div class="clear15"></div>
+
                     </div>
                   </div>
                 </div>
