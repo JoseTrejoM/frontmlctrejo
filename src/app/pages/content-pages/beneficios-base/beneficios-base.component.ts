@@ -559,7 +559,7 @@ export class BeneficiosBaseComponent {
     });
   }
 
-  backStep(stepper, index) {
+  backStep(stepper) {
 
     if (this.edad >= 50 && this.index == 5) {
       stepper.previous();
