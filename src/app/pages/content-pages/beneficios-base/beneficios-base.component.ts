@@ -483,6 +483,9 @@ export class BeneficiosBaseComponent {
         e => edadPlan >= e.edadminima && edadPlan <= e.edadmaxima);
       console.log("Plan:", this.arrPlan);
 
+      this.precioMensual = this.arrPlan[0].precioMensual;
+      this.tipoplanId = this.arrPlan[0].tipoplanId;
+
       if (this.arrPropuesta['plan']['tipoPlanId']) {
         this.precioMensual = this.arrPropuesta['plan']['costo']
         this.tipoplanId = this.arrPropuesta['plan']['tipoPlanId'];
@@ -556,7 +559,8 @@ export class BeneficiosBaseComponent {
     });
   }
 
-  backStep(stepper) {
+  backStep(stepper, index) {
+
     if (this.edad >= 50 && this.index == 5) {
       stepper.previous();
       stepper.previous();
@@ -596,11 +600,22 @@ export class BeneficiosBaseComponent {
       }
     });
 
+    console.log(arr);
+
+    if (arr.length > 0) {
+      this.beneficios = this.beneficios.filter(function (e) {
+        return e.beneficioId != beneficio;
+      });
+      console.log(this.beneficios);
+    }
+
     this.beneficios.push({
       "beneficioId": beneficio,
       "beneficiarios": arrB
 
     });
+
+    console.log(this.beneficios);
 
     if (this.index == this.arrBeneficios.length + 1) {
       this.spinner.show();
