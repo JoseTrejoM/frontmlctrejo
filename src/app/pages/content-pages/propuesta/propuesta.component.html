@@ -244,12 +244,12 @@
                       <div class="row">
                         <div class="col-6 text-center mb-1">
                           <p class="fontResponsiveSliderNotes">Mensual</p>
-                          <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
+                          <div class="btn btn-inactive-pagos mb-1 mt-1" [ngClass]="{'btn-pink': tipoPago == 65}" (click)="changeTipoPago(65)">US ${{precioMensual}}</div>
                           <p class="fontResponsiveSliderNotes">1er. Pago de US ${{(+precioMensual) + (5)}} <sup>*</sup></p>
                         </div>
                         <div class="col-6 text-center mb-1">
                           <p class=" fontResponsiveSliderNotes">Anual</p>
-                          <div class="btn btn-inactive mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
+                          <div class="btn btn-inactive-pagos mb-1 mt-1" [ngClass]="{'btn-purple': tipoPago == 64}" (click)="changeTipoPago(64)" >US ${{precioAnual}}</div>
                           <p class="fontResponsiveSliderNotes">1er. Pago de US ${{(+precioAnual) + (5)}} <sup>*</sup></p>
                         </div>
                       </div>
@@ -258,7 +258,7 @@
                   </div>
                   <div class="row mt-1 text-left">
                     <div class="col-12">
-                      <p class="fontResponsiveSliderNotes">*Tu primer pago incluye un cargo administrativo de US $5.00 por única vez.</p>
+                      <p class="condiciones">*Tu primer pago incluye un cargo administrativo de US $5.00 por única vez.</p>
                       <button class="btn btn-blue btn-block mt-1" (click)="aceptarPropuesta()" *ngIf="tipoPago != 0">
                         Continuar
                       </button>

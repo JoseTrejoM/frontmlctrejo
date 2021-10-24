@@ -14,7 +14,7 @@ clear: both;
 
 
 p {
-  margin: 0 !important;
+ //margin: 0 !important;
   white-space: pre-line;
   color:#353A50;
   font-size: 1.4em;
@@ -75,6 +75,58 @@ background-repeat: no-repeat;
   padding: 4rem;
 
 }
+
+.toggles{
+
+  width: 100%;
+  border: 0px solid #000;
+  margin: 0 auto !important;
+  min-height: 6em;
+
+
+
+  }
+    .col-izq-toggle, .col-der-toggle{
+
+     width: 49%;
+
+
+
+
+     }
+
+.col-izq-toggle{
+
+ float: left;
+
+
+}
+.col-der-toggle{
+
+float: right;
+
+
+}
+.col-izq-toggle p, .col-der-toggle p{
+
+
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #6c6c6c !important;
+  text-align: left;
+  font-weight: 700;
+  margin-top: .5em;
+
+  }
+
+
+
+  .img-familia {
+
+    width: 6em;
+    border: 0px solid #000;
+    margin:.2em;
+  }
 
 
 
@@ -268,15 +320,11 @@ text-align: center;
     text-transform: uppercase;
   }
 
-  // .picsum-img-wrapper {
-  //   .row {
-  //     width: 100vw;
-  //     height: 100vh;
-  //     max-width: 100%;
-  //     display: block;
-  //     margin: 0;
-  //   }
-  // }
+.picsum-img-wrapper {
+     .row {
+padding-bottom: 1em;
+   }
+ }
 
   @media screen and (max-width: 800px) {
 
@@ -328,7 +376,7 @@ text-align: center;
       height: 3rem !important;
       margin: 0 auto !important;
       float:center;
-      border: 1px solid #6ab336;
+      border: 0px solid #6ab336;
 
     }
   }
@@ -353,7 +401,7 @@ text-align: center;
 
     .img-thumbnail  {
 
-      height: 6em !important;
+      height: 8em !important;
       margin: 0 auto !important;
       float:center;
       border: 0px solid #6ab336;
@@ -388,6 +436,11 @@ text-align: center;
   margin: 0;
 }
 
+.titulo-plan {
+  font-size: 1.2em;
+
+}
+
     h2, .titulo-beneficios-base{
       line-height: 1.2em;
       margin: 0 0 1em 0 !important;
@@ -420,16 +473,19 @@ text-align: center;
 
       font-size: 1em;
       line-height: 1.2em;
-      margin-top: 1em;
       text-align: center !important;
-      margin: 0 auto !important;
+
 
     }
+
+
+
+
 .img-header
 {
   border: 0px solid #E31C79;
-  max-width: 12rem;
-  margin: 1em 0 1em 0;
+  max-width: 10em;
+  margin: 0em 0 .5em 0;
 }
 
 
@@ -466,7 +522,7 @@ width: 90% !important;
     }
 
     .comencemos {
-      font-size: 1.7em;
+      font-size: 1.3em;
       clear: both;
       padding:0;
       margin-top: 7em !important;

@@ -109,12 +109,26 @@ h2 {
     background: #6AB33533;
     border-color: #6AB335 !important;
     color: #6AB335 !important;
+    font-size: .7em;
+    float: center;
+    margin: 0 .5em 0 0 !important;
+    font-family: "Montserrat", sans-serif !important;
+    min-height: 2em !important;
+    padding: 0.5em;
+
   }
 
   .btn-incompleto {
     background: #E0217634;
     border-color: #E02176 !important;
     color: #E02176 !important;
+    font-size: .7em;
+    float: center;
+    margin: 0 .5em 0 0 !important;
+    font-family: "Montserrat", sans-serif !important;
+    min-height: 2em !important;
+    padding: 0.5em;
+
   }
 
   @media screen and (max-width: 800px) {
@@ -125,5 +139,6 @@ h2 {
       margin: 10px auto 5px 20px;
       width: 28%;
       display: none;
+
     }
   }

@@ -15,7 +15,7 @@ body {
   font-family: "Montserrat", sans-serif !important;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 1rem .5rem;
 }
 .boton-mensual, .boton-anual, .boton-incompleto  {
@@ -42,19 +42,37 @@ font-weight: 800;
 
   background-color: #77399d;
 }
-
-
-.boton-incompleto, .boton-editar, .boton-listo {
+.boton-incompleto,  .boton-listo {
   border: 0px solid #6ab336 !important;
  min-height: 5em !important;
- width: 10em !important;
+ width: 1.5em !important;
  line-height: 1em !important;
- padding: 1em .5em !important;
- border-radius: 12px;
+ padding: .5em .5em !important;
+ border-radius: 10px;
  float: center;
  margin: 0 .5em 0 0 !important;
  font-family: "Montserrat", sans-serif !important;
- font-size: .7em;
+ font-size: .7em !important;
+ color: #fff;
+ font-weight: 400;
+
+ }
+
+.boton-editar {
+  /* border: 0px solid #6ab336 !important; */
+  border: 0px solid #e31c79 !important;
+  background-color: #e31c79 !important;
+  border-color: #e31c79 !important;
+  color: #fff !important;
+ min-height: 4em !important;
+ width: 6em !important;
+ line-height: 1em !important;
+ padding: 1em .5em !important;
+ border-radius: 10px;
+ float: center;
+ margin: 0 .5em 0 0 !important;
+ font-family: "Montserrat", sans-serif !important;
+ font-size: 1em;
  color: #fff;
  font-weight: 500;
  text-transform: uppercase;
@@ -151,6 +169,8 @@ line-height: 1.5em; */
 
     .condiciones {
       font-size: .7rem;
+      border: 0px solid #000;
+      margin-top: .2em;
      }
 
 
@@ -163,6 +183,7 @@ line-height: 1.5em; */
       padding: 0 1em;
 
      }
+
 
 /* Termina estilos Gris */
 
@@ -342,6 +363,14 @@ body {
   max-width: 16rem !important;
   margin: 0;
 }
+.btn-inactive-pagos {
+  background-color: #dee0e7;
+  border: 0;
+  color: #6c6c6c !important;
+  padding: 1.2rem 1rem !important;
+  max-width: 16rem !important;
+  margin: 0;
+}
 
 .btnExpand {
   border-radius: 50%;
@@ -442,10 +471,12 @@ font-size: .5rem;
 
   bottom: 0px !important;
   border: 0px solid #000;
-  margin-top: 30rem !important;
+
 
 
 }
+
+
 
 
 .mat-step-header .mat-step-icon-selected,
@@ -606,7 +637,13 @@ h2 {
  font-size: .9em;
 }
 
-
+.tipobeneficiario-captura  {
+  text-transform: uppercase;
+  margin-left: 1em;
+  text-align: left !important;
+  border: 0px solid #000;
+  font-size: 1.2em;
+ }
 
 .mat-horizontal-stepper-header-container {
   display: none !important;
@@ -798,7 +835,7 @@ body {
     float: left;
     border: 0px solid #369;
     width: 20%;
-    margin-left: 3em !important;
+    margin-left: 3em ;
   }
   .img-titulo-plan-beneficios img{
     width: 6em;
@@ -960,7 +997,26 @@ body {
   .img-propuesta {
     width: 20px;
   }
+  .img-titulo-plan-beneficios  {
 
+    float: left;
+    border: 0px solid #369;
+    width: 20%;
+    margin-left: 8em !important;
+  }
+  .img-titulo-plan-beneficios img{
+    width: 6em;
+
+  }
+
+  .titulo-plan-beneficios {
+    margin: 1.5em 0 0 0;
+    font-weight: 600;
+    float: left;
+    border: 0px solid #000;
+    width: 55%;
+
+  }
 
 
 
@@ -973,6 +1029,8 @@ body {
 
 
 @media screen and (max-width: 992px) {
+
+
 
 .carousel {
 
@@ -988,6 +1046,7 @@ body {
 
 
   }
+  /*
   .btn-green  {
 
     border: 0px solid #333 !important;
@@ -995,7 +1054,7 @@ body {
     font-size: 1em;
     margin: 0 auto !important;
 
-  }
+  } */
 
   .card {
     background-color: #fff;
@@ -1003,6 +1062,18 @@ body {
     min-width: 17em !important;
     padding: .2em !important;
   }
+
+  .titular-bienvenido {
+
+    font-size:.95em !important;
+
+  }
+  .somos {
+
+    font-size:.85em !important;
+
+  }
+
 
   }
 

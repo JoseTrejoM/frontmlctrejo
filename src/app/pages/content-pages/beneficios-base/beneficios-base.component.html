@@ -94,7 +94,7 @@
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
                   <div class="titular-bienvenido">Bienvenido a México Lindo Contigo.</div>
-                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
+                  <p class="text-center mt-1 somos">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
                   <div class="row iconos-home">
@@ -122,18 +122,19 @@
                 </div>
               </ng-template>
               <ng-template ngbSlide>
-                <div class="picsum-img-wrapper" style="height: 410px">
+                <div class="picsum-img-wrapper" >
                   <div class="row text-center">
-                    <div class="col-lg-8 offset-lg-2 mt-4">
+                    <div class="col-lg-8 offset-lg-2 mt-1" style="min-height: 380px;">
                         <p class="fontResponsiveSlider">Recomendamos que el titular de tu plan sea la persona de tu familia que vive o trabaja temporalmente en Estados Unidos o Canadá. <sup>(1)</sup></p>
                         <div class="clear10"></div>
                         <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
                           <a href="https://www.contigo.digital" target="_blank">www.contigo.digital</a> para conocernos. <sup>(2)</sup></p>
                         <i class="fas fa-share-alt fa-2x icono-compartir  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="condiciones"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</p>
-                        <p class="fontResponsiveSliderNotes"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
+                        <div class="condiciones"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</div>
+                        <div class="condiciones"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</div>
                     </div>
+
                   </div>
                 </div>
               </ng-template>
@@ -143,7 +144,7 @@
                     <div class="col-12">
                       <div class="row" >
                         <div class="col-12" >
-                            <p class="fontResponsiveSlider">El Plan incluye dos tipos de beneficios:</p>
+                            <p class="titulo-plan"><b>El Plan incluye dos tipos de beneficios:</b></p>
                         </div>
                         <div class="dos-col">
                         <div class="col-uno">
@@ -183,7 +184,7 @@
           <form [formGroup]="firstFormGroup">
             <div class="container">
               <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center mt-2">
                   <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
@@ -216,21 +217,21 @@
                       CURP</a>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1" style="background-color: #F7A120; color:#fff;"
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <div class="toggles">
+                    <div class="col-izq-toggle">
+                      <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Menor', $event, chkMayor)" [checked]="checkedMenor" [ngClass]="{'btn-selected': checkedMenor}">
-                        <p class="fontResponsiveSliderNotes lh-13">
+                        <p class="lh-13">
                           Soy <u>menor</u>
                         <br>de 56 años
                         </p>
                       </mat-slide-toggle>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center mb-2">
+                    <div class="col-der-toggle">
                       <mat-slide-toggle #chkMayor  name="menor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Mayor', $event, chkMenor)" [checked]="checkedMayor" [ngClass]="{'btn-selected': checkedMayor}">
-                        <p class=" fontResponsiveSliderNotes lh-13">
+                        <p class=" lh-13">
                           Soy <u>mayor</u>
                           <br>
                           de 56 años
@@ -270,7 +271,7 @@
           <form [formGroup]="firstFormGroup">
             <div class="container">
               <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center mt-2">
                   <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
@@ -338,12 +339,12 @@
         <mat-step label="" *ngFor="let itemB of arrBeneficios; let idexBeneficios = index;">
           <form>
             <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
+              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0 mt-2">
                  <!--<a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a> -->
                 <div class="descripcion-beneficio"> {{itemB.descripcionbeneficio}} </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
+                <div class="row justify-content-center"  *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
                     <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
                     [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
@@ -441,9 +442,9 @@
 
                     <div class="form-check-inline">
                       <button class="btn btn-blue p-1" (click)="minus(itemB.beneficioid)" *ngIf="itemB.beneficioid < 3"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
                       <button class="btn btn-blue p-1" (click)="plus(itemB.beneficioid)" *ngIf="itemB.beneficioid < 3"><i class="fa fa-plus"></i></button>
-                    </div>
+                    </div>                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
+
 
                   </div>
                 </div>
