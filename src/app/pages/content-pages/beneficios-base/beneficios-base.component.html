@@ -192,7 +192,7 @@
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control" placeholder="CURP (18 dígitos)"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP (18 dígitos)"
                     (click)="inputCurp(chkMayor, chkMenor)"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
