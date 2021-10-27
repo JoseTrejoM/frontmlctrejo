@@ -509,7 +509,8 @@ export class DatosFormularioComponent implements OnInit {
       backdrop: true,
     });
 
-    this.reloadCurrentRoute();
+    this.ref.detectChanges();
+    // this.reloadCurrentRoute();
   }
 
   changeStep(stepper) {
