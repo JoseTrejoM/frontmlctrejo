@@ -30,7 +30,7 @@ export enum PageNames {
 
 @Component({
   selector: 'app-beneficios-base',
-  templateUrl: './beneficios-base.component.html',
+  templateUrl:'./beneficios-base.component.html',
   styleUrls: ['./beneficios-base.component.scss']
 })
 export class BeneficiosBaseComponent {
@@ -139,14 +139,14 @@ export class BeneficiosBaseComponent {
             "beneficioid": 1,
             "titulobeneficio": "Repatriación a México",
             "subtitulobeneficio": "(Por fallecimiento en EU)",
-            "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
+            "descripcionbeneficio": "¿Quién de tu familia  podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
 
             "servicios": []
           },
           {
             "beneficioid": 2,
             "titulobeneficio": "Servicio Funerario",
-            "subtitulobeneficio": "(Residentes  de México)",
+            "subtitulobeneficio": "(Residentes de México)",
             "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
 
             "servicios": []

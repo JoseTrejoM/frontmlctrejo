@@ -503,7 +503,7 @@ export class DatosFormularioComponent implements OnInit {
 
     this.modalService.open(content, {
       size: "sm",
-      centered: true,
+      centered: false,
       scrollable: true,
       animation: true,
       backdrop: true,

@@ -1,10 +1,4 @@
-.img-header {
-  max-width: 120px;
-  max-height: 63px;
-}
-.img-header-tranquilidad {
-  max-height: 63px;
-}
+
 
 p {
   margin: 0px !important;
@@ -31,8 +25,35 @@ h2 {
   }
 
   .img-thumbnail {
-    border: none !important;
+
+  border: 0 important;
   }
+
+  .img-header
+{
+  border: 0px solid #E31C79;
+  max-width: 12rem;
+  margin: 1em 0 1em 0;
+}
+
+  .img-header-tranquilidad {
+
+    height: 4rem;
+    margin:1rem 0 0 0rem;
+    border: 0px solid #333;
+    float: center;
+    clear: both;
+
+
+    }
+
+    .curp {
+
+     text-transform: uppercase;
+     line-height: 2em;
+
+
+      }
 
   .fontResponsiveFamilia {
     font-size: calc(0.75em + 0.2vw);
@@ -101,5 +122,9 @@ h2 {
       margin: 10px auto 5px 20px;
       width: 28%;
       display: none;
+      border: 1px solid #333;
+
     }
+
+
   }

@@ -3,30 +3,41 @@
   <div class="row bg-white" >
     <div class="col-2 text-center pt-1 "
     *ngIf="index == 0" ngClass.sm="col-12 text-center" ngClass.md="col-12 text-center" ngClass.lg="col-12 text-center" >
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" ngClass.lg="img-header-big" ngClass.md="img-header-big" ngClass.sm="img-header-big"/>
+          <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header" ngClass.lg="img-header-big" ngClass.md="img-header-big" ngClass.sm="img-header-big"/>
     </div>
-    <div class="col-2 text-center pt-1" *ngIf="index > 0" >
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+
+
+
+    <div class="row bg-white p-2">
+      <div class="col-2 float-left" ngClass.sm="text-center" ngClass.xs="col-12 text-center"*ngIf="index"  >
+        <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header">
+      </div>
+      <div class="col-10 text-center" *ngIf="index">
+        <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad">
+      </div>
+
     </div>
-    <div class="col-10 text-center pt-1" *ngIf="index > 0">
-      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
-    </div>
-    <div class="col-md-12 p-0">
-      <hr class="separador mt-1 mb-0" />
-    </div>
-  </div>
+
+<hr class="separador mt-4 mb-1" />
 </div>
+</div>
+
 
 <div class="container-fluid">
   <div class="row d-flex-center mt-3" *ngIf="index > 1">
     <div class="col-12 text-center p-0">
-      <img src="../../../assets/img/icons/Simple.png" class="img-propuesta"><span><b> Beneficios Base</b></span>
+      <div class="titulo-beneficios-base">
+         Beneficios Base
+       </div>
     </div>
   </div>
 
+
+
+
   <div class="row d-flex-center mt-3">
     <div class="col-12 text-center p-0" *ngIf="index == 0" ngStyle.lg="display:none" ngStyle.md="display:none" ngStyle.sm="display:none" ngStyle.xs="display:block">
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header" />
       <hr class="separador mt-4 mb-1" />
     </div>
     <div class="col-12 text-center p-0" *ngIf="index == 1">
@@ -34,32 +45,36 @@
       <hr class="separador mt-4 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 2">
-      <h2><b>Repatriación a México</b></h2>
-      <h3 class="mb-0"><b>(por fallecimiento en EUA o Canadá)</b></h3>
+      <p class="subtitulo-beneficios">Repatriación a México</p>
+      <p class="subtitulo-beneficios">(por fallecimiento en EUA o Canadá)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 3">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Servicio funerario</b></h2>
-      <h3 class="mb-0"><b>(en México)</b></h3>
+      <p class="subtitulo-beneficios">Servicio funerario</p>
+      <p class="subtitulo-beneficios">(en México)</p>
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 4">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Seguro de vida</b></h2>
-      <h3 class="mb-0"><b>(MX $50,000)</b></h3>
+      <p class="subtitulo-beneficios">Seguro de vida</p>
+      <p class="subtitulo-beneficios">(MX $50,000)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 5">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Educación financiera</b></h2>
-      <h3 class="mb-0"><b>(para el manejo del dinero)</b></h3>
+      <p class="subtitulo-beneficios">Educación financiera</p>
+      <p class="subtitulo-beneficios">(para el manejo del dinero)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0" *ngIf="index == 6">
       <i class="fas fa-arrow-left fa-2x float-left ml-2" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2><b>Envío de dinero</b></h2>
-      <h3 class="mb-0"><b>(con cuenta digital en México)</b></h3>
+      <p class="subtitulo-beneficios">Envío de dinero</p>
+      <p class="subtitulo-beneficios">(con cuenta digital en México)</p>
+
       <hr class="separador mt-1 mb-1" />
     </div>
   </div>
@@ -73,76 +88,86 @@
             <!-- <ngb-carousel class="w-100"
             (swipeleft)="swipe($event.type)"
             (swiperight)="swipe($event.type)"> -->
+
             <ngb-carousel class="w-100" [interval]="false">
 
               <ng-template ngbSlide>
                 <div class="col-12 text-center">
-                  <h2 class="mb-1">Bienvenido a México Lindo Contigo.</h2>
-                  <p class="text-center mt-1">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
+                  <div class="titular-bienvenido">Bienvenido a México Lindo Contigo.</div>
+                  <p class="text-center mt-1 somos">Somos la central digital de soluciones para el cuidado del dinero y la salud de tu familia.</p>
                 </div>
                 <div class="picsum-img-wrapper mt-1" ngStyle.lg="height: 359px" ngStyle.xs="height: 300px" ngStyle.sm="height: 338px">
-                  <div class="row text-center">
-                    <div class="col-4">
-                      <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                  <div class="row iconos-home">
+                    <div class="col-xs-5">
+                      <img class="img-thumbnail" src="../../../../assets/img/elements/simple.svg">
                       <p class="fontResponsive">Simple</p>
                     </div>
-                    <div class="col-4">
-                      <img class="img-thumbnail" src="../../../../assets/img/elements/segura.png">
+                    <div class="col-xs-5">
+                      <img class="img-thumbnail" src="../../../../assets/img/elements/segura.svg">
                       <p class="fontResponsive">Segura</p>
                     </div>
-                    <div class="col-4">
-                      <img class="img-thumbnail" src="../../../../assets/img/elements/centralizada.png">
+                    <div class="col-xs-5">
+                      <img class="img-thumbnail" src="../../../../assets/img/elements/centralizada.svg">
                       <p class="fontResponsive">Centralizada</p>
                     </div>
-                  </div>
-                  <div class="row text-center">
-                    <div class="col-4 offset-2">
-                      <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                    <div class="col-xs-5">
+                      <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.svg">
                       <p class="fontResponsive">A la medida</p>
                     </div>
-                    <div class="col-4">
-                      <img class="img-thumbnail" src="../../../../assets/img/elements/accesible.png">
+                    <div class="col-xs-5">
+                      <img class="img-thumbnail" src="../../../../assets/img/elements/accesible.svg">
                       <p class="fontResponsive">Accesible</p>
                     </div>
-                  </div>
+</div>
                 </div>
               </ng-template>
               <ng-template ngbSlide>
-                <div class="picsum-img-wrapper" style="height: 410px">
+                <div class="picsum-img-wrapper" >
                   <div class="row text-center">
-                    <div class="col-lg-8 offset-lg-2 mt-4">
+                    <div class="col-lg-8 offset-lg-2 mt-1" style="min-height: 380px;">
                         <p class="fontResponsiveSlider">Recomendamos que el titular de tu plan sea la persona de tu familia que vive o trabaja temporalmente en Estados Unidos o Canadá. <sup>(1)</sup></p>
+                        <div class="clear10"></div>
                         <p class="fontResponsiveSlider">Si no eres tú, compártele esta app o pídele que ingrese a
                           <a href="https://www.contigo.digital" target="_blank">www.contigo.digital</a> para conocernos. <sup>(2)</sup></p>
-                        <i class="fas fa-share-alt fa-2x text-pink  m-2"></i>
+                        <i class="fas fa-share-alt fa-2x icono-compartir  m-2"></i>
                         <p class="text-pink">Compartir</p>
-                        <p class="fontResponsiveSliderNotes"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</p>
-                        <p class="fontResponsiveSliderNotes"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</p>
+                        <div class="condiciones"><sup>(1)</sup> El servicio es ofrecido desde México y el titular debe tener CURP.</div>
+                        <div class="condiciones"><sup>(2)</sup> Los beneficios de nuestros planes están sujetos a elegibilidad.</div>
                     </div>
+
                   </div>
                 </div>
               </ng-template>
               <ng-template ngbSlide>
-                <div class="picsum-img-wrapper" style="height: 410px">
+                <div class="picsum-img-wrapper" style="min-height: 470px">
                   <div class="row text-center">
                     <div class="col-12">
-                      <div class="row">
-                        <div class="col-12">
-                            <p class="fontResponsiveSlider">El Plan incluye dos tipos de beneficios:</p>
+                      <div class="row" >
+                        <div class="col-12" >
+                            <p class="titulo-plan"><b>El Plan incluye dos tipos de beneficios:</b></p>
                         </div>
-                        <div class="col-6">
-                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.png">
+                        <div class="dos-col">
+                        <div class="col-uno">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/simple.svg">
                           <p class="fontResponsive m-0"><b>Beneficios Base</b></p>
-                          <p class="fontResponsive">(incluidos en el costo)</p>
+                          <p class="fontResponsive" style="text-transform: none !important;">(incluidos en el costo)</p>
                         </div>
-                        <div class="col-6">
-                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.png">
+                        <div class="col-dos">
+                          <img class="img-thumbnail" src="../../../../assets/img/elements/alamedida.svg">
                           <p class="fontResponsive m-0"><b>Beneficios a la Medida</b></p>
-                          <p class="fontResponsive">(con costo adicional)</p>
+                          <p class="fontResponsive" style="text-transform: none !important;">(con costo adicional)</p>
                         </div>
+                        <p class="comencemos">¿Listo? ¡Comencemos!</p>
+                        <div class="condiciones"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        Acepto los Terminos & Condiciones y el Aviso de Privacidad.</div>
+
+                      </div>
+
                         <div class="col-12 vCenter">
-                          <button class="btn btn-blue mt-1" (click) = "changeStepInicial(stepper)" >Continuar</button>
+
+                          <button class="btn btn-blue mt-1" (click) = "changeStepInicial(stepper)" style="width: 21rem;">Continuar</button>
                         </div>
+                        <div class="clear15"></div>
                       </div>
                     </div>
                   </div>
@@ -159,15 +184,15 @@
           <form [formGroup]="firstFormGroup">
             <div class="container">
               <div class="row">
-                <div class="col-12 text-center">
-                  <p class="">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
+                <div class="col-12 text-center mt-2">
+                  <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
               <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP"
+                    <input type="text" [maxlength]=18 class="mt-1" formControlName="curp" class="form-control curp" placeholder="CURP (18 dígitos)"
                     (click)="inputCurp(chkMayor, chkMenor)"
                     [ngClass]="{
                         'is-invalid': s1Submitted && s1.curp.invalid,
@@ -188,25 +213,28 @@
                     </div>
                   </div>
                   <div>
-                    <a class="btn btn-green btn-block" href="https://www.gob.mx/curp/" target="_blank">Saber cuál es mi
+                    <a class="btn btn-green btn-block" href="https://www.gob.mx/curp/" target="_blank">Saber cual es mi
                       CURP</a>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <div class="toggles">
+                    <div class="col-izq-toggle">
                       <mat-slide-toggle #chkMenor  name="mayor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Menor', $event, chkMayor)" [checked]="checkedMenor" [ngClass]="{'btn-selected': checkedMenor}">
-                        <p class="fontResponsiveSliderNotes lh-13">
-                          Soy <u>menor</u> de 56 años
+                        <p class="lh-13">
+                          Soy <u>menor</u>
+                        <br>de 56 años
                         </p>
                       </mat-slide-toggle>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center mb-2">
+                    <div class="col-der-toggle">
                       <mat-slide-toggle #chkMayor  name="menor56" class="btn btn-inactive btn-block mt-1"
                       (change) = "validaCurp('Mayor', $event, chkMenor)" [checked]="checkedMayor" [ngClass]="{'btn-selected': checkedMayor}">
-                        <p class=" fontResponsiveSliderNotes lh-13">
-                          Soy <u>mayor</u> de 56 años
+                        <p class=" lh-13">
+                          Soy <u>mayor</u>
+                          <br>
+                          de 56 años
                         </p>
                       </mat-slide-toggle>
                     </div>
@@ -216,7 +244,7 @@
                       'is-invalid': s1Submitted && s1.chk.invalid,
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
-                      <p class="fontResponsiveSliderNotes lh-13">
+                      <p class="condiciones lh-13">
                         Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
@@ -243,8 +271,8 @@
           <form [formGroup]="firstFormGroup">
             <div class="container">
               <div class="row">
-                <div class="col-12 text-center">
-                  <p class="">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
+                <div class="col-12 text-center mt-2">
+                  <p class="texto-exclusivo">El servicio es ofrecido desde México y el titular debe tener CURP.</p>
                 </div>
               </div>
 
@@ -271,7 +299,7 @@
                     </div>
                   </div>
                   <div>
-                    <a class="btn btn-green btn-block" href="https://www.gob.mx/curp/" target="_blank">Saber cuál es mi
+                    <a class="btn btn-green btn-block" href="https://www.gob.mx/curp/" target="_blank">Saber cual es mi
                       CURP</a>
                   </div>
                 </div>
@@ -281,7 +309,7 @@
                       'is-invalid': s1Submitted && s1.chk.invalid,
                       'is-valid': s1Submitted && !s1.chk.invalid
                     }">
-                      <p class="fontResponsiveSliderNotes lh-13">
+                      <p class="condiciones lh-13">
                         Acepto que si el CURP que registro es incorrecto, los beneficios no podrán ser aprovechados cuando los requiera.
                       </p>
                       <div *ngIf="
@@ -311,12 +339,12 @@
         <mat-step label="" *ngFor="let itemB of arrBeneficios; let idexBeneficios = index;">
           <form>
             <div class="row d-flex-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0">
-                <!-- <a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a> -->
-                <p class=" fontResponsiveSliderNotes lh-13"> {{itemB.descripcionbeneficio}} </p>
+              <div class="col-lg-4 col-md-4 col-sm-12 text-center p-0 mt-2">
+                 <!--<a *ngIf="itemB.beneficioid == 5" (click)="showResponsiveDialog()" class="float-right"><i class="far fa-question-circle"></i></a> -->
+                <div class="descripcion-beneficio"> {{itemB.descripcionbeneficio}} </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-12 text-center mt-1">
-                <div class="row justify-content-center" *ngIf="itemB.beneficiosbeneficiarios">
+                <div class="row justify-content-center"  *ngIf="itemB.beneficiosbeneficiarios">
                   <ng-container *ngFor="let item of itemB.beneficiosbeneficiarios; let i=index">
                     <div class="col-3 col-sm-4 text-center ng-star-inserted" *ngIf="item.tipobeneficiarioid == 17 || item.tipobeneficiarioid == 18"
                     [ngClass]="{'pointerEvents': (itemB.beneficioid > 2 && itemB.beneficioid != 5) ||
@@ -324,14 +352,13 @@
                      (edad > 56),
                     'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo) || edad > 56}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
-
-                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!--a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.esseleccionado ?
                         item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
                         ></a> -->
 
-                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
                           item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                           (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
@@ -339,7 +366,7 @@
                           >
                         </a>
 
-                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           >
                         </a>
 
@@ -360,7 +387,7 @@
                     itemB.beneficioid == 5 ? changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo) :
                     changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
 
-                      <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
                         item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                         (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
@@ -368,13 +395,13 @@
                         >
                       </a>
 
-                      <!-- <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!--a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="(!item.esseleccionado ? item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                         (mouseout)="(!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo)"
                         >
                       </a> -->
 
-                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         >
                       </a>
 
@@ -389,12 +416,12 @@
                     'grayscale': (itemB.beneficioid > 2 && !item.esseleccionado && !item.activo)}"
                     (click)="changeImg(idexBeneficios, i, itemB.beneficioid, item.tipobeneficiarioid, item.imagenactivo)">
 
-                      <!-- <a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                      <!--a><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                         (mouseover)="!item.esseleccionado ? item.imagendefault = item.imagenactivo : !item.esseleccionado ? item.imagendefault = item.imageninactivo : ''"
                         (mouseout)="!item.esseleccionado ? item.imagendefault = item.imageninactivo : item.imagendefault = item.imagenactivo"
                         ></a> -->
 
-                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid != 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           (mouseover)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
                           item.imagendefault = item.imagenactivo : item.imagendefault = item.imageninactivo)"
                           (mouseout)="item.tipobeneficiarioid != 15 && (!item.esseleccionado ?
@@ -402,36 +429,36 @@
                           >
                         </a>
 
-                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.png'" class="img-familia"
+                        <a *ngIf= "itemB.beneficioid == 5"><img [src]="'../../../../assets/img/icons/' + item.imagendefault + '.svg'" class="img-familia"
                           >
                         </a>
 
                     </div>
                   </ng-container>
                   <div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center" *ngIf="countHijo > 3 && itemB.beneficioid != 3">
-                    <a><img src="../../../../assets/img/icons/Hijo.png" class="img-familia"></a>
+                    <a><img src="../../../../assets/img/icons/Hijo.svg" class="img-familia"></a>
                   </div>
                   <div class="col-8 col-sm-8 col-md-8 col-lg-8 text-center vCenter" *ngIf="countHijo > 3 && itemB.beneficioid != 3">
 
                     <div class="form-check-inline">
                       <button class="btn btn-blue p-1" (click)="minus(itemB.beneficioid)" *ngIf="itemB.beneficioid < 3"><i class="fa fa-minus"></i></button>
-                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
                       <button class="btn btn-blue p-1" (click)="plus(itemB.beneficioid)" *ngIf="itemB.beneficioid < 3"><i class="fa fa-plus"></i></button>
-                    </div>
+                    </div>                      <input type="text" class="form-control ml-1 mr-1 text-center" [(ngModel)]="countHijo" [ngModelOptions]="{standalone: true}">
+
 
                   </div>
                 </div>
                 <p *ngIf="countHijo > 3">Haz seleccionado {{countHijo}} hijos.</p>
                 <div class="row mt-1" *ngIf="itemB.beneficioid < 3">
                   <div class="col-12">
-                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(itemB.beneficioid) : ''" *ngIf="countHijo < 4">Agregar más hijos</button>
+                    <button class="btn btn-blue btn-block" (click)="countHijo < 4 ? agregarHijos(itemB.beneficioid) : ''" *ngIf="countHijo < 4">Agregar mas hijos</button>
                   </div>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-12 text-center">
                 <div class="card cardBeneficios mb-1">
                   <div class="card-body">
-                    <p class=" fontResponsiveSliderNotes lh-13">Pago mensual</p>
+                    <p class="pago-mensual lh-13">Pago mensual</p>
                     <h1 class="mb-0"><b>US ${{precioMensual}}.00</b></h1>
                   </div>
                 </div>
