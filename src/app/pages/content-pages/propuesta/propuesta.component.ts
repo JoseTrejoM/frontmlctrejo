@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ApiService } from '../../../shared/services/api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import * as _ from 'lodash';
 
@@ -26,7 +27,8 @@ export class PropuestaComponent implements OnInit {
     private api: ApiService,
     public router: Router,
     private ref: ChangeDetectorRef,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private spinner: NgxSpinnerService
 
   ) {
 
@@ -46,10 +48,14 @@ export class PropuestaComponent implements OnInit {
 
   getResumenPropuesta() {
     this.arrResumen = [];
-    console.log('Entra');
+    this.spinner.show();
     this.api.getResumenPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
       console.log(data);
+
+      this.precioMensual = data.mensual ? data.mensual : localStorage.getItem('precioAnual');
+      this.precioAnual = data.anual ? data.anual : localStorage.getItem('precioMensual');
       this.arrResumen = data.beneficiarios;
+      this.spinner.hide();
       this.ref.detectChanges();
     });
   }
@@ -79,6 +85,7 @@ export class PropuestaComponent implements OnInit {
   }
 
   aceptarPropuesta() {
+    this.spinner.show();
     let arrSend = [];
     arrSend.push({
       "propuestaId": localStorage.getItem('propuestaId'),
@@ -93,6 +100,7 @@ export class PropuestaComponent implements OnInit {
           console.log(data);
           if (data.servicioContratadoId) {
             localStorage.setItem('servicioContratadoId', data.servicioContratadoId);
+            this.spinner.hide();
             this.router.navigate(["./pages/datos-formulario"]);
           }
         });

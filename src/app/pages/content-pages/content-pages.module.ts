@@ -22,6 +22,8 @@ import { esLocale } from "ngx-bootstrap/locale";
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MomentModule } from 'ngx-moment';
+import {DropdownModule} from 'primeng/dropdown';
+
 
 /////// ****** Components
 
@@ -59,7 +61,9 @@ defineLocale("es", esLocale);
         MatSnackBarModule,
         BsDatepickerModule.forRoot(),
         NgxStripeModule.forRoot('pk_test_51JZMBDLm93TetmkamLaX6DbO9PrSOY7zTlNJB2hLfXQLCwBWZMcH9LuCW0ZG6ZYURPVWWzGxyeD9JO9Q5zAruFmf00QuPJRxUr'),
-        MomentModule
+        MomentModule,
+        NgxSpinnerModule,
+        DropdownModule
     ],
     declarations: [
         ErrorPageComponent,

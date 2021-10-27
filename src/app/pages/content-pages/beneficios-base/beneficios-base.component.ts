@@ -16,6 +16,8 @@ import { ApiService } from '../../../shared/services/api.service'
 import { ImgSrcDirective } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NgxSpinnerService } from "ngx-spinner";
+import Swal from "sweetalert2";
 
 export enum PageNames {
   Curp,
@@ -28,7 +30,7 @@ export enum PageNames {
 
 @Component({
   selector: 'app-beneficios-base',
-  templateUrl: './beneficios-base.component.html',
+  templateUrl:'./beneficios-base.component.html',
   styleUrls: ['./beneficios-base.component.scss']
 })
 export class BeneficiosBaseComponent {
@@ -58,9 +60,18 @@ export class BeneficiosBaseComponent {
   envioDineroSelected = false;
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
   completarContratacion = false;
-
+  edad = 0;
+  precioMensual = 0;
+  arrPlan = [];
+  countRepatriacion = 1;
+  serviciobeneficiarioid: any;
+  tipoplanId = 0;
+  descripcionPlan = '';
+  precioAnual = 0;
+  continuarContratacion = 0;
 
   stepperOrientation: Observable<StepperOrientation>;
+  sexo: any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -70,7 +81,8 @@ export class BeneficiosBaseComponent {
     private _snackBar: MatSnackBar,
     private api: ApiService,
     public router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private spinner: NgxSpinnerService
   ) {
     this.beneficiarios.push(15);
     this.stepperOrientation = breakpointObserver.observe('(min-width: 800px)')
@@ -80,6 +92,9 @@ export class BeneficiosBaseComponent {
       this.completarContratacion = true;
       this.index = 1;
     }
+
+    localStorage.removeItem('beneficiarios');
+    localStorage.removeItem('beneficios');
 
   }
 
@@ -124,14 +139,14 @@ export class BeneficiosBaseComponent {
             "beneficioid": 1,
             "titulobeneficio": "Repatriación a México",
             "subtitulobeneficio": "(Por fallecimiento en EU)",
-            "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
+            "descripcionbeneficio": "¿Quién de tu familia  podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
 
             "servicios": []
           },
           {
             "beneficioid": 2,
             "titulobeneficio": "Servicio Funerario",
-            "subtitulobeneficio": "(Residentes  de México)",
+            "subtitulobeneficio": "(Residentes de México)",
             "descripcionbeneficio": "¿Quién de tu familia podría requerir este beneficio?\r\nSeleciona a las personas que quieres incluir en el plan. Puedes incluir personas que viven en México.",
 
             "servicios": []
@@ -196,11 +211,23 @@ export class BeneficiosBaseComponent {
   }
 
   getPropuesta(curp, token, stepper) {
+    this.spinner.show();
     this.api.getPropuesta(curp, token).pipe(first()).subscribe((data: any) => {
       this.arrPropuesta = data
       console.log(data);
 
       if (data.propuestaid == 0) {
+        if (this.continuarContratacion == 1) {
+          this.spinner.hide();
+          Swal.fire({
+            icon: "error",
+            title: "Lo sentimos",
+            text: "No existe un proceso de contratación previo para esta CURP.",
+            willClose: () => {
+              this.router.navigate(["./pages/home"]);
+            }
+          });
+        }
         this.arrPropuesta['beneficios'].forEach((element, index) => {
           if (element.beneficioid != 3) {
             element['beneficiosbeneficiarios'] = [];
@@ -212,6 +239,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Padre",
                 "tipobeneficiarioid": "17",
+                "activo": false
               },
               {
                 "imagenactivo": "Madre",
@@ -220,14 +248,16 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Madre",
                 "tipobeneficiarioid": "18",
+                "activo": false
               },
               {
                 "imagenactivo": "Titular",
                 "imageninactivo": "Titular-Apagado",
                 "imagendefault": element.beneficioid == 5 ? "Titular-Apagado" : "Titular",
-                "esseleccionado": false,
+                "esseleccionado": true,
                 "tipobeneficiario": "Titular",
-                "tipobeneficiarioid": "15"
+                "tipobeneficiarioid": "15",
+                "activo": false
               },
               {
                 "imagenactivo": "Pareja",
@@ -236,6 +266,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Pareja",
                 "tipobeneficiarioid": "16",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo",
@@ -252,6 +283,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-3",
@@ -260,6 +292,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficioid == 3) {
@@ -269,9 +302,10 @@ export class BeneficiosBaseComponent {
                 "imagenactivo": "Titular",
                 "imageninactivo": "Titular-Apagado",
                 "imagendefault": "Titular",
-                "esseleccionado": false,
+                "esseleccionado": true,
                 "tipobeneficiario": "Titular",
                 "tipobeneficiarioid": "15",
+                "activo": false
               }
             );
           } else if (element.beneficioid == 5) {
@@ -284,6 +318,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Titular",
                 "tipobeneficiarioid": "15",
+                "activo": false
               }
             );
           }
@@ -298,8 +333,10 @@ export class BeneficiosBaseComponent {
         this.arrPropuesta['beneficios'].forEach((element, index) => {
           if (element.beneficioid == 1) {
             element.beneficiosbeneficiarios.forEach(bb => {
+              bb.activo = false;
               if (bb.tipobeneficiarioid == 15) {
                 localStorage.setItem('servicioBeneficiarioId', bb.serviciobeneficiarioid);
+                this.serviciobeneficiarioid = bb.serviciobeneficiarioid
               }
             });
           }
@@ -313,6 +350,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-2",
@@ -321,6 +359,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
               {
                 "imagenactivo": "Hijo-3",
@@ -329,6 +368,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficiosbeneficiarios.length == 5 && element.beneficioid != 3) {
@@ -339,6 +379,7 @@ export class BeneficiosBaseComponent {
               "esseleccionado": false,
               "tipobeneficiario": "Hijo",
               "tipobeneficiarioid": "19",
+              "activo": false
             },
               {
                 "imagenactivo": "Hijo-3",
@@ -347,6 +388,7 @@ export class BeneficiosBaseComponent {
                 "esseleccionado": false,
                 "tipobeneficiario": "Hijo",
                 "tipobeneficiarioid": "19",
+                "activo": false
               },
             );
           } else if (element.beneficiosbeneficiarios.length == 6 && element.beneficioid != 3) {
@@ -357,6 +399,7 @@ export class BeneficiosBaseComponent {
               "esseleccionado": false,
               "tipobeneficiario": "Hijo",
               "tipobeneficiarioid": "19",
+              "activo": false
             });
           }
 
@@ -378,6 +421,15 @@ export class BeneficiosBaseComponent {
             });
           }
 
+          if (element.beneficioid == 3) {
+            if (this.edad >= 50) {
+              element['beneficiosbeneficiarios'].forEach(bb => {
+                bb.esseleccionado = false;
+                bb.imagendefault = bb.imageninactivo
+              });
+            }
+          }
+
         });
 
       }
@@ -391,14 +443,17 @@ export class BeneficiosBaseComponent {
       this.arrBeneficios = this.arrPropuesta['beneficios'].sort((a, b) => (a.beneficioid > b.beneficioid) ? 1 : ((b.beneficioid > a.beneficioid) ? -1 : 0));
       this.arrBeneficios = this.arrPropuesta['beneficios'];
       console.log(this.arrBeneficios);
-
+      this.getPlan(this.api.currentTokenValue);
 
       // Si cntinúa su proceso activo
       if (data.flag == 1) {
         this.beneficiariosSeleccionados();
-        if (data.estatuspropuesta == 'Cuestionario') {
+
+        if (data.estatuspropuesta == 'Cuestionario' && this.edad < 50) {
           this.router.navigate(["./pages/formulario-eligibilidad"]);
-        } else if (data.estatuspropuesta == 'Propuesta Aceptada') {
+        } else if (data.estatuspropuesta == 'Propuesta Aceptada' && this.edad < 50) {
+          this.router.navigate(["./pages/propuesta"]);
+        } else if (this.edad >= 50) {
           this.router.navigate(["./pages/propuesta"]);
         }
 
@@ -408,9 +463,39 @@ export class BeneficiosBaseComponent {
       stepper.next();
       this.index++;
       this.ref.detectChanges();
+      this.spinner.hide();
+
     },
       (error) => { }
     );
+  }
+
+  getPlan(token) {
+    this.api.getPlan(token).pipe(first()).subscribe((data: any) => {
+      console.log(data);
+      console.log(this.edad);
+      let arrTemp = [];
+      let edadPlan = 0;
+
+      this.edad > 60 ? edadPlan = 60 : edadPlan = this.edad;
+
+      this.arrPlan = data.filter(
+        e => edadPlan >= e.edadminima && edadPlan <= e.edadmaxima);
+      console.log("Plan:", this.arrPlan);
+
+      this.precioMensual = this.arrPlan[0].precioMensual;
+      this.tipoplanId = this.arrPlan[0].tipoplanId;
+
+      if (this.arrPropuesta['plan']['tipoPlanId']) {
+        this.precioMensual = this.arrPropuesta['plan']['costo']
+        this.tipoplanId = this.arrPropuesta['plan']['tipoPlanId'];
+      } else {
+        this.precioMensual = this.arrPlan[0].precioMensual;
+        this.tipoplanId = this.arrPlan[0].tipoplanId;
+
+      }
+
+    });
   }
 
   beneficiariosSeleccionados() {
@@ -424,7 +509,7 @@ export class BeneficiosBaseComponent {
           );
           this.beneficiarios.push(
             parseInt(bb.tipobeneficiarioid)
-            );
+          );
         }
       });
       this.beneficios.push({
@@ -435,12 +520,13 @@ export class BeneficiosBaseComponent {
     });
 
 
-      this.beneficiarios = Array.from(new Set(this.beneficiarios));
-      localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
-      localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
+    this.beneficiarios = Array.from(new Set(this.beneficiarios));
+    localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
+    localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
   }
 
   showResponsiveDialog() {
+    console.log('Modal');
     this.displayModalResponsive = true
   }
 
@@ -454,23 +540,44 @@ export class BeneficiosBaseComponent {
     if (this.firstFormGroup.invalid) {
       return;
     }
-    console.log(new Date().getTime() / 1000);
-
+    this.continuarContratacion = 0;
     this.api.loginapp().pipe(first()).subscribe((data: any) => {
       this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+      // this.getPlan(this.api.currentTokenValue);
+    });
+  }
+
+  changeStepCurpContinuar (stepper, beneficio) {
+    this.s1Submitted = true;
+    if (this.firstFormGroup.invalid) {
+      return;
+    }
+    this.continuarContratacion = 1;
+    this.api.loginapp().pipe(first()).subscribe((data: any) => {
+      this.getPropuesta(this.s1.curp.value, this.api.currentTokenValue, stepper);
+      // this.getPlan(this.api.currentTokenValue);
     });
   }
 
   backStep(stepper) {
-    stepper.previous();
-    this.index--;
+
+    if (this.edad >= 50 && this.index == 5) {
+      stepper.previous();
+      stepper.previous();
+      this.index--;
+      this.index--;
+    } else {
+      stepper.previous();
+      this.index--;
+    }
+
   }
 
   changeStep(stepper, beneficio) {
     let arrB = [];
-
+    let arrSend = [];
+    let arrSendPropuesta = [];
     // console.log(this.arrBeneficios);
-
     let arr = this.arrBeneficios.filter(function (e) {
       return e.beneficioid == beneficio;
     });
@@ -491,8 +598,16 @@ export class BeneficiosBaseComponent {
       if (element.esseleccionado) {
         this.beneficiarios.push(parseInt(element.tipobeneficiarioid))
       }
-      // element.esseleccionado ? this.beneficiarios.push(parseInt(element.tipobeneficiarioid)) : '';
     });
+
+    console.log(arr);
+
+    if (arr.length > 0) {
+      this.beneficios = this.beneficios.filter(function (e) {
+        return e.beneficioId != beneficio;
+      });
+      console.log(this.beneficios);
+    }
 
     this.beneficios.push({
       "beneficioId": beneficio,
@@ -500,19 +615,90 @@ export class BeneficiosBaseComponent {
 
     });
 
+    console.log(this.beneficios);
+
     if (this.index == this.arrBeneficios.length + 1) {
+      this.spinner.show();
       this.beneficiarios = Array.from(new Set(this.beneficiarios));
       localStorage.setItem("beneficiarios", JSON.stringify(this.beneficiarios));
       localStorage.setItem("beneficios", JSON.stringify(this.beneficios));
-      this.router.navigate(["./pages/formulario-eligibilidad"]);
+      localStorage.setItem('tipoplanId', this.tipoplanId.toString());
+      localStorage.setItem('precioAnual', this.precioAnual.toString());
+      localStorage.setItem('precioMensual', this.precioMensual.toString());
+      localStorage.setItem('descripcionPlan', this.descripcionPlan);
+
+      if (this.edad >= 50) {
+        // Guardo beneficios pmayor de 60 y direcciono a la propuesta
+
+        if (parseInt(localStorage.getItem('propuestaId')) == 0) {
+          arrSend.push({
+            "curp": localStorage.getItem('curp'),
+            "beneficiarios": JSON.parse(localStorage.getItem('beneficiarios')),
+            "beneficios": JSON.parse(localStorage.getItem('beneficios')),
+          })
+        } else {
+          arrSend.push({
+            "propuestaId": localStorage.getItem('propuestaId'),
+            "servicioBeneficiarioId": this.serviciobeneficiarioid,
+            "curp": localStorage.getItem('curp'),
+            "beneficiarios": JSON.parse(localStorage.getItem('beneficiarios')),
+            "beneficios": JSON.parse(localStorage.getItem('beneficios')),
+          })
+        }
+
+        this.api.loginapp().pipe(first()).subscribe((data: any) => {
+          this.api.postCuestionario(JSON.stringify(arrSend[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+            console.log(data);
+
+            if (data.propuesta) {
+
+              localStorage.setItem('tipoplanId', this.tipoplanId.toString());
+              localStorage.setItem('precioAnual', this.precioAnual.toString());
+              localStorage.setItem('precioMensual', this.precioMensual.toString());
+              localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
+              localStorage.setItem('descripcionPlan', this.descripcionPlan);
+
+              arrSendPropuesta.push({
+                "propuestaId": data.propuesta['propuestaId'],
+                "frecuenciaPagoId": 65,
+                "tipoPlanId": this.tipoplanId,
+                "formaPagoId": 20
+              });
+
+              this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+                console.log(data);
+                if (data.servicioContratadoId) {
+                  this.spinner.hide();
+                  this.router.navigate(["./pages/propuesta"]);
+                }
+              });
+
+            }
+          },
+            (error) => { }
+          );
+        });
+
+      } else {
+        // console.log(this.tipoplanId);
+        this.spinner.hide();
+        this.router.navigate(["./pages/formulario-eligibilidad"]);
+      }
     }
     // console.log(this.beneficios);
-    stepper.next();
-    this.index++;
+    if (this.edad >= 50 && this.index == 3) {
+      stepper.next();
+      stepper.next();
+      this.index++;
+      this.index++;
+    } else {
+      stepper.next();
+      this.index++;
+    }
   }
 
   changeImg(indexBeneficios, i, beneficio, tipobeneficiarioid, imagenactivo) {
-
+    let plan = [];
     this.arrSeleccionados.push(parseInt(tipobeneficiarioid));
 
 
@@ -526,6 +712,420 @@ export class BeneficiosBaseComponent {
     !arr.esseleccionado ? arr.esseleccionado = true : arr.esseleccionado = false;
 
 
+    // Preselecciono envío de dinero
+    this.arrBeneficios[4]['beneficiosbeneficiarios'][i].esseleccionado = true;
+
+    if (arr.esseleccionado) {
+      // Repatriación
+      if (beneficio == 1) {
+        this.countRepatriacion++;
+        if (this.edad <= 56) {
+          // Menores de 56
+          // "Plan de Acceso para Titular menor de 56 años" Id: 1
+          //"Plan de Acceso para Titular menor de 56 años (pareja y/o hijos) más de una persona requiere Repatriación" Id: 3
+          //"Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos) más de una persona requiere Repatriación" Id: 5
+          // Obtengo beneficio 1
+          let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 1);
+          // Busco si la pareja o hijos están seleccionados
+          let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+          // Busco si los padres están seleccionados
+          let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+          if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 3);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else {
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          }
+        } else {
+          // Mayor de 56
+          // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+          // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos) más de una persona requiere Repatriación" Id: 4
+          // Obtengo beneficio 1
+          let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 1);
+          // Busco si la pareja o hijos están seleccionados
+          let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+          // Busco si los padres están seleccionados
+
+          if (arrParejaHijo.length > 0) {
+            // Pareja e hijos seleccionados sin padres
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 4);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else {
+            // Sólo titular
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          }
+        }
+        // Servicios funerarios
+      } else if (beneficio == 2) {
+        if (this.countRepatriacion == 1) {
+          // Sólo titular en repatriación
+          if (this.edad <= 56) {
+            // Menor de 56
+            // "Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos en México) sólo el titular requiere Repatriación" Id: 8
+            // "Plan de Acceso para Titular  menor de 56 años (con pareja y/o hijos en México) sólo titular requiere Repatriación" Id: 6
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 6);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 8);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 8);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          } else {
+            // Mayor de 56
+            // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+            // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos en México) sólo titular requiere Repatriación" Id: 7
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0) {
+              // Pareja e hijos seleccionados sin padres
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 7);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              // Sólo titular
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          }
+        } else {
+          // Más de un miembro en repatriación.
+          // "Plan de Acceso para Titular menor de 56 años" Id: 1
+          //"Plan de Acceso para Titular menor de 56 años (pareja y/o hijos) más de una persona requiere Repatriación" Id: 3
+          //"Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos) más de una persona requiere Repatriación" Id: 5
+          if (this.edad <= 56) {
+            // Menor de 56
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 3);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          } else {
+            // Mayor de 56.
+            // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+            // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos) más de una persona requiere Repatriación" Id: 4
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0) {
+              // Pareja e hijos seleccionados sin padres
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 4);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              // Sólo titular
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          }
+        }
+      }
+    } else {
+
+      // Repatriación
+      if (beneficio == 1) {
+        this.countRepatriacion--;
+        if (this.edad <= 56) {
+          // Menores de 56
+          // "Plan de Acceso para Titular menor de 56 años" Id: 1
+          // "Plan de Acceso para Titular menor de 56 años (pareja y/o hijos) más de una persona requiere Repatriación" Id: 3
+          // "Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos) más de una persona requiere Repatriación" Id: 5
+          let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 1);
+
+          let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+
+          let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+          if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+            // Pareja y/o hijos
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 3);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+            // Padres
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+            // Parej, Hijos y/o padres
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else {
+            // Titular
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          }
+        } else {
+          // Mayor de 56
+          // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+          // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos) más de una persona requiere Repatriación" Id: 4
+          // Obtengo beneficio 1
+          let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 1);
+          // Busco si la pareja o hijos están seleccionados
+          let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+          // Busco si los padres están seleccionados
+
+          if (arrParejaHijo.length > 0) {
+            // Pareja e hijos seleccionados sin padres
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 4);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          } else {
+            // Sólo titular
+            let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+            this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+          }
+        }
+        // Servicios funerarios
+      } else if (beneficio == 2) {
+        if (this.countRepatriacion == 1) {
+          // Sólo titular en repatriación
+          if (this.edad <= 56) {
+            // Menor de 56
+            // "Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos en México) sólo el titular requiere Repatriación" Id: 8
+            // "Plan de Acceso para Titular  menor de 56 años (con pareja y/o hijos en México) sólo titular requiere Repatriación" Id: 6
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 6);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 8);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 8);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          } else {
+            // Mayor de 56
+            // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+            // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos en México) sólo titular requiere Repatriación" Id: 7
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0) {
+              // Pareja e hijos seleccionados sin padres
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 7);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              // Sólo titular
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          }
+        } else {
+          // Más de un miembro en repatriación.
+          // "Plan de Acceso para Titular menor de 56 años" Id: 1
+          //"Plan de Acceso para Titular menor de 56 años (pareja y/o hijos) más de una persona requiere Repatriación" Id: 3
+          //"Plan de Acceso para Titular menor de 56 años (con padres, pareja y/o hijos) más de una persona requiere Repatriación" Id: 5
+          if (this.edad <= 56) {
+            // Menor de 56
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0 && arrPadres.length == 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 3);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length == 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else if (arrParejaHijo.length > 0 && arrPadres.length > 0) {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 5);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 1);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          } else {
+            // Mayor de 56.
+            // "Plan de Acceso para Titular mayor de 56 años" Id: 2
+            // "Plan de Acceso para Titular mayor de 56 años (con pareja y/o hijos) más de una persona requiere Repatriación" Id: 4
+            // Obtengo beneficio 2
+            let arrBen = this.arrBeneficios.filter(e => e.beneficioid == 2);
+            // Busco si la pareja o hijos están seleccionados
+            let arrParejaHijo = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 19 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 16 && e.esseleccionado == true)));
+            // Busco si los padres están seleccionados
+            let arrPadres = arrBen[0].beneficiosbeneficiarios.filter(e => (e.tipobeneficiarioid == 17 && e.esseleccionado == true) || ((e.tipobeneficiarioid == 18 && e.esseleccionado == true)));
+
+            if (arrParejaHijo.length > 0) {
+              // Pareja e hijos seleccionados sin padres
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 4);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            } else {
+              // Sólo titular
+              let index = this.arrPlan.findIndex(x => x.tipoplanId == 2);
+              this.precioMensual = this.arrPlan[index].precioMensual;
+            this.precioAnual = this.arrPlan[index].precioAnual;
+            this.tipoplanId = this.arrPlan[index].tipoplanId;
+            this.descripcionPlan = this.arrPlan[index].descripcionPlan;
+            }
+          }
+        }
+      }
+    }
+
+
     if (beneficio == 5) {
       // Bebeficio Envío de dinero
       if (tipobeneficiarioid == 19) {
@@ -534,9 +1134,16 @@ export class BeneficiosBaseComponent {
       this.envioDineroSelected = true;
       this.arrBeneficios.forEach(element => {
         element['beneficiosbeneficiarios'].forEach(bb => {
-          if (bb.imagenactivo != imagenactivo) {
-            bb.esseleccionado = false;
-            bb.imagendefault = bb.imageninactivo;
+          if (element.beneficioid == 5) {
+            if ((bb.imagenactivo != imagenactivo) && bb.esseleccionado) {
+              bb.esseleccionado = false;
+              bb.activo = true;
+              bb.imagendefault = bb.imageninactivo;
+            } else if (bb.imagenactivo == imagenactivo) {
+              bb.esseleccionado = true;
+              bb.activo = true;
+              bb.imagendefault = bb.imagenactivo;
+            }
           }
         });
 
@@ -670,6 +1277,12 @@ export class BeneficiosBaseComponent {
     if (monthDiif < 0 || (monthDiif === 0 && fechaActual.getDate() < fechaCurp.getDate())) {
       yearsDiff--;
     }
+
+    localStorage.setItem("edad", yearsDiff.toString());
+    this.edad = yearsDiff;
+
+    this.sexo = this.s1.curp.value.slice(10, 11);
+    localStorage.setItem("sexo", this.sexo);
 
     if (edad == 'Menor' && yearsDiff > 56) {
       e.source.checked = false;

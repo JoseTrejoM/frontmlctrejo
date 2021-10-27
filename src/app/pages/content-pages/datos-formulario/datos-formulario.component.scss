@@ -1,9 +1,15 @@
+.form-control {
+  padding: 0 !important;
+}
+
+
 .img-header {
   max-width: 120px;
   max-height: 63px;
 }
 .img-header-tranquilidad {
   max-height: 63px;
+
 }
 
 p {
@@ -28,6 +34,8 @@ h2 {
 
   .fontResponsive {
     font-size: calc(0.7em + 0.3vw);
+    color:#454F63;
+    font-family: "Monserrat", sans-serif !important;
   }
 
   .img-thumbnail {
@@ -44,6 +52,11 @@ h2 {
 
   .fontResponsiveSliderNotes {
     font-size: calc(0.5em + 0.7vmin);
+  }
+
+  .fontResponsiveTableText {
+    font-size: calc(0.5em + 0.2vmin);
+    line-height: 10px;
   }
 
   .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
@@ -93,6 +106,36 @@ h2 {
     margin: 5px 0;
   }
 
+  .bb-1 {
+    border-bottom: 1px solid;
+  }
+
+  .btn-listo {
+    background: #6AB33533;
+    border-color: #6AB335 !important;
+    color: #6AB335 !important;
+    font-size: .7em;
+    float: center;
+    margin: 0 .5em 0 0 !important;
+    font-family: "Montserrat", sans-serif !important;
+    min-height: 2em !important;
+    padding: 0.5em;
+
+  }
+
+  .btn-incompleto {
+    background: #E0217634;
+    border-color: #E02176 !important;
+    color: #E02176 !important;
+    font-size: .7em;
+    float: center;
+    margin: 0 .5em 0 0 !important;
+    font-family: "Montserrat", sans-serif !important;
+    min-height: 2em !important;
+    padding: 0.5em;
+
+  }
+
   @media screen and (max-width: 800px) {
     .img-header-tranquilidad {
       visibility: hidden;
@@ -101,5 +144,6 @@ h2 {
       margin: 10px auto 5px 20px;
       width: 28%;
       display: none;
+
     }
   }

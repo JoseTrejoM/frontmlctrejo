@@ -2,10 +2,10 @@
 <div class="container-fluid" ngStyle.lg="display:block" ngStyle.md="display:block" ngStyle.sm="display:block" ngStyle.xs="display:none">
   <div class="row bg-white">
     <div class="col-md-2 text-center pt-1">
-      <img src="../../../../assets/img/logos/mlc_logo_rosa.png" class="img-header" />
+      <img src="../../../../assets/img/logos/mexico-lindo-contigo.svg" class="img-header" />
     </div>
     <div class="col-md-10 text-center pt-1">
-      <img src="../../../../assets/img/logos/tranquilidad.png" class="img-header-tranquilidad" />
+      <img src="../../../../assets/img/logos/tranquilidad-a-tu-alcance.svg" class="img-header-tranquilidad" />
     </div>
     <div class="col-md-12 p-0">
       <hr class="separador mt-1 mb-0" />
@@ -15,7 +15,7 @@
 <div class="container-fluid">
   <div class="row bg-white align-items-center" *ngIf="index == 1">
     <div class="col-12 text-center p-0 mt-2">
-      <h2>Datos</h2>
+      <h2>Datos personales</h2>
       <h3 class="m-0 fontResponsive">Para continuar debes llenar todos los campos.</h3>
     </div>
     <div class="col-12 p-0">
@@ -25,9 +25,9 @@
   <div class="row bg-white align-items-center" *ngIf="index == 2">
     <div class="col-12 text-center p-0 mt-2">
       <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
-      <h2>Confirma los datos</h2>
+      <h2>Confirma tus datos</h2>
 
-      <h3 class="m-0 fontResponsive">Por favor confirma que los datos son correctos.</h3>
+      <h3 class="m-0 fontResponsive">Por favor confirma que todos los datos son correctos.</h3>
     </div>
     <div class="col-12 p-0">
       <hr class="separador mt-4 mb-0" />
@@ -37,7 +37,6 @@
     <div class="col-12 text-center p-0 mt-2">
       <i class="fas fa-arrow-left fa-2x float-left ml-2 cursor-pointer" matStepperPrevious (click)="backStep(stepper)"></i>
       <h2>Confirma tu Plan</h2>
-      <br>
       <h3 class="m-0 fontResponsive">Por favor confirma el diseño de tu Plan y selecciona la forma de pago.</h3>
     </div>
     <div class="col-12 p-0">
@@ -48,7 +47,7 @@
 <div class="container-fluid mt-3 p-0">
   <div class="row m-0">
     <div class="col-12 p-0">
-          <div class="container">
+          <div class="container" [ngClass]="{'container-fluid': index == 3}">
           <mat-stepper [linear]="true" class="stepper-datos-formulario" #stepper>
             <mat-step label="">
               <div class="row d-flex-center mt-2">
@@ -57,25 +56,28 @@
                     <div class="card-body">
                       <div class="row vCenter">
                         <div class="col-3 col-sm-4 col-md text-center vCenter">
-                          <h3 class="m-0">{{item.tipoBeneficiario}}</h3>
+                          <span class="tipobeneficiario-captura">{{item.tipoBeneficiario}}</span>
                         </div>
                         <div class="col-5 text-center" *ngIf="item.completo">
-                          <button class="btn btn-outline-success">¡Listo!</button>
+                          <!--button class="boton-listo">¡Listo!</button-->
+                          <button class="btn btn-outline-success btn-listo">Listo</button>
                         </div>
                         <div class="col-5 text-center" *ngIf="!item.completo">
-                          <button class="btn btn-outline-danger">Incompleto</button>
+                          <!--button class="boton-incompleto">Incompleto</button-->
+                          <button class="btn btn-outline-danger btn-incompleto">Incompleto</button>
                         </div>
                         <div class="col-4 text-center">
-                          <button class="btn btn-pink" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
-                          <button class="btn btn-pink" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalTitular, item)" *ngIf="item.tipoBeneficiarioId == 15">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalPareja, item)" *ngIf="item.tipoBeneficiarioId == 16">Editar</button>
+                          <button class="boton-editar" (click)="openModal(modalFamilia, item)" *ngIf="item.tipoBeneficiarioId > 16">Editar</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row mt-2" *ngIf="this.formlarioCompleto">
+              <!-- <div class="row mt-2"> -->
+                <div class="row mt-2" *ngIf="this.formlarioCompleto">
                 <div class="col-12 text-center">
                   <button class="btn btn-blue mb-1" (click)="changeStep(stepper)">Continuar</button>
                 </div>
@@ -85,35 +87,35 @@
             <mat-step label="">
               <div class="row d-flex-center mt-2">
                 <div class="col-md-6 col-lg-4 col-sm-12 mb-2" *ngFor="let item of arrBeneficiarios">
-                  <div *ngIf="item.tipoBeneficiarioId == 15">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 15" class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
-                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
-                    <p><b>Genero:</b> {{item.sexo}}</p>
+                    <p><b>Fecha de Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Sexo:</b> {{item.sexo}}</p>
                     <p><b>País origen:</b> {{item.paisOrigen}}</p>
                     <p><b>Estado origen:</b> {{item.estadoOrigen}}</p>
-                    <p><b>País residencia:</b> {{item.paisTrabajo}}</p>
-                    <p><b>País residencia:</b> {{item.estadoTrabajo}}</p>
+                    <p><b>País de residencia:</b> {{item.paisTrabajo}}</p>
+                    <p><b>Estado/Provincia:</b> {{item.estadoTrabajo}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId == 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId == 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
-                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
-                    <p><b>Genero:</b> {{item.sexo}}</p>
-                    <p><b>País origen:</b> {{item.paisOrigen}}</p>
-                    <p><b>Estado origen:</b> {{item.estadoOrigen}}</p>
+                    <p><b>Fecha de Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Sexo:</b> {{item.sexo}}</p>
+                    <p *ngIf="cmbEstadoPareja != 33"><b>País de residencia:</b> {{item.paisOrigen}}</p>
+                    <p *ngIf="cmbEstadoPareja != 33"><b>Estado:</b> {{item.estadoOrigen}}</p>
                   </div>
-                  <div *ngIf="item.tipoBeneficiarioId > 16">
-                    <h3 class="mb-1"><b><u>{{item.tipoBeneficiario}}</u></b></h3>
+                  <div *ngIf="item.tipoBeneficiarioId > 16"  class="datos-detalle-confirmar">
+                    <h3 class="mb-1"><b>{{item.tipoBeneficiario}}</b></h3>
                     <p><b>Nombre:</b> {{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</p>
                     <p><b>Teléfono:</b> {{item.telefono}}</p>
                     <p><b>Email:</b> {{item.correo}}</p>
-                    <p><b>Fecha Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
-                    <p><b>Genero:</b> {{item.sexo}}</p>
+                    <p><b>Fecha de Nacimiento:</b> {{item.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
+                    <p><b>Sexo:</b> {{item.sexo}}</p>
                   </div>
                 </div>
               </div>
@@ -126,17 +128,78 @@
             <!-- Fin Step Conormación datos -->
             <!-- Step Conormación plan -->
             <mat-step label="">
-              <div class="row d-flex-center mt-2">
-                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
-                  <h4 class="mb-1"><b>Beneficios del plan</b></h4>
-                  <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p>
+              <div class="row d-flex-center mt-2 p-1">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-2" ngClass.sm="mb-4">
+                  <h4 class="mb-1 text-center"><b>Beneficios del Plan</b></h4>
+                  <!-- <p *ngFor="let item of arrBeneficios" class="fontResponsive"> {{item}}</p> -->
+                  <div class="row mt-2 vCenter text-center rowTable">
+                    <div class="col-2 center-flex"></div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/repatriacion.svg" class="img-propuesta-ico-table">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/servicios-funerarios.svg" class="img-propuesta-ico-table ml-2">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/seguro-vida.svg" class="img-propuesta-ico-table ml-2">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/educacion-financiera.svg" class="img-propuesta-ico-table ml-2 ">
+                    </div>
+                    <div class="col-2 center-flex">
+                      <img src="../../../assets/img/icons/envio-dinero.svg" class="img-propuesta-ico-table ml-2 mb-1">
+                    </div>
+                  </div>
+                  <div class="row vCenter mt-1 text-center bb-1">
+                    <div class="col-2 center-flex"></div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Repatriación a México</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Servicio funerario</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Seguro de vida</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Educación financiera</p>
+                    </div>
+                    <div class="col-2 center-flex">
+                      <p class="fontResponsiveTableText">Envío de dinero</p>
+                    </div>
+                  </div>
+                  <div class="row mt-2 vCenter text-center" *ngFor="let itemB of arrResumen; let i = index">
+
+                    <div class="col-2 text-left">
+                      <span class="tipobeneficiario">{{itemB.tipobeneficiario}} </span>
+
+                    </div>
+                    <ng-container *ngFor="let item of itemB.beneficioSimpleDTO">
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 1">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 2">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 3">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 4">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                      <div class="col-2 center-flex" *ngIf="item.beneficioId == 5">
+                        <img src="../../../assets/img/icons/bien.svg" class="img-propuesta" *ngIf="item.activo">
+                      </div>
+                    </ng-container>
+                  </div>
 
                 </div>
-                <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-2 offset-lg-2">
-                  <h4 class="mb-1"><b>Plan de previsión</b></h4>
-                  <p><b>Plan: </b> {{plan['descripcionPlan']}}</p>
-                  <p><b>Precio Anual: </b> US ${{plan['precioAnual']}}</p>
-                  <p><b>Precio Mensual: </b> US ${{plan['precioMensual']}}</p>
+                <div class="col-md-5 col-lg-5 col-sm-12 col-12 mb-2 offset-md-1 offset-lg-1">
+                  <!-- <h4 class="mb-1"><b>Plan de previsión</b></h4> -->
+                  <p class="mb-1"><b>Plan: </b> {{plan['descripcionPlan']}}</p>
+                  <p class="mb-1"><b>Forma de pago: </b> {{plan['formaPago']}}</p>
+                  <p class="mb-1"><b>Primer pago: </b> US ${{costoInicial}}</p>
+                  <p *ngIf="frecuenciaPagoId != 64"><b>Pago a partir del segundo mes: </b> US ${{plan['costo']}}</p>
                 </div>
               </div>
               <div class="row mt-2">
@@ -188,7 +251,7 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <input type="text" class="form-control input-form-datos" formControlName="apaterno" placeholder="Apellido paterno"
+          <input type="text" class="form-control input-form-datos " formControlName="apaterno" placeholder="Apellido paterno"
           [ngClass]="{ 'is-invalid': submitted && f.apaterno.errors }">
         </div>
       </div>
@@ -200,6 +263,13 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
+          <!-- <select class="form-control input-form-datos mb-1" formControlName="lada" placeholder="Lada"
+          [ngClass]="{ 'is-invalid': submitted && f.lada.value == '0' }">
+            <option value="0" disabled>Lada</option>
+            <option value="1" >🇨🇦 Canadá +1</option>
+            <option value="1" >🇺🇸 Estados Unidos +1</option>
+            <option value="52">🇲🇽 Mexico +52</option>
+          </select> -->
           <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefono" placeholder="Teléfono"
           [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }">
         </div>
@@ -232,7 +302,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estado" placeholder="País"
           [ngClass]="{ 'is-invalid': submitted && f.estado.value == '0' }">
-            <option value="0" disabled>Estado origen de México</option>
+            <option value="0" disabled>Estado de origen de México</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>
@@ -241,7 +311,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="pais" placeholder="País"
           [ngClass]="{ 'is-invalid': submitted && f.pais.value == '0' }" (change)="getEstadosEU($event.target.value)">
-            <option value="0" disabled>País de residencia</option>
+            <option value="0" disabled>País donde vives/trabajas</option>
             <option value="{{item.paisid}}" *ngFor="let item of paises">{{item.descripcionpais}}</option>
           </select>
         </div>
@@ -250,7 +320,7 @@
         <div class="col">
           <select class="form-control input-form-datos" formControlName="estadoEU" placeholder="Estado"
           [ngClass]="{ 'is-invalid': submitted && f.estadoEU.value == '0' }">
-            <option value="0" disabled>¿En dónde trabajas?</option>
+            <option value="0" disabled>Estado donde vives/trabajas</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estadosEU">{{item.nombreestado}}</option>
           </select>
         </div>
@@ -278,31 +348,38 @@
       <div class="form-row">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="nombreP" placeholder="Nombre"
-          [ngClass]="{ 'is-invalid': submitted && fP.nombreP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.nombreP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="apaternoP" placeholder="Apellido paterno"
-          [ngClass]="{ 'is-invalid': submitted && fP.apaternoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.apaternoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="amaternoP" placeholder="Apellido materno"
-          [ngClass]="{ 'is-invalid': submitted && fP.amaternoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.amaternoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
+          <!-- <select class="form-control input-form-datos mb-1" formControlName="ladaP" placeholder="Lada"
+          [ngClass]="{ 'is-invalid': submittedP && fP.ladaP.value == '0' }">
+            <option value="0" disabled>Lada</option>
+            <option value="1" >🇨🇦 Canadá +1</option>
+            <option value="1" >🇺🇸 Estados Unidos +1</option>
+            <option value="52">🇲🇽 Mexico +52</option>
+          </select> -->
           <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefonoP" placeholder="Teléfono"
-          [ngClass]="{ 'is-invalid': submitted && fP.telefonoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.telefonoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <input type="text" class="form-control input-form-datos" formControlName="correoP" placeholder="Email"
-          [ngClass]="{ 'is-invalid': submitted && fP.correoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.correoP.errors }">
         </div>
       </div>
       <div class="form-row  mt-1">
@@ -310,14 +387,14 @@
           <input class="form-control input-form-datos" #drp="bsDatepicker" bsDatepicker [maxDate]="maxDate"
           [bsConfig]="{ isAnimated: true, adaptivePosition: false }" placement="top"
           formControlName="fnacimientoP" placeholder="Fecha de nacimiento"
-          [ngClass]="{ 'is-invalid': submitted && fP.fnacimientoP.errors }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.fnacimientoP.errors }">
 
         </div>
       </div>
       <div class="form-row  mt-1">
         <div class="col">
           <select class="form-control input-form-datos" formControlName="sexoP" placeholder="Sexo"
-          [ngClass]="{ 'is-invalid': submitted && fP.sexoP.value == '0' }">
+          [ngClass]="{ 'is-invalid': submittedP && fP.sexoP.value == '0' }">
             <option value="0" disabled>Sexo</option>
             <option value="{{item.sexoid}}" *ngFor="let item of sexos">{{item.sexo}}</option>
           </select>
@@ -325,9 +402,10 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
-          <select class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
-          [ngClass]="{ 'is-invalid': submitted && fP.estadoP.value == '0' }">
-            <option value="0" disabled>Estado origen de México</option>
+          <select cmbEstadoPareja class="form-control input-form-datos" formControlName="estadoP" placeholder="País"
+          [ngClass]="{ 'is-invalid': submittedP && fP.estadoP.value == '0' }">
+            <option value="0" disabled>Estado donde vives</option>
+            <option value="33">No aplica</option>
             <option value="{{item.estadoid}}" *ngFor="let item of estados">{{item.nombreestado}}</option>
           </select>
         </div>
@@ -372,6 +450,13 @@
       </div>
       <div class="form-row  mt-1">
         <div class="col">
+          <!-- <select class="form-control input-form-datos mb-1" formControlName="lada2" placeholder="Lada"
+          [ngClass]="{ 'is-invalid': submitted2 && f2.lada2.value == '0' }">
+            <option value="0" disabled>Lada</option>
+            <option value="1" >🇨🇦 Canadá +1</option>
+            <option value="1" >🇺🇸 Estados Unidos +1</option>
+            <option value="52">🇲🇽 Mexico +52</option>
+          </select> -->
           <input type="text" class="form-control input-form-datos" [maxlength]=10 formControlName="telefono2" placeholder="Teléfono"
           [ngClass]="{ 'is-invalid': submitted2 && f2.telefono2.errors }">
         </div>
@@ -408,6 +493,8 @@
     </form>
   </div>
 </ng-template>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#e31c79" type = "square-jelly-box" [fullScreen] = "true"></ngx-spinner>
+
 <!-- Fin Modal Datos Familia -->
 
 <!--Page Ends-->

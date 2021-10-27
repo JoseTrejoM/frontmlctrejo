@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ApiService} from '../../../shared/services/api.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { NgxSpinnerService } from "ngx-spinner";
+
 const helper = new JwtHelperService();
 
 @Component({
@@ -27,7 +29,9 @@ export class FormularioEligibilidadComponent implements OnInit {
   constructor(
     private api: ApiService,
     public router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private spinner: NgxSpinnerService,
+    private ref: ChangeDetectorRef,
   ) {
     if (parseInt(localStorage.getItem('propuestaId')) == 0) {
       this.cuestionarioLocal = [];
@@ -72,10 +76,13 @@ export class FormularioEligibilidadComponent implements OnInit {
   }
 
   getPreguntas() {
+    this.spinner.show();
+    let arrTemp = [];
     this.api.getCuestionario(1, this.api.currentTokenValue).pipe(first()).subscribe((dataCuestionario:any) => {
       console.log(dataCuestionario);
+
         dataCuestionario['preguntas'].forEach(item => {
-          this.cuestionario.push(
+          arrTemp.push(
             {
               clavePregunta: item.clavePregunta,
               descripcionPregunta: item.descripcionPregunta,
@@ -85,15 +92,19 @@ export class FormularioEligibilidadComponent implements OnInit {
               selected: false,
               respuesta: '',
               respuestaId: 0,
+              continua: false
             }
           )
         });
+
+        this.cuestionario = arrTemp;
 
         this.cuestionario = this.cuestionario.map(a => {
           const exists = this.cuestionarioLocal.find(b => b.preguntaid == a.preguntaId);
 
           if (exists) {
-            a.selected = true;
+            exists.respuestaid ? a.selected = true : a.selected = false;
+            a.continuar = true;
             a.respuesta = exists.respuesta;
             a.respuestaId = exists.respuestaid;
           }
@@ -101,7 +112,14 @@ export class FormularioEligibilidadComponent implements OnInit {
           return a;
         });
 
-        this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0))
+        this.cuestionario.sort((a,b) => (a.orden > b.orden) ? 1 : ((b.orden > a.orden) ? -1 : 0));
+        this.spinner.hide();
+
+        if (localStorage.getItem('sexo') == 'H') {
+          this.cuestionario[0].respuesta = 'no';
+        }
+        console.log(this.cuestionario);
+        this.ref.detectChanges();
       },
       (error) => { }
     );
@@ -109,20 +127,31 @@ export class FormularioEligibilidadComponent implements OnInit {
 
   seleccionarRespuesta(index, value) {
     if (this.cuestionario[index].respuesta == 'si') {
+
     } else {
       this.cuestionario[index].respuesta = value;
     }
+    if (value == 'si') {
+      this.cuestionario[index].continua = false
+    }
+    // value == 'si' ? this.cuestionario[index].continua = false : this.cuestionario[index].continua = true;
   }
 
-  changeStep(stepper, index, value){
+  changeStep(stepper, index, value, event){
     console.log(value);
     let arrSend = [];
+    let arrSendPropuesta = [];
+
+    if (this.cuestionario[index].respuesta == 'si') {
+      let arrBeneficios = JSON.parse(localStorage.getItem('beneficios'));
+      arrBeneficios = arrBeneficios.filter(e => e.beneficioId != 3);
+      localStorage.setItem('beneficios', JSON.stringify(arrBeneficios));
+    }
+
     if (index == this.cuestionario.length - 1) {
       this.respuestas=[];
-
-
-
-
+      event.target.disabled = true;
+      this.spinner.show();
       this.cuestionario.forEach(element => {
         if (parseInt(localStorage.getItem('propuestaId')) == 0) {
           this.respuestas.push(
@@ -162,25 +191,37 @@ export class FormularioEligibilidadComponent implements OnInit {
 
         console.log(JSON.stringify(arrSend[0]));
 
+        this.api.loginapp().pipe(first()).subscribe((data: any) => {
           this.api.postCuestionario(JSON.stringify(arrSend[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
             console.log(data);
 
             if (data.plan && data.propuesta) {
 
-              localStorage.setItem('tipoplanId', data.plan['tipoplanId']);
-              localStorage.setItem('precioAnual', data.plan['precioAnual']);
-              localStorage.setItem('precioMensual', data.plan['precioMensual']);
+              // localStorage.setItem('tipoplanId', data.plan['tipoplanId']);
+              // localStorage.setItem('precioAnual', data.plan['precioAnual']);
+              // localStorage.setItem('precioMensual', data.plan['precioMensual']);
+              // localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
               localStorage.setItem('propuestaId', data.propuesta['propuestaId']);
-              localStorage.setItem('descripcionPlan', data.propuesta['descripcionPlan']);
 
+              arrSendPropuesta.push({
+                "propuestaId": data.propuesta['propuestaId'],
+                "frecuenciaPagoId": 65,
+                "tipoPlanId": localStorage.getItem('tipoplanId'),
+                "formaPagoId": 20
+              });
 
-              this.router.navigate(["./pages/propuesta"]);
-
+              this.api.postAceptarPropuesta(JSON.stringify(arrSendPropuesta[0]), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+                console.log(data);
+                if (data.servicioContratadoId) {
+                  this.spinner.hide();
+                  this.router.navigate(["./pages/propuesta"]);
+                }
+              });
             }
             },
             (error) => { }
           );
-
+          });
 
       // this.router.navigate(["/pages/propuesta"]);
     } else {
@@ -190,8 +231,16 @@ export class FormularioEligibilidadComponent implements OnInit {
   }
 
   changeStepInicial(stepper){
-    stepper.next();
-    this.index++;
+    if (localStorage.getItem('sexo') == 'H') {
+      stepper.next();
+      stepper.next();
+      this.index++;
+      this.index++;
+      console.log(this.cuestionario);
+    } else {
+      stepper.next();
+      this.index++;
+    }
   }
 
   save(e) {

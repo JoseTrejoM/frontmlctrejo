@@ -8,7 +8,12 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
+interface Country {
+  name: string,
+  code: string
+}
 
 @Component({
   selector: 'app-datos-formulario',
@@ -52,14 +57,17 @@ export class DatosFormularioComponent implements OnInit {
   arrResumen = [];
   personaId = 0;
   plan =[];
-
+  costoInicial = 0;
+  selectedCountry: Country;
   sexo = 'Sexo'
+  frecuenciaPagoId = 0;
 
   decodedToken = this.jwtHelper.decodeToken(this.api.currentTokenValue);
 
   config = {
     animated: true
   };
+  countries: { name: string; code: string; }[];
 
   constructor(
     private modalService: NgbModal,
@@ -68,20 +76,26 @@ export class DatosFormularioComponent implements OnInit {
     private ref: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     public jwtHelper: JwtHelperService,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
 
     setTheme('bs4');
     this.maxDate.setDate(this.maxDate.getDate());
-
-      this.api.loginapp().pipe(first()).subscribe((data: any) => {
+    this.api.loginapp().pipe(first()).subscribe((data: any) => {
+        this.spinner.show();
         this.getPais();
         this.getEstadosMexico(142);
         this.getData();
         this.getResumenPropuesta();
         this.getPropuesta();
       });
+
+      this.countries = [
+        {name: 'USA +1', code: '1'},
+        {name: 'Canadá +1', code: '1'},
+        {name: 'México +52', code: '52'},
+    ];
 
   }
 
@@ -90,6 +104,7 @@ export class DatosFormularioComponent implements OnInit {
       nombre: ["", Validators.required],
       apaterno: ["", Validators.required],
       amaterno: ["", Validators.required],
+      // lada: ["0", Validators.required],
       telefono: ["",  [
         Validators.required,
         Validators.pattern("^[0-9]*$"),
@@ -108,6 +123,7 @@ export class DatosFormularioComponent implements OnInit {
       nombreP: ["", Validators.required],
       apaternoP: ["", Validators.required],
       amaternoP: ["", Validators.required],
+      // ladaP: ["0", Validators.required],
       telefonoP: ["",  [
         Validators.required,
         Validators.pattern("^[0-9]*$"),
@@ -124,13 +140,13 @@ export class DatosFormularioComponent implements OnInit {
       nombre2: ["", Validators.required],
       apaterno2: ["", Validators.required],
       amaterno2: ["", Validators.required],
+      // lada2: ["0", Validators.required],
       telefono2: ["",  [
-        Validators.required,
         Validators.pattern("^[0-9]*$"),
         Validators.minLength(10),
         Validators.maxLength(10),
       ],],
-      correo2: ["", Validators.required],
+      correo2: [""],
       fnacimiento2: ["", Validators.required],
       sexo2: ["0", Validators.required],
     });
@@ -155,6 +171,7 @@ export class DatosFormularioComponent implements OnInit {
   }
 
   getData() {
+
     this.arrBeneficiarios = [];
     this.api.getDataBeneficiariosById(localStorage.getItem('propuestaId'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
       console.log(data);
@@ -195,6 +212,7 @@ export class DatosFormularioComponent implements OnInit {
       });
 
       this.arrBeneficiarios = data.beneficiario;
+      this.spinner.hide();
       this.ref.detectChanges();
     });
   }
@@ -204,6 +222,7 @@ export class DatosFormularioComponent implements OnInit {
     this.arrBeneficios = [];
     let arr = [];
     this.api.getResumenPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.arrResumen = data.beneficiarios;
       this.arrResumen.forEach(element => {
         element['beneficioSimpleDTO'].forEach(item => {
@@ -223,7 +242,10 @@ export class DatosFormularioComponent implements OnInit {
 
   getPropuesta() {
     this.api.getPropuesta(localStorage.getItem('curp'), this.api.currentTokenValue).pipe(first()).subscribe((data: any) => {
+      console.log(data);
       this.plan = data.plan;
+      this.costoInicial = this.plan['costo'] + 5;
+      this.frecuenciaPagoId = this.plan['clFrecuenciaPagoId'];
     });
   }
 
@@ -262,6 +284,7 @@ export class DatosFormularioComponent implements OnInit {
       this.frm.value.estado == 0) {
       return;
     }
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,
@@ -321,9 +344,10 @@ export class DatosFormularioComponent implements OnInit {
   addUserPareja() {
     this.submittedP = true;
     let arrSend = [];
-    if (this.frmP.invalid || this.frmP.value.sexo == 0) {
+    if (this.frmP.invalid || this.frmP.value.sexoP == 0) {
       return;
     }
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,
@@ -379,7 +403,7 @@ export class DatosFormularioComponent implements OnInit {
     if (this.frm2.invalid || this.frm2.value.sexo2 == 0) {
       return;
     }
-
+    this.spinner.show();
     if (this.personaId == 0) {
       arrSend.push({
         "tipoBeneficiarioId": this.tipobeneficiarioid,
@@ -436,6 +460,7 @@ export class DatosFormularioComponent implements OnInit {
     item.personaId ? this.personaId = item.personaId : 0;
 
     if (item.tipoBeneficiarioId == 15) {
+      this.getEstadosEU(item.paisTrabajoId);
       this.frm.patchValue(
         {
           'nombre': item.nombre ? item.nombre : '',
@@ -449,7 +474,6 @@ export class DatosFormularioComponent implements OnInit {
           'estadoEU': item.estadoTrabajoId ? item.estadoTrabajoId : '0',
           'pais': item.paisTrabajoId ? item.paisTrabajoId : '0'
         });
-        this.getEstadosEU(item.paisTrabajoId);
 
     } else if (item.tipoBeneficiarioId == 16) {
       this.frmP.patchValue(
@@ -479,13 +503,14 @@ export class DatosFormularioComponent implements OnInit {
 
     this.modalService.open(content, {
       size: "sm",
-      centered: true,
+      centered: false,
       scrollable: true,
       animation: true,
       backdrop: true,
     });
 
-    this.reloadCurrentRoute();
+    this.ref.detectChanges();
+    // this.reloadCurrentRoute();
   }
 
   changeStep(stepper) {
